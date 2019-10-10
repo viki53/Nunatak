@@ -13,7 +13,7 @@ class ClubsTableSeeder extends Seeder
     {
         $club = App\Club::create([
 			'id' => 1,
-			'name' => 'Nunatak Team',
+			'name' => 'Team Nunatak',
 			'registration_number' => '0987654321',
 			'country' => 'FR',
 		]);
