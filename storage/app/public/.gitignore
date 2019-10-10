@@ -1,2 +1,4 @@
 *
+!splashscreens/
+!splashscreens/*.jpg
 !.gitignore

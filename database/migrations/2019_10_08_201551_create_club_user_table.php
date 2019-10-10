@@ -14,13 +14,12 @@ class CreateClubUserTable extends Migration
 	public function up()
 	{
 		Schema::create('club_user', function (Blueprint $table) {
-			$table->bigIncrements('id');
 			$table->unsignedBigInteger('club_id');
 			$table->unsignedBigInteger('user_id');
 			$table->boolean('is_owner')->default(false);
 			$table->timestamps();
 
-			$table->unique(['club_id', 'user_id']);
+			$table->primary(['club_id', 'user_id']);
 
 			$table->foreign('club_id')
 				->references('id')->on('clubs');

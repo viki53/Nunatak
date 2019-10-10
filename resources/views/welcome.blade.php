@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Laravel</title>
+		<title>{{ config('app.name') }}</title>
 
 		<!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -13,15 +13,19 @@
 		<style>
 			html, body {
 				background-color: #fff;
-				color: #636b6f;
+				color: #242729;
 				font-family: 'Nunito', sans-serif;
 				font-weight: 200;
 				height: 100vh;
 				margin: 0;
+				background-size: cover;
+				background-position: center;
+				text-shadow: 0 0 4px rgba(255, 255, 255, .7);
 			}
 
 			.full-height {
 				height: 100vh;
+				background-color: rgba(255, 255, 255, .1);
 			}
 
 			.flex-center {
@@ -50,7 +54,7 @@
 
 			.links,
 			.links > a {
-				color: #636b6f;
+				color: inherit;
 				padding: 0 25px;
 				font-size: 13px;
 				font-weight: 600;
@@ -64,7 +68,7 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body style="background-image: url('/storage/splashscreens/{{ $splashscreen->file_name }}');">
 		<div class="flex-center position-ref full-height">
 			@if (Route::has('login'))
 				<div class="top-right links">
