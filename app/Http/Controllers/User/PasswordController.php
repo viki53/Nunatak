@@ -4,41 +4,39 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateUserProfile as UpdateUserProfileRequest;
+use App\Http\Requests\UpdateUserPassword as UpdateUserPasswordRequest;
 
-class ProfileController extends Controller
+class PasswordController extends Controller
 {
     /**
-     * Show the user profile.
+     * Show the password form.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
     {
-        return view('user.profile', [
+        return view('user.password', [
 			'user' => $request->user()
 		]);
 	}
 
     /**
-     * Update the user's profile.
+     * Update the user's password.
      *
      * @param  Request  $request
      * @return Response
      */
-    public function update(UpdateUserProfileRequest $request)
+    public function update(UpdateUserPasswordRequest $request)
     {
 		$validatedData = $request->validated();
 
 		$user = $request->user();
 
-		$user->name = $validatedData['name'];
-		$user->email = $validatedData['email'];
-		$user->phone = $validatedData['phone'];
+		$user->password = bcrypt($validatedData['password']);
 
 		$user->save();
 
-		$request->session()->flash('status', __('Profil mis à jour'));
+		$request->session()->flash('status', __('Mot de passe mis à jour'));
 		return redirect()->route('dashboard');
     }
 }
