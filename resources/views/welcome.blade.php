@@ -20,7 +20,6 @@
 				margin: 0;
 				background-size: cover;
 				background-position: center;
-				text-shadow: 0 0 4px rgba(255, 255, 255, .7);
 			}
 
 			.full-height {
@@ -40,8 +39,14 @@
 
 			.top-right {
 				position: absolute;
-				right: 10px;
-				top: 18px;
+				top: 0;
+				right: 0;
+				width: 100%;
+				padding: 0;
+				display: flex;
+				justify-content: right;
+				background-color: #fff;
+				box-shadow: 0 0 4px rgba(31, 31, 31, .5);
 			}
 
 			.content {
@@ -50,12 +55,13 @@
 
 			.title {
 				font-size: 84px;
+				text-shadow: 0 0 4px rgba(255, 255, 255, .7);
 			}
 
-			.links,
 			.links > a {
+				display: inline-block;
 				color: inherit;
-				padding: 0 25px;
+				padding: 18px 25px;
 				font-size: 13px;
 				font-weight: 600;
 				letter-spacing: .1rem;
