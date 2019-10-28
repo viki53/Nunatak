@@ -21,8 +21,12 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard');
+		$clubs = $request->user()->clubs()->get();
+
+        return view('dashboard', [
+			'clubs' => $clubs
+		]);
     }
 }
