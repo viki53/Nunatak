@@ -16,7 +16,7 @@
 							<label for="profile-name" class="col-md-4 col-form-label text-md-right">{{ __('Nom complet') }}</label>
 
 							<div class="col-md-6">
-								<input id="profile-name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+								<input id="profile-name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
 
 								@error('name')
 									<span class="invalid-feedback" role="alert">
@@ -30,7 +30,7 @@
 							<label for="profile-email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse email') }}</label>
 
 							<div class="col-md-6">
-								<input id="profile-email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email" autofocus>
+								<input id="profile-email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
 
 								@error('email')
 									<span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
 							<label for="profile-phone" class="col-md-4 col-form-label text-md-right">{{ __('Numéro de téléphone') }}</label>
 
 							<div class="col-md-6">
-								<input id="profile-phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel" autofocus>
+								<input id="profile-phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel">
 
 								@error('phone')
 									<span class="invalid-feedback" role="alert">

@@ -6,14 +6,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSplashscreensTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('splashscreens', function (Blueprint $table) {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('splashscreens', function (Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->string('file_name');
 			$table->string('author_name')->nullable();
@@ -21,16 +21,16 @@ class CreateSplashscreensTable extends Migration
 			$table->string('caption')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
-        });
-    }
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
 		Schema::dropIfExists('splashscreens');
-    }
+	}
 }

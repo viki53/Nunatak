@@ -11,15 +11,12 @@ class ClubsTableSeeder extends Seeder
      */
     public function run()
     {
-        $club = App\Club::create([
-			'id' => 1,
+        $club = App\Club::firstOrNew([
 			'name' => 'Team Nunatak',
 			'registration_number' => '0987654321',
 			'country' => 'FR',
 		]);
 
 		$club->save();
-
-		$club->users()->attach(1, ['is_owner' => true]);
     }
 }

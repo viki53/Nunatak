@@ -51,7 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany('App\Club')->using('App\ClubUser')->withPivot([
 			'created_at',
 			'updated_at',
-			'is_owner'
+			'is_owner',
 		]);
     }
 }

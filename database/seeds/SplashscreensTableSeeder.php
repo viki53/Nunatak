@@ -16,10 +16,10 @@ class SplashscreensTableSeeder extends Seeder
 
 		foreach ($files as $file) {
 			$filename = str_replace($directory, '', $file);
-			App\Splashscreen::create([
+			App\Splashscreen::firstOrCreate([
 				'file_name' => $filename,
 				'author_name' => implode(' ', array_map('ucfirst', array_slice(explode('-', $filename), 0, 2)))
-			])->save();
+			]);
 		}
 	}
 }

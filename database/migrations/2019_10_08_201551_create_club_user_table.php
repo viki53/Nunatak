@@ -22,7 +22,8 @@ class CreateClubUserTable extends Migration
 			$table->primary(['club_id', 'user_id']);
 
 			$table->foreign('club_id')
-				->references('id')->on('clubs');
+				->references('id')->on('clubs')
+				->onDelete('cascade');
 
 			$table->foreign('user_id')
 				->references('id')->on('users')

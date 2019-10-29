@@ -17,10 +17,21 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::get('/user/profile', 'User\ProfileController@index')->name('user.profile')->middleware('auth');
-Route::post('/user/profile', 'User\ProfileController@update')->middleware('auth');
+Route::name('user.')->middleware('auth')->group(function () {
+	Route::get('/user/profile', 'User\ProfileController@index')->name('profile');
+	Route::post('/user/profile', 'User\ProfileController@update');
 
-Route::get('/user/password', 'User\PasswordController@index')->name('user.password')->middleware('auth');
-Route::post('/user/password', 'User\PasswordController@update')->middleware('auth');
+	Route::get('/user/password', 'User\PasswordController@index')->name('password');
+	Route::post('/user/password', 'User\PasswordController@update');
+});
 
-Route::get('/club/{id}/users', 'Club\UsersController@index')->name('club.users')->middleware('auth');
+Route::name('club.')->middleware('auth')->group(function () {
+	Route::get('/club/{id}/members', 'Club\MembersController@index')->name('members');
+	Route::delete('/club/{id}/members', 'Club\MembersController@remove')->name('members.remove');
+
+	Route::get('/club/{id}/sports', 'Club\SportsController@index')->name('sports');
+	Route::post('/club/{id}/sports', 'Club\SportsController@add')->name('sports.add');
+	Route::delete('/club/{id}/sports', 'Club\SportsController@remove')->name('sports.remove');
+
+	Route::get('/club/{id}', 'Club\ClubController@index')->name('edit');
+});

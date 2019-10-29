@@ -37,7 +37,7 @@ Route::get('/clubs', function () {
     return ClubResource::collection(Club::paginate());
 });
 Route::get('/clubs/{club}', function (Club $club) {
-    return new ClubResource($club->with('users')->get());
+    return new ClubResource($club->with(['sports', 'users'])->get());
 });
 
 Route::get('/sites', function () {

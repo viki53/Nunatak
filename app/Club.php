@@ -20,7 +20,6 @@ class Club extends Model
 		'city',
 		'country',
 		'registration_number',
-		'category',
 	];
 
     /**
@@ -32,6 +31,17 @@ class Club extends Model
 	}
 
     /**
+     * The sport the club supports.
+     */
+    public function sports()
+    {
+        return $this->belongsToMany('App\Sport')->using('App\ClubSport')->withPivot([
+			'created_at',
+			'updated_at',
+		]);
+    }
+
+    /**
      * The users registered in the club.
      */
     public function members()
@@ -39,7 +49,7 @@ class Club extends Model
         return $this->belongsToMany('App\User')->using('App\ClubUser')->withPivot([
 			'created_at',
 			'updated_at',
-			'is_owner'
+			'is_owner',
 		]);
     }
 }

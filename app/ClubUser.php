@@ -8,7 +8,7 @@ class ClubUser extends Pivot
 {
 	public $incrementing = true;
 
-	protected $table = 'clubs_users';
+	protected $table = 'club_user';
 
 	/**
 	 * The attributes that are mass assignable.
