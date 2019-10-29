@@ -22,3 +22,5 @@ Route::post('/user/profile', 'User\ProfileController@update')->middleware('auth'
 
 Route::get('/user/password', 'User\PasswordController@index')->name('user.password')->middleware('auth');
 Route::post('/user/password', 'User\PasswordController@update')->middleware('auth');
+
+Route::get('/club/{id}/users', 'Club\UsersController@index')->name('club.users')->middleware('auth');

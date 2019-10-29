@@ -23,7 +23,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-		$clubs = $request->user()->clubs()->get();
+		$clubs = $request->user()->clubs()->withCount('members')->get();
 
         return view('dashboard', [
 			'clubs' => $clubs

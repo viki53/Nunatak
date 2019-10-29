@@ -34,7 +34,7 @@ class Club extends Model
     /**
      * The users registered in the club.
      */
-    public function users()
+    public function members()
     {
         return $this->belongsToMany('App\User')->using('App\ClubUser')->withPivot([
 			'created_at',

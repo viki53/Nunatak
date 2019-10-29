@@ -24,6 +24,12 @@
 
 					@if($club->pivot->is_owner)
 					<p class="alert alert-success" role="alert">Vous êtes gérant de cette association.</p>
+
+					<p>{{ trans_choice('{1} Vous êtes le seul membre|[2,*] {1} membres dans l\'association', $club->members_count) }}.</p>
+
+					<p>
+						<a href="{{ @route('club.users', ['id' => $club->id]) }}" class="card-link">Liste des membres</a>
+					</p>
 					@endif
 				</div>
 			</div>
