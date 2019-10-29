@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-8">
+	<div class="row">
+		@include('user.menu')
+		<div class="col-md-9">
 			<div class="card">
 				<div class="card-header">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</div>
 

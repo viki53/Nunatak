@@ -20,8 +20,10 @@
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+	<a class="sr-only sr-only-focusable" href="#main-menu">{{ __('Aller au menu') }}</a>
+	<a class="sr-only sr-only-focusable" href="#main-content">{{ __('Aller au contenu principal') }}</a>
 	<div id="app">
-		<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+		<nav id="main-menu" class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
 			<div class="container">
 				@guest
 				<a class="navbar-brand" href="{{ url('/') }}">
@@ -82,7 +84,7 @@
 			</div>
 		</nav>
 
-		<main class="py-4">
+		<main id="main-content" class="py-4">
 			@yield('content')
 		</main>
 	</div>
