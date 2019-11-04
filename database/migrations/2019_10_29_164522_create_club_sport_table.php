@@ -6,14 +6,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateClubSportTable extends Migration
 {
-		/**
-		 * Run the migrations.
-		 *
-		 * @return void
-		 */
-		public function up()
-		{
-				Schema::create('club_sport', function (Blueprint $table) {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('club_sport', function (Blueprint $table) {
 			$table->unsignedBigInteger('club_id');
 			$table->unsignedBigInteger('sport_id');
 
@@ -28,16 +28,16 @@ class CreateClubSportTable extends Migration
 			$table->foreign('sport_id')
 				->references('id')->on('sports')
 				->onDelete('cascade');
-				});
-		}
+		});
+	}
 
-		/**
-		 * Reverse the migrations.
-		 *
-		 * @return void
-		 */
-		public function down()
-		{
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
 		Schema::disableForeignKeyConstraints();
 		Schema::dropIfExists('club_sport');
 		Schema::enableForeignKeyConstraints();

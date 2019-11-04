@@ -63,9 +63,9 @@
 							<label for="club-country" class="col-md-4 col-form-label text-md-right">{{ __('Pays') }}</label>
 
 							<div class="col-md-6">
-								<select id="club-country" class="custom-select @error('country') is-invalid @enderror" name="country" value="{{ old('country', $club->country) }}" required autocomplete="country">
+								<select id="club-country" class="custom-select @error('country') is-invalid @enderror" name="country" required autocomplete="country">
 									<option value="">—</option>
-									<option value="fr">France</option>
+									<option value="fr" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>France</option>
 								</select>
 
 								@error('country')
