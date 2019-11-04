@@ -13,6 +13,9 @@
 
 Route::get('/', 'WelcomeController@index');
 
+Route::get('/clubs', 'ClubsController@index')->name('clubs');
+Route::get('/clubs/{sportid}-{sportname}', 'ClubsController@index')->name('clubs.sport');
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

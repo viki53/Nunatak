@@ -24,13 +24,13 @@
 		<h2 class="card-header">{{ $club->name }}</h2>
 
 		<div class="card-body">
-			@empty($club->sports_count)
+			@empty($club->sports)
 			<p>Ne propose aucun sport</p>
 			@else
 			<p>
 				Propose :
 				@foreach($club->sports as $sport)
-				<strong>{{ $sport->name }}</strong>@if (!$loop->last),@endif
+				<strong><a href="{{ route('clubs').'/'.$sport->slug }}">{{ $sport->name }}</a></strong>@if (!$loop->last),@endif
 				@endforeach
 			</p>
 			@endempty

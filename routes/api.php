@@ -11,6 +11,9 @@ use App\Club;
 use App\Http\Resources\Site as SiteResource;
 use App\Site;
 
+use App\Http\Resources\Sport as SportResource;
+use App\Sport;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,4 +48,11 @@ Route::get('/sites', function () {
 });
 Route::get('/sites/{site}', function (Site $site) {
     return new SiteResource($site->with('club')->get());
+});
+
+Route::get('/sports', function () {
+    return SportResource::collection(Sport::paginate());
+});
+Route::get('/sports/{sport}', function (Sport $sport) {
+    return new SportResource($sport->with(['clubs'])->get());
 });

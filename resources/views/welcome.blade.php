@@ -98,6 +98,12 @@
 				<div class="links">
 					{{ __('La plateforme pour les associations') }}
 				</div>
+
+				<div class="links">
+					@foreach($sports as $sport)
+					<a href="{{ route('clubs').'/'.$sport->slug }}">{{ $sport->name }}</a>@if (!$loop->last) | @endif
+					@endforeach
+				</div>
 			</div>
 		</div>
 	</body>

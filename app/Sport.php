@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Sport extends Model
 {
@@ -24,4 +25,16 @@ class Sport extends Model
     {
         return $this->belongsToMany('App\Club')->using('App\ClubSport');
 	}
+
+
+    /**
+     * Get the sport's slug to build URLs.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getSlugAttribute()
+    {
+        return $this->id.'-'.Str::slug($this->name);
+    }
 }
