@@ -41,13 +41,14 @@
 			<p class="alert alert-success" role="alert">Vous êtes gérant de cette association.</p>
 
 			<p>{{ trans_choice('{1} Vous êtes le seul membre|[2,*] :count membres dans l\'association', $club->members_count, ['count' => $club->members_count]) }}.</p>
-
-			<p>
-				<a href="{{ @route('club.members', ['id' => $club->id]) }}" class="btn btn-outline-primary">Liste des membres</a>
-				<a href="{{ @route('club.edit', ['id' => $club->id]) }}" class="btn btn-outline-secondary">Modifier les informations</a>
-			</p>
 			@endif
 		</div>
+		@if($club->pivot->is_owner)
+		<div class="card-footer text-center">
+			<a href="{{ @route('club.members', ['id' => $club->id]) }}" class="btn btn-outline-primary">Liste des membres</a>
+			<a href="{{ @route('club.edit', ['id' => $club->id]) }}" class="btn btn-outline-secondary">Modifier les informations</a>
+		</div>
+		@endif
 	</div>
 	@endforeach
 </div>

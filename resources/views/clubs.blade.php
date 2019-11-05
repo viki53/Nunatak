@@ -27,12 +27,12 @@
 			@empty($club->sports)
 			<p>Ne propose aucun sport</p>
 			@else
-			<p>
-				Propose :
+			<p>Propose :</p>
+			<ul>
 				@foreach($club->sports as $sport)
-				<strong><a href="{{ route('clubs').'/'.$sport->slug }}">{{ $sport->name }}</a></strong>@if (!$loop->last),@endif
+				<li><a href="{{ route('clubs').'/'.$sport->slug }}">{{ $sport->name }}</a></li>
 				@endforeach
-			</p>
+			</ul>
 			@endempty
 		</div>
 	</div>
