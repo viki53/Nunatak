@@ -14,7 +14,7 @@
 				<div class="card-header">{{ __('Modifier le club sportif') }}</div>
 
 				<div class="card-body">
-					<form method="POST" action="{{ route('club.edit', ['id' => $club->id]) }}">
+					<form method="POST" action="{{ route('club.update', ['club' => $club]) }}">
 						@csrf
 
 						<div class="form-group row">
@@ -35,7 +35,7 @@
 							<label for="club-address" class="col-md-4 col-form-label text-md-right">{{ __('Adresse') }}</label>
 
 							<div class="col-md-6">
-								<textarea id="club-address" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address', $club->address) }}" required autocomplete="street-address"></textarea>
+								<textarea id="club-address" class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="street-address">{{ old('address', $club->address) }}</textarea>
 
 								@error('address')
 									<span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
 							<div class="col-md-6">
 								<select id="club-country" class="custom-select @error('country') is-invalid @enderror" name="country" required autocomplete="country">
 									<option value="">—</option>
-									<option value="fr" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>France</option>
+									<option value="FR" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>France</option>
 								</select>
 
 								@error('country')

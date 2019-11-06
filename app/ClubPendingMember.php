@@ -2,13 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ClubUser extends Pivot
+class ClubPendingMember extends Model
 {
-	public $incrementing = true;
-
-	protected $table = 'club_user';
+	use SoftDeletes;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -19,17 +18,15 @@ class ClubUser extends Pivot
 		'club_id',
 		'user_id',
 		'user_email',
-		'is_owner',
+		'user_name',
 	];
 
     /**
-     * The attributes that should be cast to native types.
+     * The relationships that should always be loaded.
      *
      * @var array
      */
-    protected $casts = [
-        'is_owner' => 'boolean',
-	];
+    protected $with = ['user'];
 
     /**
      * The club the user is registered in.

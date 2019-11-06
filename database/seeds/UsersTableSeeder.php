@@ -4,13 +4,13 @@ use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
-		/**
-		 * Run the database seeds.
-		 *
-		 * @return void
-		 */
-		public function run()
-		{
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
 		$user = App\User::firstOrNew([
 						'name' => 'Corentin Hatte',
 			'email' => 'viki53000+nunatak@gmail.com',
@@ -22,5 +22,5 @@ class UsersTableSeeder extends Seeder
 		$user->save();
 
 		$user->clubs()->syncWithoutDetaching([1, ['is_owner' => true]]);
-		}
+	}
 }

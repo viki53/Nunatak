@@ -19,4 +19,20 @@ class ClubSport extends Pivot
 		'club_id',
 		'sport_id',
 	];
+
+    /**
+     * The club the sport is affected to.
+     */
+    public function club()
+    {
+        return $this->belongsTo('App\Club');
+    }
+
+    /**
+     * The sport the club offers.
+     */
+    public function sport()
+    {
+        return $this->belongsTo('App\Sport');
+    }
 }

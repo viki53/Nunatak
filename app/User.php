@@ -54,4 +54,12 @@ class User extends Authenticatable implements MustVerifyEmail
 			'is_owner',
 		]);
     }
+
+    /**
+     * The pending invitations to join a club.
+     */
+    public function invitations()
+    {
+        return $this->hasMany('App\ClubPendingMember', 'user_id');
+	}
 }

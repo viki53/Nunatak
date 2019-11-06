@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Club;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Club;
+use App\ClubPendingMember;
+use App\User;
+use App\Http\Requests\CreateClubPendingMember as CreateClubPendingMemberRequest;
 
 class MembersController extends Controller
 {
@@ -13,9 +16,9 @@ class MembersController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function index($id, Request $request)
+	public function index(Club $club, Request $request)
 	{
-		$club = Club::with('members')->withCount('members')->findOrFail($id);
+		$club->load(['members', 'pending_members.user']);
 
 		return view('club.members', [
 			'club' => $club,
@@ -24,19 +27,42 @@ class MembersController extends Controller
 	}
 
 	/**
+	 * Add a member to the club.
+	 *
+	 * @return \Illuminate\Contracts\Support\Renderable
+	 */
+	public function add(Club $club, CreateClubPendingMemberRequest $request)
+	{
+		$validatedData = $request->validated();
+
+		$member = $club->pending_members()->create([
+			'club_id' => $club->id,
+			'user_name' => $validatedData['user_name'],
+			'user_email' => $validatedData['user_email'],
+		]);
+
+		$user = User::where(['email' => $member->user_email])->first();
+
+		if (!empty($user)) {
+			$member->user_id = $user->id;
+			$member->save();
+		}
+
+		$request->session()->flash('status', __('Membre ajouté'));
+		return redirect()->route('club.members', ['club' => $club]);
+	}
+
+	/**
 	 * Remove a club's member.
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function remove($id, Request $request)
+	public function remove(Club $club, Request $request)
 	{
-		$club = Club::findOrFail($id);
+		$pending_member = ClubPendingMember::findOrFail($request->input('invitation_id'));
+		$pending_member->delete();
 
-		$club->member()->detach($request->input('member_id'));
-
-		$club->save();
-
-		$request->session()->flash('status', __('Membre supprimé'));
-		return redirect()->route('club.members', ['id' => $id]);
+		$request->session()->flash('status', __('Invitation supprimée'));
+		return redirect()->route('club.members', ['club' => $club]);
 	}
 }

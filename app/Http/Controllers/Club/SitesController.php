@@ -5,23 +5,20 @@ namespace App\Http\Controllers\Club;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Club;
-use App\Sport;
 
-class SportsController extends Controller
+class SitesController extends Controller
 {
 	/**
-	 * Show the club's sports list.
+	 * Display the club's sites list
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
 	public function index(Club $club, Request $request)
 	{
-		$club->load('sports');
-		$sports = Sport::orderBy('name', 'ASC')->get();
+		$club->load('sites');
 
-		return view('club.sports', [
+		return view('club.sites', [
 			'club' => $club,
-			'sports' => $sports,
 		]);
 	}
 
@@ -37,21 +34,6 @@ class SportsController extends Controller
 		$club->save();
 
 		$request->session()->flash('status', __('Sport ajouté'));
-		return redirect()->route('club.sports', ['club' => $club]);
-	}
-
-	/**
-	 * Remove a sport from the club's list.
-	 *
-	 * @return \Illuminate\Contracts\Support\Renderable
-	 */
-	public function remove(Club $club, Request $request)
-	{
-		$club->sports()->detach($request->input('sport_id'));
-
-		$club->save();
-
-		$request->session()->flash('status', __('Sport retiré'));
 		return redirect()->route('club.sports', ['club' => $club]);
 	}
 }

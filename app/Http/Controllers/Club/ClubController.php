@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Club;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Club;
 use App\Http\Requests\UpdateClubInfo as UpdateClubInfoRequest;
 
 class ClubController extends Controller
@@ -14,10 +15,8 @@ class ClubController extends Controller
 	 * @param  \App\Club  $club
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function index($id)
+	public function index(Club $club)
 	{
-		$club = \App\Club::findOrFail($id);
-
 		return view('club.edit', [
 			'club' => $club,
 		]);
@@ -30,10 +29,8 @@ class ClubController extends Controller
 	 * @param  Request  $request
 	 * @return Response
 	 */
-	public function update($id, UpdateClubInfoRequest $request)
+	public function update(Club $club, UpdateClubInfoRequest $request)
 	{
-		$club = \App\Club::findOrFail($id);
-
 		$validatedData = $request->validated();
 
 		$club->name = $validatedData['name'];
@@ -41,7 +38,6 @@ class ClubController extends Controller
 		$club->city = $validatedData['city'];
 		$club->country = $validatedData['country'];
 		$club->registration_number = $validatedData['registration_number'];
-		$club->category_id = $validatedData['category_id'];
 
 		$club->save();
 

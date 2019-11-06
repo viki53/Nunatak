@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClubInfo extends FormRequest
+class CreateClubPendingMember extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,8 @@ class UpdateClubInfo extends FormRequest
     public function rules()
     {
         return [
-			'name' => ['required', 'string', 'max:255'],
-			'address' => ['required'],
-			'city' => ['required', 'string'],
-			'country' => ['required', 'string', 'size:2'],
-			'registration_number' => ['required', 'string'],
+			'user_name' => ['required', 'string', 'max:255'],
+			'user_email' => ['required', 'email'],
 		];
     }
 }
