@@ -19,6 +19,8 @@
 <body>
 	<a class="sr-only sr-only-focusable" href="#main-menu">{{ __('Aller au menu') }}</a>
 	<a class="sr-only sr-only-focusable" href="#main-content">{{ __('Aller au contenu principal') }}</a>
+	@yield('quicklinks')
+
 	<div id="app">
 		<nav id="main-menu" class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
 			<div class="container">
@@ -63,9 +65,6 @@
 									<a class="dropdown-item" href="{{ route('user.invitations') }}">
 										{{ __('Invitations') }}
 									</a>
-
-									<div class="dropdown-divider"></div>
-
 									<a class="dropdown-item" href="{{ route('user.profile') }}">
 										{{ __('Mon compte') }}
 									</a>

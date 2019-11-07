@@ -1,20 +1,25 @@
 @extends('layouts.app')
 
+@section('quicklinks')
+<a class="sr-only sr-only-focusable" href="#members-list">{{ __('Aller à la liste des membres') }}</a>
+<a class="sr-only sr-only-focusable" href="#invitations-list">{{ __('Aller à la liste des invitations') }}</a>
+@endsection
+
 @section('content')
 <header class="container">
 	<h1>{{ $club->name }}</h1>
-	<p class="lead">
-		{{ trans_choice('{0} Aucun membre inscrit|{1} Un membre inscrit|[2,*] :count membres inscrits', count($club->members), ['count' => count($club->members)]) }} | {{ trans_choice('{0} Aucun membre en attente|{1} Un membre en attente|[2,*] :count membres en attente', count($club->invitations), ['count' => count($club->invitations)]) }}
-	</p>
+	<p class="lead">{!! __('Gestion des <a href="#members-list">membres</a> et <a href="#invitations-list">invitations</a>') !!}</p>
 </header>
 
 <div class="container">
 	<div class="row">
 		@include('club.menu', ['club' => $club])
 		<div class="col-md-9">
+			@if(count($club->members) > 0)
+			<h2 id="members-list">{{ trans_choice('{0} Aucun membre inscrit|{1} Un membre inscrit|[2,*] :count membres inscrits', count($club->members), ['count' => count($club->members)]) }}</h2>
 			@foreach($club->members as $member)
 			<div class="card mb-3">
-				<h2 class="card-header">{{ $member->name }}</h2>
+				<h3 class="card-header">{{ $member->name }}</h3>
 
 				<div class="card-body">
 					@if(!$member->pivot->is_owner && $member->id !== $user->id)
@@ -39,10 +44,13 @@
 				</div>
 			</div>
 			@endforeach
+			@endif
 
+			@if(count($club->invitations) > 0)
+			<h2 id="invitations-list">{{ trans_choice('{0} Aucune invitation en attente|{1} Une invitation en attente|[2,*] :count invitations en attente', count($club->invitations), ['count' => count($club->invitations)]) }}</h2>
 			@foreach($club->invitations as $invitation)
 			<div class="card mb-3">
-				<h2 class="card-header"><em>En attente :</em> {{ $invitation->user_name }}</h2>
+				<h3 class="card-header"><em>En attente :</em> {{ $invitation->user_name }}</h3>
 
 				<div class="card-body">
 					<p>{{ $invitation->user_email }}</p>
@@ -59,6 +67,7 @@
 				</div>
 			</div>
 			@endforeach
+			@endif
 
 			<form method="POST" action="{{ route('club.invitations.add', ['club' => $club]) }}" class="card">
 				@csrf
