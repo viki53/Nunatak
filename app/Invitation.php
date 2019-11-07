@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ClubPendingMember extends Model
+class Invitation extends Model
 {
 	use SoftDeletes;
 
@@ -20,13 +20,6 @@ class ClubPendingMember extends Model
 		'user_email',
 		'user_name',
 	];
-
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    protected $with = ['user'];
 
     /**
      * The club the user is registered in.

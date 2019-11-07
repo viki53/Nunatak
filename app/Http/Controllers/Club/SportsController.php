@@ -45,9 +45,9 @@ class SportsController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function remove(Club $club, Request $request)
+	public function remove(Club $club, Sport $sport, Request $request)
 	{
-		$club->sports()->detach($request->input('sport_id'));
+		$club->sports()->detach($sport);
 
 		$club->save();
 

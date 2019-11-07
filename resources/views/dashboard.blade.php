@@ -41,8 +41,8 @@
 			<p class="alert alert-success" role="alert">Vous êtes gérant de cette association.</p>
 
 			<p>{{ trans_choice('{1} Vous êtes le seul membre|[2,*] :count membres dans l\'association', $club->members_count, ['count' => $club->members_count]) }}.</p>
-			@if(!empty($club->pending_members_count))
-			<p>{{ trans_choice('{1} Une inscription en attente|[2,*] :count inscriptions en attente', $club->pending_members_count, ['count' => $club->pending_members_count]) }}.</p>
+			@if(!empty($club->invitations_count))
+			<p>{{ trans_choice('{1} Une inscription en attente|[2,*] :count inscriptions en attente', $club->invitations_count, ['count' => $club->invitations_count]) }}.</p>
 			@endif
 
 			@empty($club->sites)

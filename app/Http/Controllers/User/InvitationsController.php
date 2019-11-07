@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Club;
-use App\ClubPendingMember;
+use App\Invitation;
 
 class InvitationsController extends Controller
 {
@@ -29,10 +29,8 @@ class InvitationsController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function accept(Request $request)
+	public function accept(Invitation $invitation, Request $request)
 	{
-		$invitation = ClubPendingMember::findOrFail($request->input('invitation_id'));
-
 		$request->user()->clubs()->attach($invitation->club_id);
 		$invitation->delete();
 
@@ -45,9 +43,8 @@ class InvitationsController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function reject(Request $request)
+	public function reject(Invitation $invitation, Request $request)
 	{
-		$invitation = ClubPendingMember::findOrFail($request->input('invitation_id'));
 		$invitation->delete();
 
 		$request->session()->flash('status', __('Invitation supprimée'));

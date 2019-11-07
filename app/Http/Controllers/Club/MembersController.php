@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Club;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Club;
-use App\ClubPendingMember;
+use App\Invitation;
 use App\User;
-use App\Http\Requests\CreateClubPendingMember as CreateClubPendingMemberRequest;
+use App\Http\Requests\CreateInvitation as CreateInvitationRequest;
 
 class MembersController extends Controller
 {
@@ -18,7 +18,7 @@ class MembersController extends Controller
 	 */
 	public function index(Club $club, Request $request)
 	{
-		$club->load(['members', 'pending_members.user']);
+		$club->load(['members', 'invitations.user']);
 
 		return view('club.members', [
 			'club' => $club,
@@ -31,11 +31,11 @@ class MembersController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function add(Club $club, CreateClubPendingMemberRequest $request)
+	public function add(Club $club, CreateInvitationRequest $request)
 	{
 		$validatedData = $request->validated();
 
-		$member = $club->pending_members()->create([
+		$member = $club->invitations()->create([
 			'club_id' => $club->id,
 			'user_name' => $validatedData['user_name'],
 			'user_email' => $validatedData['user_email'],
@@ -57,10 +57,9 @@ class MembersController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function remove(Club $club, Request $request)
+	public function remove(Club $club, Invitation $invitation, Request $request)
 	{
-		$pending_member = ClubPendingMember::findOrFail($request->input('invitation_id'));
-		$pending_member->delete();
+		$invitation->delete();
 
 		$request->session()->flash('status', __('Invitation supprimée'));
 		return redirect()->route('club.members', ['club' => $club]);

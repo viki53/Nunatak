@@ -33,9 +33,9 @@ class Club extends Model
     /**
      * The members pending registration to the club.
      */
-    public function pending_members()
+    public function invitations()
     {
-        return $this->hasMany('App\ClubPendingMember');
+        return $this->hasMany('App\Invitation');
 	}
 
     /**

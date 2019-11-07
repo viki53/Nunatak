@@ -60,6 +60,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function invitations()
     {
-        return $this->hasMany('App\ClubPendingMember', 'user_id');
+        return $this->hasMany('App\Invitation');
 	}
 }

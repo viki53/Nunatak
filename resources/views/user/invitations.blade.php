@@ -23,19 +23,17 @@
 				<h2 class="card-header">{{ $invitation->club->name }}</h2>
 
 				<div class="card-body">
-					<form method="POST" action="{{ route('user.invitations.accept') }}" class="float-right ml-2">
+					<form method="POST" action="{{ route('user.invitations.accept', ['invitation' => $invitation]) }}" class="float-right ml-2">
 						@csrf
 						@method('POST')
 
-						<input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
 						<button type="submit" class="btn btn-outline-success">{{ __('Accepter') }}</button>
 					</form>
 
-					<form method="POST" action="{{ route('user.invitations.reject') }}" class="float-right ml-2">
+					<form method="POST" action="{{ route('user.invitations.reject', ['invitation' => $invitation]) }}" class="float-right ml-2">
 						@csrf
 						@method('DELETE')
 
-						<input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
 						<button type="submit" class="btn btn-outline-danger">{{ __('Refuser') }}</button>
 					</form>
 

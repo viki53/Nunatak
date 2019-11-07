@@ -21,7 +21,7 @@
 				<h2 class="card-header">{{ $sport->name }}</h2>
 
 				<div class="card-body">
-					<form method="POST" action="{{ route('club.sports.remove', ['club' => $club]) }}">
+					<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}">
 						@csrf
 						@method('DELETE')
 

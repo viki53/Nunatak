@@ -4,7 +4,7 @@
 <header class="container">
 	<h1>{{ $club->name }}</h1>
 	<p class="lead">
-		{{ trans_choice('{0} Aucun membre inscrit|{1} Un membre inscrit|[2,*] :count membres inscrits', count($club->members), ['count' => count($club->members)]) }} | {{ trans_choice('{0} Aucun membre en attente|{1} Un membre en attente|[2,*] :count membres en attente', count($club->pending_members), ['count' => count($club->pending_members)]) }}
+		{{ trans_choice('{0} Aucun membre inscrit|{1} Un membre inscrit|[2,*] :count membres inscrits', count($club->members), ['count' => count($club->members)]) }} | {{ trans_choice('{0} Aucun membre en attente|{1} Un membre en attente|[2,*] :count membres en attente', count($club->invitations), ['count' => count($club->invitations)]) }}
 	</p>
 </header>
 
@@ -18,7 +18,7 @@
 
 				<div class="card-body">
 					@if(!$member->pivot->is_owner && $member->id !== $user->id)
-					<form method="POST" action="{{ route('club.members.remove', ['club' => $club]) }}">
+					<form method="POST" action="{{ route('club.members.remove', ['club' => $club, 'member' => $member->pivot->id]) }}">
 						@csrf
 						@method('DELETE')
 
@@ -40,27 +40,27 @@
 			</div>
 			@endforeach
 
-			@foreach($club->pending_members as $pending_member)
+			@foreach($club->invitations as $invitation)
 			<div class="card mb-3">
-				<h2 class="card-header"><em>En attente :</em> {{ $pending_member->user_name }}</h2>
+				<h2 class="card-header"><em>En attente :</em> {{ $invitation->user_name }}</h2>
 
 				<div class="card-body">
-					<p>{{ $pending_member->user_email }}</p>
+					<p>{{ $invitation->user_email }}</p>
 
-					<form method="POST" action="{{ route('club.pending_members.remove', ['club' => $club]) }}">
+					<form method="POST" action="{{ route('club.invitations.remove', ['club' => $club, 'invitation' => $invitation]) }}">
 						@csrf
 						@method('DELETE')
 
-						<input type="hidden" name="invitation_id" value="{{ $pending_member->id }}">
+						<input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
 						<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
 
-						<p>Ajouté <time datetime="{{ $pending_member->created_at->toIso8601String() }}" title="Le {{ $pending_member->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $pending_member->created_at->diffForHumans() }}</time>.</p>
+						<p>Ajouté <time datetime="{{ $invitation->created_at->toIso8601String() }}" title="Le {{ $invitation->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $invitation->created_at->diffForHumans() }}</time>.</p>
 					</form>
 				</div>
 			</div>
 			@endforeach
 
-			<form method="POST" action="{{ route('club.pending_members.add', ['club' => $club]) }}" class="card">
+			<form method="POST" action="{{ route('club.invitations.add', ['club' => $club]) }}" class="card">
 				@csrf
 
 				<h2 class="card-header">Inviter un membre</h2>

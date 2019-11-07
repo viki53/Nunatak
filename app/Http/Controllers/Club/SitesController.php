@@ -23,17 +23,33 @@ class SitesController extends Controller
 	}
 
 	/**
-	 * Add a sport to the club's list.
+	 * Add a site to the club's list.
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
 	public function add(Club $club, Request $request)
 	{
-		$club->sports()->attach($request->input('sport_id'));
+		$club->sites()->create([
+			'name' => $request->input('name'),
+			'domain' => $request->input('domain'),
+		]);
+
+		$request->session()->flash('status', __('Site créé'));
+		return redirect()->route('club.sites', ['club' => $club]);
+	}
+
+	/**
+	 * Remove a site from the club's list.
+	 *
+	 * @return \Illuminate\Contracts\Support\Renderable
+	 */
+	public function remove(Club $club, Site $site, Request $request)
+	{
+		$club->sites()->detach($site);
 
 		$club->save();
 
-		$request->session()->flash('status', __('Sport ajouté'));
-		return redirect()->route('club.sports', ['club' => $club]);
+		$request->session()->flash('status', __('Site retiré'));
+		return redirect()->route('club.sites', ['club' => $club]);
 	}
 }

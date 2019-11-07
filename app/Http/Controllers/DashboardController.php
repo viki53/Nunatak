@@ -26,7 +26,7 @@ class DashboardController extends Controller
 		$user = $request->user()->with(['clubs.sports'])->withCount('clubs')->first();
 
 		foreach($user->clubs as $club) {
-			$club->loadCount(['members']);
+			$club->loadCount(['members', 'invitations']);
 		}
 
 		return view('dashboard', [
