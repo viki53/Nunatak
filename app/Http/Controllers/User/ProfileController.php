@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateUserProfile as UpdateUserProfileRequest;
+use App\Http\Requests\UpdateUserProfileRequest;
 
 class ProfileController extends Controller
 {

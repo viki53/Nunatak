@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateUserPassword as UpdateUserPasswordRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
 
 class PasswordController extends Controller
 {

@@ -18,33 +18,34 @@
 
 			@foreach($club->sites as $site)
 			<div class="card mb-3">
-				<h2 class="card-header">{{ $site->name }}</h2>
+				<h2 class="card-header">{{ $site->title }}</h2>
 
 				<div class="card-body">
-					<form method="POST" action="{{ route('club.sites.remove', ['club' => $club]) }}">
+					<div class="card-title"><a href="https://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></div>
+
+					<form method="POST" action="{{ route('club.sites.remove', ['club' => $club, 'site' => $site]) }}">
 						@csrf
 						@method('DELETE')
 
-						<input type="hidden" name="site_id" value="{{ $site->id }}">
 						<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
 
-						<p>Créé <time datetime="{{ $site->pivot->created_at->toIso8601String() }}" title="Le {{ $site->pivot->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $site->pivot->created_at->diffForHumans() }}</time>.</p>
+						<p>Créé <time datetime="{{ $site->created_at->toIso8601String() }}" title="Le {{ $site->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $site->created_at->diffForHumans() }}</time>.</p>
 					</form>
 				</div>
 			</div>
 			@endforeach
 
-			<form method="POST" action="{{ route('club.sites.add', ['id' => $club->id]) }}" class="card">
+			<form method="POST" action="{{ route('club.sites.add', ['club' => $club]) }}" class="card">
 				@csrf
 
 				<h2 class="card-header">Créer un nouveau site</h2>
 
 				<div class="card-body">
 					<div class="form-group row">
-						<label for="new-site-name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
+						<label for="new-site-title" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
 
 						<div class="col-md-6">
-							<input id="new-site-name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="off">
+							<input id="new-site-title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $club->name) }}" required autocomplete="off">
 
 							@error('sport_id')
 								<span class="invalid-feedback" role="alert">
@@ -62,9 +63,9 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">https://</span>
 								</div>
-								<input id="new-site-domain" type="text" class="form-control @error('domain') is-invalid @enderror" name="domain" value="{{ old('domain') }}" required autocomplete="off">
+								<input id="new-site-domain" type="text" class="form-control @error('domain') is-invalid @enderror" name="domain" value="{{ old('domain', Str::slug($club->name)) }}" required autocomplete="off">
 								<div class="input-group-append">
-									<span class="input-group-text">.nunatak.io</span>
+									<span class="input-group-text">{{ config('nunatak.domain_suffix') }}</span>
 								</div>
 							</div>
 
@@ -79,7 +80,7 @@
 					<div class="form-group row mb-0">
 						<div class="col-md-6 offset-md-4">
 							<button type="submit" class="btn btn-primary">
-								{{ __('Enregistrer') }}
+								{{ __('Créer') }}
 							</button>
 						</div>
 					</div>

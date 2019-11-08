@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Club;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Club;
-use App\Http\Requests\UpdateClubInfo as UpdateClubInfoRequest;
+use App\Http\Requests\UpdateClubRequest;
 
 class ClubController extends Controller
 {
@@ -29,7 +29,7 @@ class ClubController extends Controller
 	 * @param  Request  $request
 	 * @return Response
 	 */
-	public function update(Club $club, UpdateClubInfoRequest $request)
+	public function update(Club $club, UpdateClubRequest $request)
 	{
 		$validatedData = $request->validated();
 

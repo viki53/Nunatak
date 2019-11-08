@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Club;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateSiteRequest;
 use App\Club;
+use App\Site;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class SitesController extends Controller
 {
@@ -27,11 +31,13 @@ class SitesController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function add(Club $club, Request $request)
+	public function add(Club $club, CreateSiteRequest $request)
 	{
+		$validatedData = $request->validated();
+
 		$club->sites()->create([
-			'name' => $request->input('name'),
-			'domain' => $request->input('domain'),
+			'title' => $validatedData['title'],
+			'domain' => $validatedData['domain'],
 		]);
 
 		$request->session()->flash('status', __('Site créé'));
@@ -45,9 +51,9 @@ class SitesController extends Controller
 	 */
 	public function remove(Club $club, Site $site, Request $request)
 	{
-		$club->sites()->detach($site);
-
-		$club->save();
+		$site->domain = $site->domain.'.deleted_'.Carbon::now()->format('Y-m-d').'_'.Carbon::now()->format('H-i-s');
+		$site->save();
+		$site->delete();
 
 		$request->session()->flash('status', __('Site retiré'));
 		return redirect()->route('club.sites', ['club' => $club]);

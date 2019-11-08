@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Club;
 use App\Invitation;
 use App\User;
-use App\Http\Requests\CreateInvitation as CreateInvitationRequest;
+use App\Http\Requests\CreateInvitationRequest;
 
 class MembersController extends Controller
 {
