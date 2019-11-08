@@ -24,7 +24,7 @@
 		<h2 class="card-header">{{ $club->name }}</h2>
 
 		<div class="card-body">
-			@empty($club->sports)
+			@if(count($club->sports) === 0)
 			<p>Ne propose aucun sport</p>
 			@else
 			<p>
@@ -33,7 +33,18 @@
 				<strong><a href="{{ route('clubs').'/'.$sport->slug }}">{{ $sport->name }}</a></strong>@if (!$loop->last),@endif
 				@endforeach
 			</p>
-			@endempty
+			@endif
+
+			@if(count($club->sites) === 0)
+			<p>Aucun site</p>
+			@else
+			<p>{{ trans_choice('{1} Un seul site public|[2,*] :count sites publics', count($club->sites), ['count' => count($club->sites)]) }} :</p>
+			<ul>
+				@foreach($club->sites as $site)
+				<li><a href="https://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->title }}</a></li>
+				@endforeach
+			</ul>
+			@endif
 
 			<p>Vous êtes membre depuis <time datetime="{{ $club->pivot->created_at->toIso8601String() }}" title="Depuis le {{ $club->pivot->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $club->pivot->created_at->longAbsoluteDiffForHumans() }}</time>.</p>
 
@@ -44,16 +55,6 @@
 			@if(!empty($club->invitations_count))
 			<p>{{ trans_choice('{1} Une inscription en attente|[2,*] :count inscriptions en attente', $club->invitations_count, ['count' => $club->invitations_count]) }}.</p>
 			@endif
-
-			@empty($club->sites)
-			<p>Aucun site</p>
-			@else
-			<ul>
-				@foreach($club->sites as $site)
-				<li><a href="https://{{ $site->domain }}">{{ $site->name }}</a></li>
-				@endforeach
-			</ul>
-			@endempty
 			@endif
 		</div>
 		@if($club->pivot->is_owner)
