@@ -3,9 +3,6 @@
 @section('content')
 <header class="container">
 	<h1>{{ __('Bienvenue, :name', ['name' => $user->name]) }}</h1>
-	<p class="lead">
-		{{ trans_choice('{0} Aucune invitation en attente|{1} Une invitation en attente|[2,*] :count invitations en attente', count($user->invitations), ['count' => count($user->invitations)]) }}
-	</p>
 </header>
 
 <div class="container">
@@ -18,6 +15,11 @@
 	<div class="row">
 		@include('user.menu', ['user' => $user])
 		<div class="col-md-9">
+			@if(count($user->invitations) === 0)
+			<p class="lead">
+				{{ trans_choice('{0} Aucune invitation en attente|{1} Une invitation en attente|[2,*] :count invitations en attente', count($user->invitations), ['count' => count($user->invitations)]) }}
+			</p>
+			@endif
 			@foreach($user->invitations as $invitation)
 			<div class="card mb-3">
 				<h2 class="card-header">{{ $invitation->club->name }}</h2>

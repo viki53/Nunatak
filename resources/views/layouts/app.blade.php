@@ -22,7 +22,7 @@
 	@yield('quicklinks')
 
 	<div id="app">
-		<nav id="main-menu" class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+		<nav id="main-menu" class="navbar navbar-expand-md shadow-sm">
 			<div class="container">
 				@guest
 				<a class="navbar-brand" href="{{ url('/') }}">

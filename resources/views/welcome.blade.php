@@ -55,7 +55,7 @@
 
 			.title {
 				font-size: 84px;
-				text-shadow: 0 0 4px rgba(255, 255, 255, .7);
+				text-shadow: 0 0 5px rgba(255, 255, 255, .7);
 			}
 
 			.links > a {
@@ -71,6 +71,31 @@
 
 			.m-b-md {
 				margin-bottom: 30px;
+			}
+
+
+			@media (prefers-color-scheme: dark) {
+				html, body {
+					background-color: #212529;
+					color: #f8fafc;
+				}
+				.navbar {
+					background-color: black !important;
+					color: white;
+				}
+				.navbar a {
+					color: inherit;
+				}
+				.full-height {
+					background-color: rgba(0, 0, 0, .1);
+				}
+				.top-right {
+					background-color: #000;
+				}
+				.title {
+					font-size: 84px;
+					text-shadow: 0 0 5px rgba(0, 0, 0, .7);
+				}
 			}
 		</style>
 	</head>
@@ -91,13 +116,9 @@
 			@endif
 
 			<div class="content">
-				<div class="title m-b-md">
-					{{ config('app.name') }}
-				</div>
+				<div class="title m-b-md">{{ config('app.name') }}</div>
 
-				<div class="links">
-					{{ __('La plateforme pour les associations') }}
-				</div>
+				<div class="links">{{ __('La plateforme pour les associations') }}</div>
 
 				<div class="links">
 					@foreach($sports as $sport)

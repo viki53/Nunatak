@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<header class="container">
+	<h1>{{ __('Bienvenue, :name', ['name' => $user->name]) }}</h1>
+</header>
+
 <div class="container">
 	<div class="row">
 		@include('user.menu')
 		<div class="col-md-9">
 			<div class="card">
-				<div class="card-header">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</div>
+				<h2 class="card-header">{{ __('Modifier mon compte') }}</h2>
 
 				<div class="card-body">
 					<form method="POST" action="{{ route('user.profile') }}">
@@ -62,9 +66,6 @@
 							</div>
 						</div>
 					</form>
-				</div>
-				<div class="card-footer">
-					<a href="{{ route('user.password') }}" class="card-link">{{ __('Changer de mot de passe') }}</a>
 				</div>
 			</div>
 		</div>

@@ -10644,3 +10644,85 @@ a.text-dark:focus {
   }
 }
 
+.navbar {
+  background-color: white !important;
+  color: black;
+}
+
+.navbar a {
+  color: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #212529;
+    color: #f8fafc;
+  }
+
+  .card {
+    background-color: black;
+  }
+
+  .card-header,
+  .card-footer {
+    background-color: #0f0f0f;
+  }
+
+  .navbar {
+    background-color: black !important;
+    color: white;
+  }
+
+  .navbar a {
+    color: inherit;
+  }
+
+  .dropdown-menu {
+    background-color: black;
+    border-color: rgba(255, 255, 255, 0.075);
+    color: #f8fafc;
+  }
+
+  .dropdown-item:hover,
+  .dropdown-item:focus {
+    background-color: #0d0d0d;
+    color: white;
+  }
+
+  .dropdown-divider {
+    border-top-color: #1a1a1a;
+  }
+
+  .list-group-item {
+    background-color: black;
+  }
+
+  .list-group-item-action {
+    color: #f8fafc;
+  }
+
+  .list-group-item-action:hover,
+  .list-group-item-action:focus {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  .form-control,
+  .custom-select {
+    background-color: #1a1d21;
+    border-color: #383f45;
+    color: #f8fafc;
+  }
+
+  .form-control:focus,
+  .custom-select:focus {
+    background-color: #131618;
+    color: white;
+  }
+
+  .input-group-text {
+    background-color: #131618;
+    border-color: #383f45;
+  }
+}
+

@@ -11,7 +11,7 @@
 		@include('club.menu', ['club' => $club])
 		<div class="col-md-9">
 			<div class="card">
-				<div class="card-header">{{ __('Modifier le club sportif') }}</div>
+				<h2 class="card-header">{{ __('Modifier le club sportif') }}</h2>
 
 				<div class="card-body">
 					<form method="POST" action="{{ route('club.update', ['club' => $club]) }}">
