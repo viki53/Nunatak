@@ -7,7 +7,7 @@
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>{{ config('app.name') }}</title>
+	<title>{{ $site->title }}</title>
 
 	<!-- Fonts -->
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,15 +24,9 @@
 	<div id="app">
 		<nav id="main-menu" class="navbar navbar-expand-md shadow-sm">
 			<div class="container">
-				@guest
 				<a class="navbar-brand" href="{{ url('/') }}">
-					{{ config('app.name') }}
+					{{ $site->title }}
 				</a>
-				@else
-				<a class="navbar-brand" href="{{ url('/dashboard') }}">
-					{{ config('app.name') }}
-				</a>
-				@endguest
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Afficher/cacher la navigation') }}">
 					<span class="navbar-toggler-icon"></span>
 				</button>
