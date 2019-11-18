@@ -13,8 +13,9 @@
 
 // ===== Clus's site routing =====
 
-Route::domain('{subdomain}'.config('nunatak.domain_suffix'))->middleware('loadsite')->name('site.')->group(function () {
-	Route::get('/', 'Site\WelcomeController@index');
+Route::domain('{domain}'.config('nunatak.domain_suffix'))->middleware('loadsite')->name('site.')->group(function () {
+	// Route::get('/', 'Site\WelcomeController@index');
+	Route::fallback('Site\PageController@index');
 });
 
 // ===== Root domain routing =====
@@ -58,5 +59,15 @@ Route::domain(config('nunatak.root_domain'))->group(function () {
 
 		Route::get('/club/{club}', 'Club\ClubController@index')->name('edit');
 		Route::post('/club/{club}', 'Club\ClubController@update')->name('update');
+	});
+
+	Route::name('site.')->middleware('auth')->group(function () {
+		Route::get('/site/{site}/pages', 'Club\PagesController@index')->name('pages');
+
+		Route::get('/site/{site}/pages/{page}', 'Club\PagesController@edit')->name('pages.edit');
+		Route::post('/site/{site}/pages/{page}', 'Club\PagesController@update')->name('pages.update');
+		Route::delete('/site/{site}/pages/{page}', 'Club\PagesController@remove')->name('pages.remove');
+
+		Route::post('/site/{site}/pages', 'Club\PagesController@add')->name('pages.add');
 	});
 });

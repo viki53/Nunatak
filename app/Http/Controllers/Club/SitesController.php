@@ -22,6 +22,7 @@ class SitesController extends Controller
 		$club->load('sites');
 
 		return view('club.sites', [
+			'protocol' => 'http'.($request->secure() ? 's' : ''),
 			'club' => $club,
 		]);
 	}
@@ -35,13 +36,23 @@ class SitesController extends Controller
 	{
 		$validatedData = $request->validated();
 
-		$club->sites()->create([
+		$site = $club->sites()->create([
 			'title' => $validatedData['title'],
 			'domain' => $validatedData['domain'],
 		]);
 
+		$home_page = $site->pages()->create([
+			'path' => '/',
+		]);
+
+		$home_page->revisions()->create([
+			'title' => 'Bienvenue',
+			'subtitle' => 'Ceci est votre page d\'accueil',
+			'content' => 'Vous pouvez modifier ce texte à volonté, l\'historique des modifications sera enregistré.',
+		]);
+
 		$request->session()->flash('status', __('Site créé'));
-		return redirect()->route('club.sites', ['club' => $club]);
+		return redirect()->route('site.pages', ['site' => $site]);
 	}
 
 	/**

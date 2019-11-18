@@ -7,7 +7,7 @@
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>{{ $site->title }}</title>
+	<title>@if(!empty($page)){{ $page->last_revision->title}} — @endif{{ $site->title }}</title>
 
 	<!-- Fonts -->
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -33,7 +33,11 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<!-- Left Side Of Navbar -->
 					<ul class="navbar-nav mr-auto">
-
+						@if(!empty($page))
+						<li class="nav-item">
+							<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}" class="btn btn-primary">Modifier</a>
+						</li>
+						@endif
 					</ul>
 
 					<!-- Right Side Of Navbar -->
@@ -42,10 +46,12 @@
 						@guest
 						<li class="nav-item">
 							<a class="btn btn-outline-primary" href="{{ route('login') }}">{{ __('Connexion') }}</a>
-							@if (Route::has('register'))
-							<a class="btn btn-primary" href="{{ route('register') }}">{{ __('Inscription') }}</a>
-							@endif
 						</li>
+						@if (Route::has('register'))
+						<li class="nav-item ml-1">
+							<a class="btn btn-primary" href="{{ route('register') }}">{{ __('Inscription') }}</a>
+						</li>
+						@endif
 						@else
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

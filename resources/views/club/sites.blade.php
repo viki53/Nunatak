@@ -21,7 +21,9 @@
 				<h2 class="card-header">{{ $site->title }}</h2>
 
 				<div class="card-body">
-					<div class="card-title"><a href="https://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></div>
+					<div class="card-title"><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></div>
+
+					<p><a href="{{ route('site.pages', ['site' => $site]) }}">Voir les pages</a></p>
 
 					<form method="POST" action="{{ route('club.sites.remove', ['club' => $club, 'site' => $site]) }}">
 						@csrf

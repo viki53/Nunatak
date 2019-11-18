@@ -28,10 +28,18 @@ class Site extends Model
     }
 
     /**
-     * The users registered to the ssite.
+     * The users registered to the site.
      */
     public function users()
     {
         return $this->hasManyThrough('App\User', 'App\Club');
+    }
+
+    /**
+     * The site's pages.
+     */
+    public function pages()
+    {
+        return $this->hasMany('App\Page');
     }
 }

@@ -30,7 +30,8 @@ class DashboardController extends Controller
 		}
 
 		return view('dashboard', [
-			'user' => $user
+			'protocol' => 'http'.($request->secure() ? 's' : ''),
+			'user' => $user,
 		]);
 	}
 }
