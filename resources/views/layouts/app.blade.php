@@ -89,6 +89,7 @@
 	</div>
 
 	<!-- Scripts -->
+	<script>window._translations = {!! cache('translations') !!};</script>
 	<script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

@@ -41,7 +41,7 @@
 			<p>{{ trans_choice('{1} Un seul site public|[2,*] :count sites publics', count($club->sites), ['count' => count($club->sites)]) }} :</p>
 			<ul>
 				@foreach($club->sites as $site)
-				<li><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->title }}</a></li>
+				<li><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->title }}</a> <a href="{{ route('site.pages', ['site' => $site]) }}" class="btn btn-outline-primary btn-sm">Gérer</a></li>
 				@endforeach
 			</ul>
 			@endif

@@ -9,6 +9,6 @@
 </header>
 
 <main class="container">
-	{{ $page->last_revision->content }}
+	{!! $page->last_revision->content !!}
 </main>
 @endsection

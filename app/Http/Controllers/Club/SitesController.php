@@ -48,7 +48,7 @@ class SitesController extends Controller
 		$home_page->revisions()->create([
 			'title' => 'Bienvenue',
 			'subtitle' => 'Ceci est votre page d\'accueil',
-			'content' => 'Vous pouvez modifier ce texte à volonté, l\'historique des modifications sera enregistré.',
+			'content' => '<p>Vous pouvez modifier ce texte à volonté, l\'historique des modifications sera enregistré.</p><p>Vous pouvez même sauter des lignes ou mettre des mots en <strong>gras</strong> ou en <em>italique</em> !</<p>',
 		]);
 
 		$request->session()->flash('status', __('Site créé'));
