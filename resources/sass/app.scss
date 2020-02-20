@@ -29,12 +29,18 @@
 		background-color: lighten(black, 6%);
 	}
 
-	.navbar {
+	.navbar.navbar-light {
 		background-color: black !important;
 		color: white;
-	}
-	.navbar a {
-		color: inherit;
+
+		a,
+		.navbar-nav .nav-link {
+			color: inherit;
+		}
+		.navbar-toggler {
+			background-color: lighten(black, 5%);
+			border-color: lighten(black, 10%);
+		}
 	}
 
 	.dropdown-menu {
@@ -53,6 +59,11 @@
 
 	.list-group-item {
 		background-color: black;
+
+		&.disabled {
+			background-color: lighten(black, 5%);
+			color: white;
+		}
 	}
 	.list-group-item-action {
 		color: $body-bg;
@@ -83,16 +94,29 @@
 @import '~quill/dist/quill.snow.css';
 .ql-snow {
 	.ql-picker-options {
-		background-color: $body-color;
-		color: $body-bg;
+		background-color: $body-bg;
+		color: $body-color;
+
+		@media (prefers-color-scheme: dark) {
+			background-color: $body-color;
+			color: $body-bg;
+		}
 	}
 	&.ql-toolbar button,
 	.ql-toolbar button,
 	.ql-picker-label {
-		color: $body-bg;
+		color: $body-color;
+
+		@media (prefers-color-scheme: dark) {
+			color: $body-bg;
+		}
 	}
 	.ql-stroke {
-		stroke: $body-bg;
+		stroke: $body-color;
+
+		@media (prefers-color-scheme: dark) {
+			stroke: $body-bg;
+		}
 	}
 }
 .ql-container {
