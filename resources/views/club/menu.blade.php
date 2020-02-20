@@ -15,6 +15,7 @@ $name = $route->getName();
 	$paramSite = $route->parameter('site');
 	@endphp
 	<div class="list-group mt-3">
+		<p class="list-group-item disabled" aria-disabled="true"><strong>Sites</strong></p>
 		@foreach($club->sites as $site)
 		<a href="{{ route('site.pages', ['site' => $site]) }}" class="list-group-item list-group-item-action @if(!empty($paramSite) && $paramSite->id === $site->id) active @endif">{{ $site->title }}</a>
 		@endforeach

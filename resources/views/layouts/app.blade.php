@@ -22,7 +22,7 @@
 	@yield('quicklinks')
 
 	<div id="app">
-		<nav id="main-menu" class="navbar navbar-expand-md shadow-sm">
+		<nav id="main-menu" class="navbar navbar-light navbar-expand-md shadow-sm">
 			<div class="container">
 				@guest
 				<a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
@@ -54,11 +54,11 @@
 							@endif
 						@else
 							<li class="nav-item dropdown">
-								<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+								<a id="menu-dropdown-label-auth" class="nav-link dropdown-toggle" href="#menu-dropdown-auth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 									{{ Auth::user()->name }} <span class="caret"></span>
 								</a>
 
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								<div id="menu-dropdown-auth" class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-dropdown-label-auth">
 									<a class="dropdown-item" href="{{ route('user.invitations') }}">
 										{{ __('Invitations') }}
 									</a>

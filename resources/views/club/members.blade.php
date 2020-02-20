@@ -8,7 +8,7 @@
 @section('content')
 <header class="container">
 	<h1>{{ $club->name }}</h1>
-	<p class="lead">{!! __('Gestion des <a href="#members-list">membres</a> et <a href="#invitations-list">invitations</a>') !!}</p>
+	<p class="lead">{!! __('Gestion des <a href="#members-list">membres</a> et <a href="#invitations-list">invitations</a>.') !!} <a href="#club-invite-form">{{ __('Inviter un sportif') }}</a></p>
 </header>
 
 <div class="container">
@@ -69,7 +69,7 @@
 			@endforeach
 			@endif
 
-			<form method="POST" action="{{ route('club.invitations.add', ['club' => $club]) }}" class="card">
+			<form method="POST" action="{{ route('club.invitations.add', ['club' => $club]) }}" id="club-invite-form" class="card">
 				@csrf
 
 				<h2 class="card-header">Inviter un membre</h2>
@@ -79,7 +79,7 @@
 						<label for="new-member-name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
 
 						<div class="col-md-6">
-							<input id="new-member-name" type="text" class="form-control @error('user_name') is-invalid @enderror" name="user_name" value="{{ old('user_name') }}" required autocomplete="name">
+							<input id="new-member-name" type="text" class="form-control @error('user_name') is-invalid @enderror" name="user_name" id="club-invite-form-name" value="{{ old('user_name') }}" required autocomplete="name">
 
 							@error('user_name')
 								<span class="invalid-feedback" role="alert">

@@ -22,7 +22,7 @@
 	@yield('quicklinks')
 
 	<div id="app">
-		<nav id="main-menu" class="navbar navbar-white bg-white navbar-expand-md">
+		<nav id="main-menu" class="navbar navbar-light bg-white navbar-expand-md">
 			<div class="container">
 				<a class="navbar-brand" href="{{ url('/') }}">{{ $site->title }}</a>
 
@@ -34,9 +34,11 @@
 					<!-- Left Side Of Navbar -->
 					<ul class="navbar-nav mr-auto">
 						@if(!empty($page))
+						@auth
 						<li class="nav-item">
 							<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}" class="btn btn-primary">Modifier</a>
 						</li>
+						@endauth
 						@endif
 					</ul>
 
