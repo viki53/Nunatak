@@ -21,12 +21,11 @@ module.exports = {
 				: key
 			}
 
-			_.forEach(replace, (value, key) => {
-				translation = translation.replace(':' + key, value)
+			Object.keys(replace || {}).forEach((key) => {
+				translation = translation.replace(":" + key, replace[key])
 			})
 
 			return translation
 		}
 	},
 }
-
