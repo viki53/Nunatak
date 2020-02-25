@@ -52,14 +52,12 @@
 					</div>
 				</fieldset>
 
-				<ntk-page-content-editor id="new-page-content-js" header="{{ __('Contenu') }}" content="{{ old('content', $page->last_revision->content) }}" required @error('content') error="{{ $message }}"@enderror></ntk-page-content-editor>
-				<noscript data-fallback="new-page-content-js">
 				<fieldset class="card mt-3">
 					<h3 class="card-header"><label for="new-page-content">{{ __('Contenu') }}</label></h3>
 
 					<div class="card-body">
 						<div class="form-group">
-							<textarea id="new-page-content" class="form-control @error('content') is-invalid @enderror" name="content" required>{{ old('content', $page->last_revision->content) }}</textarea>
+							<textarea id="new-page-content" data-text-editor class="form-control @error('content') is-invalid @enderror" name="content" required>{{ old('content', $page->last_revision->content) }}</textarea>
 
 							@error('content')
 								<span class="invalid-feedback" role="alert">
@@ -69,7 +67,6 @@
 						</div>
 					</div>
 				</fieldset>
-				</noscript>
 
 				<div class="form-group row mt-3 mb-0">
 					<div class="col-md-6 offset-md-4">

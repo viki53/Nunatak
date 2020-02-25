@@ -138,3 +138,18 @@
 	h5 { @extend h5; }
 	h6 { @extend h6; }
 }
+
+.ql-toolbar {
+	border-top-left-radius: $border-radius;
+	border-top-right-radius: $border-radius;
+
+	& + .text-editor {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
+
+.text-editor {
+	min-height: 15em;
+}
+
