@@ -3,7 +3,7 @@
 @section('content')
 <header class="container">
 	<h1>{{ $site->title }}</h1>
-	<p class="lead">Modifier la page {{ $page->last_revision->title }}</p>
+	<p class="lead">Modifier la page <q>{{ $page->last_revision->title }}</q></p>
 </header>
 
 <div class="container">
