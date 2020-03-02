@@ -118,7 +118,7 @@
 			<div class="content">
 				<div class="title m-b-md">{{ config('app.name') }}</div>
 
-				<div class="links">{{ __('La plateforme pour les associations') }}</div>
+				<div class="links">{{ __('La plateforme pour les associations sportives') }}</div>
 
 				<div class="links">
 					@foreach($sports as $sport)
