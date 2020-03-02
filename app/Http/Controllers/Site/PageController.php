@@ -19,9 +19,14 @@ class PageController extends Controller
 	{
 		$site = $request->site;
 
+		$path = $request->path();
+		if (substr($path, 0 ,1) !== '/') {
+			$path = '/'.$path;
+		}
+
 		$page = Page::where([
 			'site_id' => $site->id,
-			'path' => $request->path(),
+			'path' => $path,
 		])->with(['last_revision'])->first();
 
 		if (empty($page)) {
