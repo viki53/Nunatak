@@ -17,7 +17,7 @@ class SportsController extends Controller
 	public function index(Club $club, Request $request)
 	{
 		$club->load('sports');
-		$sports = Sport::orderBy('name', 'ASC')->get();
+		$sports = Sport::orderBy('name', 'ASC')->whereNotIn('id', $club->sports()->allRelatedIds()->toArray())->get();
 
 		return view('club.sports', [
 			'club' => $club,
