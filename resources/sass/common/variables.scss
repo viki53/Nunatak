@@ -1,0 +1,17 @@
+@import '_variables';
+
+:root {
+	--font-family-main: #{$font-family-main};
+	--font-family-title: #{$font-family-title};
+	--font-size-base: #{$font-size-base};
+	--font-weight-base: #{$font-weight-base};
+	--line-height-base: #{$line-height-base};
+
+	@each $name, $value in $sizes {
+		--size-#{$name}: #{$value};
+	}
+
+	@each $name, $value in $colors {
+		--color-#{$name}: #{$value};
+	}
+}

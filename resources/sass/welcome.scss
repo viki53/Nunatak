@@ -1,0 +1,97 @@
+@import 'common/variables';
+@import 'common/common';
+@import 'components/container';
+@import 'components/navbar';
+
+$splashscreen-bg: #e67667;
+$splashscreen-color: #fff;
+
+$sportlink-bg: #fff;
+$sportlink-color: #292929;
+
+:root {
+	--size-lane-height: calc(100vh / 7.8);
+}
+
+.splashscreen {
+	width: 100vw;
+	height: 100vh;
+	background-color: $splashscreen-bg;
+	background-image: url('/storage/splashscreens/steven-lelham-atSaEOeE8Nk-unsplash.jpg');
+	background-size: auto 100%;
+	background-position: center;
+	background-repeat: repeat-x;
+	margin-top: var(--size-navbar-height);
+	color: $splashscreen-color;
+}
+
+@media screen and (min-width: 80rem) {
+	.splashscreen-content {
+		width: 54%;
+	}
+}
+.splashscreen-content {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	padding-top: calc(var(--size-lane-height) * 0.98);
+	text-align: center;
+
+	.brand,
+	.slogan {
+		height: var(--size-lane-height);
+		margin: 0;
+		flex: 0 0 var(--size-lane-height);
+		align-self: center;
+		justify-content: center;
+		vertical-align: middle;
+		line-height: 0;
+		font-weight: var(--font-weight-base);
+	}
+
+	.brand {
+		font-size: 6.25rem;
+		font-family: var(--font-family-title);
+		padding: calc(var(--size-lane-height) / 2) 0;
+	}
+
+	.slogan {
+		font-size: 2rem;
+		padding: calc(var(--size-lane-height) / 4) 0;
+
+		span {
+			display: block;
+			line-height: calc(var(--size-lane-height) / 4);
+		}
+	}
+}
+
+.sports-list {
+	display: block;
+	text-align: center;
+
+	.lane {
+		flex: 0 0 var(--size-lane-height);
+		height: var(--size-lane-height);
+		padding: calc(var(--size-lane-height) / 4) 0;
+		line-height: calc(var(--size-lane-height) / 4);
+	}
+	a {
+		display: inline-block;
+		padding: 10px 15px;
+		margin: 0 7.5px;
+		line-height: 1rem;
+		background-color: $sportlink-bg;
+		color: $sportlink-color;
+		text-decoration: none;
+		border-radius: var(--size-radius);
+		box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
+		transition: box-shadow linear 150ms, color linear 150ms;
+
+		&:hover,
+		&:focus {
+			color: #000;
+			box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+		}
+	}
+}

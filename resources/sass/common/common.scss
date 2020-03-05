@@ -1,0 +1,27 @@
+html, body {
+	background-color: var(--color-body-bg);
+	color: var(--color-body-color);
+	font-family: var(--font-family-main);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-base);
+	line-height: var(--line-height-base);
+	min-height: 100vh;
+	margin: 0;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+a {
+	color: inherit;
+	text-decoration: underline;
+
+	&:focus,
+	&:hover,
+	&:active {
+		text-decoration: none;
+	}
+}

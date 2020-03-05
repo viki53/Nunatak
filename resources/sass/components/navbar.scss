@@ -1,0 +1,44 @@
+.navbar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: var(--size-navbar-height);
+	background-color: var(--color-navbar-bg);
+	color: var(--color-navbar-color);
+	font-size: var(--size-navbar-font);
+	line-height: var(--size-navbar-font);
+
+	a {
+		text-decoration: none;
+
+		&:focus,
+		&:hover,
+		&:active {
+			color: #ffffff;
+		}
+	}
+
+	.navbar-item {
+		display: block;
+		float: left;
+		height: var(--size-navbar-height);
+		padding: calc((var(--size-navbar-height) - var(--size-navbar-font)) / 2) calc(var(--size-navbar-font) / 2);
+	}
+
+	& > .container {
+		display: flex;
+		flex-direction: row;
+		align-content: center;
+		justify-content: center;
+	}
+	.navbar-left {
+		display: block;
+		flex: 1;
+		align-self: flex-start;
+	}
+	.navbar-right {
+		display: block;
+		align-self: flex-end;
+	}
+}
