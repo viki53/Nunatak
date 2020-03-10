@@ -10,22 +10,6 @@ use App\Sport;
 class SportsController extends Controller
 {
 	/**
-	 * Show the club's sports list.
-	 *
-	 * @return \Illuminate\Contracts\Support\Renderable
-	 */
-	public function index(Club $club, Request $request)
-	{
-		$club->load('sports');
-		$sports = Sport::orderBy('name', 'ASC')->whereNotIn('id', $club->sports()->allRelatedIds()->toArray())->get();
-
-		return view('club.sports', [
-			'club' => $club,
-			'sports' => $sports,
-		]);
-	}
-
-	/**
 	 * Add a sport to the club's list.
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
@@ -37,7 +21,7 @@ class SportsController extends Controller
 		$club->save();
 
 		$request->session()->flash('status', __('Sport ajouté'));
-		return redirect()->route('club.sports', ['club' => $club]);
+		return redirect(route('club.edit', ['club' => $club]).'#club-sports-add');
 	}
 
 	/**
@@ -52,6 +36,6 @@ class SportsController extends Controller
 		$club->save();
 
 		$request->session()->flash('status', __('Sport retiré'));
-		return redirect()->route('club.sports', ['club' => $club]);
+		return redirect(route('club.edit', ['club' => $club]).'#club-sports-list');
 	}
 }

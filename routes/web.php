@@ -53,7 +53,6 @@ Route::domain(config('nunatak.root_domain'))->group(function () {
 		Route::post('/club/{club}/sites', 'Club\SitesController@add')->name('sites.add');
 		Route::delete('/club/{club}/sites/{site}', 'Club\SitesController@remove')->name('sites.remove');
 
-		Route::get('/club/{club}/sports', 'Club\SportsController@index')->name('sports');
 		Route::post('/club/{club}/sports', 'Club\SportsController@add')->name('sports.add');
 		Route::delete('/club/{club}/sports/{sport}', 'Club\SportsController@remove')->name('sports.remove');
 

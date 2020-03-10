@@ -15,7 +15,7 @@ class ProfileController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		return view('user.profile', [
+		return view('dashboard.user.profile', [
 			'user' => $request->user()
 		]);
 	}

@@ -21,7 +21,7 @@ class PagesController extends Controller
 	{
 		$site->load(['club', 'pages.last_revision']);
 
-		return view('club.pages.list', [
+		return view('dashboard.club.pages.list', [
 			'protocol' => 'http'.($request->secure() ? 's' : ''),
 			'site' => $site,
 		]);
@@ -61,7 +61,7 @@ class PagesController extends Controller
 		$site->load(['club']);
 		$page->load(['last_revision']);
 
-		return view('club.pages.edit', [
+		return view('dashboard.club.pages.edit', [
 			'protocol' => 'http'.($request->secure() ? 's' : ''),
 			'site' => $site,
 			'page' => $page,

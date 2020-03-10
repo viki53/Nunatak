@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Club;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Club;
+use App\Sport;
 use App\Http\Requests\UpdateClubRequest;
 
 class ClubController extends Controller
@@ -17,8 +18,12 @@ class ClubController extends Controller
 	 */
 	public function index(Club $club)
 	{
-		return view('club.edit', [
+		$club->load('sports');
+		$sports = Sport::orderBy('name', 'ASC')->whereNotIn('id', $club->sports()->allRelatedIds()->toArray())->get();
+
+		return view('dashboard.club.edit', [
 			'club' => $club,
+			'sports' => $sports,
 		]);
 	}
 

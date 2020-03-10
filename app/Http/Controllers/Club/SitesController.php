@@ -21,7 +21,7 @@ class SitesController extends Controller
 	{
 		$club->load('sites');
 
-		return view('club.sites', [
+		return view('dashboard.club.sites', [
 			'protocol' => 'http'.($request->secure() ? 's' : ''),
 			'club' => $club,
 		]);

@@ -20,7 +20,7 @@ class MembersController extends Controller
 	{
 		$club->load(['members', 'invitations.user']);
 
-		return view('club.members', [
+		return view('dashboard.club.members', [
 			'club' => $club,
 			'user' => $request->user()
 		]);

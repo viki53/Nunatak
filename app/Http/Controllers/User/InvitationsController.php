@@ -19,7 +19,7 @@ class InvitationsController extends Controller
 		$user = $request->user();
 		$user->load('invitations');
 
-		return view('user.invitations', [
+		return view('dashboard.user.invitations', [
 			'user' => $user
 		]);
 	}

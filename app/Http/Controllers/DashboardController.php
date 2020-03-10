@@ -29,7 +29,7 @@ class DashboardController extends Controller
 			$club->loadCount(['members', 'invitations']);
 		}
 
-		return view('dashboard', [
+		return view('dashboard.home', [
 			'protocol' => 'http'.($request->secure() ? 's' : ''),
 			'user' => $user,
 		]);

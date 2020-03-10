@@ -28,7 +28,7 @@ class ClubsController extends Controller
 
 		$clubs = $query->get();
 
-		return view('clubs', [
+		return view('dashboard.clubs', [
 			'clubs' => $clubs,
 			'sport' => $sport
 		]);
