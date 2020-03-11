@@ -1,13 +1,19 @@
 .navbar {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	left: 0;
+	z-index: 99;
 	height: var(--size-navbar-height);
 	background-color: var(--color-navbar-bg);
 	color: var(--color-navbar-color);
 	font-size: var(--size-navbar-font);
 	line-height: var(--size-navbar-font);
+	box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	justify-content: center;
 
 	a {
 		text-decoration: none;
@@ -15,7 +21,7 @@
 		&:focus,
 		&:hover,
 		&:active {
-			color: #ffffff;
+			color: #fff;
 		}
 	}
 
@@ -26,12 +32,6 @@
 		padding: calc((var(--size-navbar-height) - var(--size-navbar-font)) / 2) calc(var(--size-navbar-font) / 2);
 	}
 
-	& > .container {
-		display: flex;
-		flex-direction: row;
-		align-content: center;
-		justify-content: center;
-	}
 	.navbar-left {
 		display: block;
 		flex: 1;

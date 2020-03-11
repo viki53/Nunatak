@@ -14,20 +14,27 @@
 	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" async>
 
 	<!-- Styles -->
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 </head>
 <body>
-	<a class="sr-only sr-only-focusable" href="#main-menu">{{ __('Aller au menu') }}</a>
-	<a class="sr-only sr-only-focusable" href="#main-content">{{ __('Aller au contenu principal') }}</a>
-	@yield('quicklinks')
+	<nav id="quicklinks">
+		<a href="#main-menu">{{ __('Aller au menu') }}</a>
+		<a href="#main-content">{{ __('Aller au contenu principal') }}</a>
+		@yield('quicklinks')
+	</nav>
 
 	<div id="app">
 		@include('layouts.includes.navbar')
 
-		<main id="main-content">
-			@yield('header')
-			@yield('content')
-		</main>
+		<div id="page">
+			<nav id="sidebar">
+				@include('layouts.includes.club-sidebar')
+				@yield('sidebar')
+			</nav>
+			<main id="main-content">
+				@yield('content')
+			</main>
+		</div>
 	</div>
 
 	<!-- Scripts -->

@@ -1,0 +1,23 @@
+.columns-container {
+	display: flex;
+	padding: 1rem;
+	flex-wrap: wrap;
+
+	& > .column {
+		flex: 1 0 var(--size-column-min-width);
+		padding: 0 1rem;
+		margin: 1rem 0;
+
+		&.col-sm {
+			flex-basis: calc(var(--size-column-min-width) * 0.6);
+		}
+
+		&.col-md {
+			flex-basis: calc(var(--size-column-min-width) * 1.5);
+		}
+
+		&.col-lg {
+			flex-basis: calc(var(--size-column-min-width) * 3);
+		}
+	}
+}

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<header class="container">
+<header>
 	<h1>{{ __('Bienvenue, :name', ['name' => $user->name]) }}</h1>
 </header>
 

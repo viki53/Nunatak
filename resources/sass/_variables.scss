@@ -1,7 +1,7 @@
 // Typography
 $font-family-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-title: 'Montserrat', Verdana, sans-serif;
-$font-size-base: 0.9rem;
+$font-size-base: 1rem;
 $font-weight-base: 400;
 $font-weight-bold: 700;
 $line-height-base: 1.6;
@@ -11,6 +11,8 @@ $sizes: (
 	"container": 80rem,
 	"navbar-height": 4rem,
 	"navbar-font": 1.25rem,
+	"sidebar-width": 18rem,
+	"column-min-width": 22rem,
 	"radius": 2px,
 	"shadow-x": 0,
 	"shadow-x-hover": 0,
@@ -22,31 +24,33 @@ $sizes: (
 
 // Colors
 $colors: (
-	"blue": #3490dc,
-	"indigo": #6574cd,
-	"purple": #9561e2,
-	"pink": #f66d9b,
-	"red": #e3342f,
-	"orange": #f6993f,
-	"yellow": #ffed4a,
-	"green": #38c172,
-	"teal": #4dc0b5,
-	"cyan": #6cb2eb,
+	"navy": #326a8c,
+	"yellow": #f2a71b,
+	"orange": #f25749,
+	"red": #f25050,
+	"grey": #bfbfbf,
 
 	"body-bg": #f8fafc,
 	"body-color": #202020,
-	"navbar-bg": #000,
-	"navbar-color": #f4f4f4,
-	"shadow": rgba(0, 0, 0, .4),
-	"shadow-hover": rgba(0, 0, 0, .7),
+	"navbar-bg": #f2a71b,
+	"navbar-color": #fff,
+	"shadow": rgba(0, 0, 0, .2),
+	"shadow-hover": rgba(0, 0, 0, .4),
+	"shadow-dark": rgba(0, 0, 0, .4),
+	"shadow-dark-hover": rgba(0, 0, 0, .7),
+	"sidebar-bg": #fff,
+	"sidebar": #202020,
+	"sidebar-disabled": #404040,
+	"sidebar-hover-bg": #fafafa,
+	"sidebar-hover": #323232,
 );
 
 :root {
-	--font-family-main: $font-family-main;
-	--font-family-title: $font-family-title;
-	--font-size-base: $font-size-base;
-	--font-weight-base: $font-weight-base;
-	--line-height-base: $line-height-base;
+	--font-family-main: #{$font-family-main};
+	--font-family-title: #{$font-family-title};
+	--font-size-base: #{$font-size-base};
+	--font-weight-base: #{$font-weight-base};
+	--line-height-base: #{$line-height-base};
 
 	@each $name, $value in $sizes {
 		--size-#{$name}: #{$value};

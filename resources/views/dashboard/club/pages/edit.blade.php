@@ -1,73 +1,66 @@
-@extends('layouts.dashboard-club')
+@extends('layouts.dashboard')
 
-@section('header')
-<!-- Edit header -->
-<header class="container">
-	<h1>{{ $site->title }}</h1>
-	<p class="lead">Modifier la page <q>{{ $page->last_revision->title }}</q></p>
+@section('content')
+<header class="hero">
+	<h1 class="title">{{ $site->title }}</h1>
+	<p class="subtitle">Modifier la page <q>{{ $page->last_revision->title }}</q></p>
 </header>
-@endsection
 
-@section('main')
-<!-- Edit main -->
-<form method="POST" action="{{ route('site.pages.update', ['site' => $site, 'page' => $page]) }}">
+<div>
+	<div class="column">
+	</div>
+	<div class="column">
+	</div>
+</div>
+<form method="POST" action="{{ route('site.pages.update', ['site' => $site, 'page' => $page]) }}" class="columns-container">
 	@csrf
-	<fieldset class="card">
-		<h2 class="card-header">{{ __('Modifier la page') }}</h2>
+	<fieldset class="column">
+		<h2>{{ __('Modifier la page') }}</h2>
 
-		<div class="card-body">
-			<div class="form-group row">
-				<label for="new-page-title" class="col-md-4 col-form-label text-md-right">{{ __('Titre') }}</label>
+		<div class="form-group">
+			<label for="new-page-title" class="col-md-4 col-form-label text-md-right">{{ __('Titre') }}</label>
 
-				<div class="col-md-6">
-					<input id="new-page-title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" required value="{{ old('title', $page->last_revision->title) }}" required autofocus>
+			<input id="new-page-title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" required value="{{ old('title', $page->last_revision->title) }}" required autofocus>
 
-					@error('title')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-					@enderror
-				</div>
-			</div>
+			@error('title')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+		</div>
 
-			<div class="form-group row">
-				<label for="new-page-subtitle" class="col-md-4 col-form-label text-md-right">{{ __('Sous-titre') }}</label>
+		<div class="form-group">
+			<label for="new-page-subtitle" class="col-md-4 col-form-label text-md-right">{{ __('Sous-titre') }}</label>
 
-				<div class="col-md-6">
-					<input id="new-page-subtitle" type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" value="{{ old('subtitle', $page->last_revision->subtitle) }}" required>
+			<input id="new-page-subtitle" type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" value="{{ old('subtitle', $page->last_revision->subtitle) }}" required>
 
-					@error('subtitle')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-					@enderror
-				</div>
-			</div>
+			@error('subtitle')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
 		</div>
 	</fieldset>
 
-	<fieldset class="card mt-3">
-		<h3 class="card-header"><label for="new-page-content">{{ __('Contenu') }}</label></h3>
+	<fieldset class="column">
+		<h3><label for="new-page-content">{{ __('Contenu') }}</label></h3>
 
-		<div class="card-body">
-			<div class="form-group">
-				<textarea id="new-page-content" data-text-editor class="form-control @error('content') is-invalid @enderror" name="content" required>{{ old('content', $page->last_revision->content) }}</textarea>
+		<div class="form-group">
+			<textarea id="new-page-content" data-text-editor class="form-control @error('content') is-invalid @enderror" name="content" required>{{ old('content', $page->last_revision->content) }}</textarea>
 
-				@error('content')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
-				@enderror
-			</div>
+			@error('content')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
 		</div>
-	</fieldset>
 
-	<div class="form-group row mt-3 mb-0">
-		<div class="col-md-6 offset-md-4">
-			<button type="submit" class="btn btn-primary">
+		<div class="form-group submit">
+			<button type="submit" class="button-primary">
 				{{ !empty($page) ? __('Enregistrer') : __('Créer') }}
 			</button>
 		</div>
-	</div>
+	</fieldset>
+
 </form>
 @endsection

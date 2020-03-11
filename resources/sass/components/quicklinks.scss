@@ -1,0 +1,13 @@
+#quicklinks {
+	height: 0;
+
+	a {
+		@extend .sr-only-focusable;
+
+		&:active,
+		&:focus {
+			position: relative;
+			z-index: 100;
+		}
+	}
+}

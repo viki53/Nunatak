@@ -1,0 +1,88 @@
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+@import 'common/common';
+@import 'components/container';
+@import 'components/columns';
+@import 'components/dropdown';
+@import 'components/hero';
+@import 'components/quicklinks';
+@import 'components/navbar';
+@import 'components/sidebar';
+@import 'components/form';
+
+#page {
+	width: 100vw;
+	min-height: 100vh;
+	margin-top: var(--size-navbar-height);
+}
+
+#main-content {
+	margin: 0;
+	padding: 0;
+}
+
+@import '~quill/dist/quill.snow.css';
+.ql-snow {
+	.ql-picker-options {
+		background-color: var(--color-body-bg);
+		color: var(--color-body-color);
+
+		@media (prefers-color-scheme: dark) {
+			background-color: var(--color-body-color);
+			color: var(--color-body-bg);
+		}
+	}
+	&.ql-toolbar button,
+	.ql-toolbar button,
+	.ql-picker-label {
+		color: var(--color-body-color);
+
+		@media (prefers-color-scheme: dark) {
+			color: var(--color-body-bg);
+		}
+	}
+	.ql-stroke {
+		stroke: var(--color-body-color);
+
+		@media (prefers-color-scheme: dark) {
+			stroke: var(--color-body-bg);
+		}
+	}
+}
+.ql-container {
+	overflow-y: auto;
+	resize: vertical;
+}
+.ql-editor {
+	padding: 0;
+
+	p { @extend p; }
+	ol { @extend ol; }
+	ul { @extend ul; }
+	pre { @extend pre; }
+	blockquote { @extend blockquote; }
+	h1 { @extend h1; }
+	h2 { @extend h2; }
+	h3 { @extend h3; }
+	h4 { @extend h4; }
+	h5 { @extend h5; }
+	h6 { @extend h6; }
+}
+
+.ql-toolbar {
+	border-top-left-radius: var(--size-radius);
+	border-top-right-radius: var(--size-radius);
+
+	& + .text-editor {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
+
+.text-editor {
+	min-height: 15em;
+}
+
