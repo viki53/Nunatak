@@ -42,4 +42,12 @@ class Site extends Model
     {
         return $this->hasMany('App\Page');
     }
+
+    /**
+     * The site's home page.
+     */
+    public function home_page()
+    {
+        return $this->hasOne('App\Page')->where('path', '/')->latest();
+    }
 }

@@ -951,6 +951,7 @@
   --font-family-title: Montserrat, Verdana, sans-serif;
   --font-size-base: 1rem;
   --font-weight-base: 400;
+  --font-weight-bold: 700;
   --line-height-base: 1.6;
   --size-container: 80rem;
   --size-navbar-height: 4rem;
@@ -1083,6 +1084,8 @@ a:active {
   display: block;
   padding: 1.25em;
   margin: 0;
+  font-size: 1em;
+  font-weight: var(--font-weight-base, normal);
 }
 
 .dropdown-label::after {
@@ -1233,6 +1236,7 @@ a:active {
   z-index: 97;
   background-color: var(--color-sidebar-bg);
   color: var(--color-sidebar);
+  overflow-y: auto;
   box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
 }
 
@@ -1251,6 +1255,15 @@ a:active {
 
 #sidebar ~ #main-content {
   margin-left: var(--size-sidebar-width);
+}
+
+.sidebar-list .sidebar-list-title {
+  display: block;
+  padding: 1.25em;
+  margin: 2em 0 0;
+  color: var(--color-sidebar-disabled);
+  font-size: 1em;
+  font-weight: var(--font-weight-bold, bold);
 }
 
 .sidebar-item {

@@ -1,10 +1,11 @@
-@import '_variables';
+@import '../_variables';
 
 :root {
 	--font-family-main: #{$font-family-main};
 	--font-family-title: #{$font-family-title};
 	--font-size-base: #{$font-size-base};
 	--font-weight-base: #{$font-weight-base};
+	--font-weight-bold: #{$font-weight-bold};
 	--line-height-base: #{$line-height-base};
 
 	@each $name, $value in $sizes {

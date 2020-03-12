@@ -84,6 +84,9 @@ class PagesController extends Controller
 			'content' => $validatedData['content'],
 		]);
 
+		$page->path = $validatedData['path'];
+		$page->save();
+
 		$request->session()->flash('status', __('Page mise à jour'));
 		return redirect()->route('site.pages', ['site' => $site]);
 	}

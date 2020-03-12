@@ -15,6 +15,12 @@
 			<div class="card-body">
 				<div class="card-title"><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></div>
 
+				@if(empty($site->home_page))
+				<p class="alert warning" role="alert">
+					{{ __('Ce site n\'a pas de page d\'accueil') }}
+				</p>
+				@endif
+
 				<p><a href="{{ route('site.pages', ['site' => $site]) }}">Voir les pages</a></p>
 
 				<form method="POST" action="{{ route('club.sites.remove', ['club' => $club, 'site' => $site]) }}">
@@ -42,7 +48,7 @@
 					<div class="col-md-6">
 						<input id="new-site-title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $club->name) }}" required autocomplete="off">
 
-						@error('sport_id')
+						@error('title')
 							<span class="invalid-feedback" role="alert">
 								<strong>{{ $message }}</strong>
 							</span>
@@ -64,7 +70,7 @@
 							</div>
 						</div>
 
-						@error('sport_id')
+						@error('domain')
 							<span class="invalid-feedback" role="alert">
 								<strong>{{ $message }}</strong>
 							</span>

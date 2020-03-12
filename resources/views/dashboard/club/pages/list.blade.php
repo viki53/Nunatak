@@ -8,6 +8,11 @@
 
 <div class="columns-container">
 	<div class="column">
+		@if(empty($site->home_page))
+		<p class="alert warning" role="alert">
+			{{ __('Votre site n\'a pas de page d\'accueil') }}
+		</p>
+		@endif
 		@foreach($site->pages as $page)
 		<div class="card mb-3">
 			<h2 class="card-header"><a href="{{ $protocol }}://{{ $site->domain }}{{ $page->path }}" target="_blank" title="{{ __('Ouvrir la page dans un nouvel onglet') }}">{{ $page->last_revision->title }}</a></h2>
