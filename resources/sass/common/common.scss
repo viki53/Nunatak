@@ -1,3 +1,5 @@
+@import "./variables";
+
 html, body {
 	background-color: var(--color-body-bg);
 	color: var(--color-body-color);
@@ -52,3 +54,5 @@ a {
 		}
 	}
 }
+
+@import "./table";

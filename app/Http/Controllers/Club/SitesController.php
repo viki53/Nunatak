@@ -20,6 +20,7 @@ class SitesController extends Controller
 	public function index(Club $club, Request $request)
 	{
 		$club->load('sites');
+		$club->sites->loadCount('pages');
 
 		return view('dashboard.club.sites', [
 			'protocol' => 'http'.($request->secure() ? 's' : ''),

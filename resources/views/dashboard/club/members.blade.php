@@ -16,33 +16,50 @@
 		<h2 id="members-list">{{ trans_choice('{0} Aucun membre inscrit|{1} Un membre inscrit|[2,*] :count membres inscrits', count($club->members), ['count' => count($club->members)]) }}</h2>
 
 		@if(count($club->members) > 0)
-		@foreach($club->members as $member)
-		<div class="card mb-3">
-			<h3 class="card-header">{{ $member->name }}</h3>
+		<table class="simple striped">
+			<thead>
+				<tr>
+					<th>Identité</th>
+					<th>Ancienneté</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($club->members as $member)
+				<tr>
+					<td>
+						<p><strong>{{ $member->name }}</strong></p>
 
-			<div class="card-body">
-				@if(!$member->pivot->is_owner && $member->id !== $user->id)
-				<form method="POST" action="{{ route('club.members.remove', ['club' => $club, 'member' => $member->pivot->id]) }}">
-					@csrf
-					@method('DELETE')
+						@if($member->id == $user->id)
+						<p class="alert alert-info" role="alert">C'est vous !</p>
+						@endif
 
-					<input type="hidden" name="member_id" value="{{ $member->id }}">
-					<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
+						@if($member->pivot->is_owner)
+						<p class="alert alert-success" role="alert">Gérant de l'association</p>
+						@endif
+					</td>
 
-					<p>Membre depuis <time datetime="{{ $member->pivot->created_at->toIso8601String() }}" title="Depuis le {{ $member->pivot->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $member->pivot->created_at->longAbsoluteDiffForHumans() }}</time>.</p>
-				</form>
-				@endif
+					<td>
+						<p>Membre depuis <time datetime="{{ $member->pivot->created_at->toIso8601String() }}" title="Depuis le {{ $member->pivot->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $member->pivot->created_at->longAbsoluteDiffForHumans() }}</time>.</p>
+					</td>
 
-				@if($member->pivot->is_owner)
-				<p class="alert alert-success" role="alert">Gérant de l'association.</p>
-				@endif
+					<td>
+						@if(!$member->pivot->is_owner && $member->id !== $user->id)
+						<form method="POST" action="{{ route('club.members.remove', ['club' => $club, 'member' => $member->pivot->id]) }}">
+							@csrf
+							@method('DELETE')
 
-				@if($member->id == $user->id)
-				<p class="alert alert-info" role="alert">C'est vous !</p>
-				@endif
-			</div>
-		</div>
-		@endforeach
+							<input type="hidden" name="member_id" value="{{ $member->id }}">
+							<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
+
+							<p>Membre depuis <time datetime="{{ $member->pivot->created_at->toIso8601String() }}" title="Depuis le {{ $member->pivot->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $member->pivot->created_at->longAbsoluteDiffForHumans() }}</time>.</p>
+						</form>
+						@endif
+					</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
 		@endif
 	</div>
 

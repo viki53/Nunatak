@@ -35,6 +35,8 @@
   --color-sidebar-disabled: #404040;
   --color-sidebar-hover-bg: #fafafa;
   --color-sidebar-hover: #323232;
+  --color-table-border: #bfbfbf;
+  --color-table-stripe: #ffffff;
 }
 
 html,
@@ -89,6 +91,30 @@ a:active {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 0.5em;
+  border: 1px solid var(--color-table-border);
+}
+
+table.simple th,
+table.simple td {
+  border-left: 0;
+  border-right: 0;
+}
+
+table.striped thead > tr th,
+table.striped thead > tr td,
+table.striped tbody > tr:nth-child(2n) th,
+table.striped tbody > tr:nth-child(2n) td {
+  background-color: var(--color-table-stripe);
 }
 
 .container {

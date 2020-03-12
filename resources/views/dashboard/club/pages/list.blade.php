@@ -13,27 +13,55 @@
 			{{ __('Votre site n\'a pas de page d\'accueil') }}
 		</p>
 		@endif
-		@foreach($site->pages as $page)
-		<div class="card mb-3">
-			<h2 class="card-header"><a href="{{ $protocol }}://{{ $site->domain }}{{ $page->path }}" target="_blank" title="{{ __('Ouvrir la page dans un nouvel onglet') }}">{{ $page->last_revision->title }}</a></h2>
 
-			<div class="card-body">
-				<p class="float-right mx-1"><a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}" class="btn btn-primary">{{ __('Modifier') }}</a></p>
+		@if(!empty($site->pages))
+		<table class="simple striped">
+			<thead>
+				<tr>
+					<th>Page</th>
+					<th>Chemin</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($site->pages as $page)
+				<tr>
+					<td>
+						<p>
+							<strong>
+								<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}">
+									{{ $page->last_revision->title }}
+								</a>
+							</strong>
+						</p>
 
-				@if($page->path !== '/')
-				<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}" class="float-right mx-1">
-					@csrf
-					@method('DELETE')
+						<p>Créée <time datetime="{{ $page->created_at->toIso8601String() }}" title="Le {{ $page->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $page->created_at->diffForHumans() }}</time>.</p>
+						<p>Dernière modification <time datetime="{{ $page->created_at->toIso8601String() }}" title="Le {{ $page->last_revision->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $page->last_revision->created_at->diffForHumans() }}</time>.</p>
+					</td>
 
-					<button type="submit" class="btn btn-outline-danger">{{ __('Supprimer') }}</button>
-				</form>
-				@endif
+					<td>
+						<p>
+							<a href="{{ $protocol }}://{{ $site->domain }}{{ $page->path }}" target="_blank" title="{{ __('Ouvrir la page dans un nouvel onglet') }}">
+								{{ $page->path }}
+							</a>
+						</p>
+					</td>
 
-				<p>Créée <time datetime="{{ $page->created_at->toIso8601String() }}" title="Le {{ $page->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $page->created_at->diffForHumans() }}</time>.</p>
-				<p>Dernière modification <time datetime="{{ $page->created_at->toIso8601String() }}" title="Le {{ $page->last_revision->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $page->last_revision->created_at->diffForHumans() }}</time>.</p>
-			</div>
-		</div>
-		@endforeach
+					<td>
+						@if(!empty($site->home_page) && $page->id !== $site->home_page->id)
+						<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}" class="float-right mx-1">
+							@csrf
+							@method('DELETE')
+
+							<button type="submit" class="btn btn-outline-danger">{{ __('Supprimer') }}</button>
+						</form>
+						@endif
+					</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		@endif
 	</div>
 
 	<form method="POST" action="{{ route('site.pages.add', ['site' => $site]) }}" class="column">

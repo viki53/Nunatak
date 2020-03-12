@@ -8,32 +8,50 @@
 
 <div class="columns-container">
 	<div class="column">
-		@foreach($club->sites as $site)
-		<div class="card">
-			<h2 class="card-header">{{ $site->title }}</h2>
+		<table class="simple striped">
+			<thead>
+				<tr>
+					<th>Site</th>
+					<th>Pages</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($club->sites as $site)
+				<tr class="card">
+					<td class="card-header">
+						<p><strong>{{ $site->title }}</strong></p>
 
-			<div class="card-body">
-				<div class="card-title"><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></div>
+						<p><em><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></em></p>
+						@if(empty($site->home_page))
+						<p class="alert warning" role="alert">
+							{{ __('Ce site n\'a pas de page d\'accueil') }}
+						</p>
+						@endif
+					</td>
 
-				@if(empty($site->home_page))
-				<p class="alert warning" role="alert">
-					{{ __('Ce site n\'a pas de page d\'accueil') }}
-				</p>
-				@endif
+					<td>
+						<p>
+							<a href="{{ route('site.pages', ['site' => $site]) }}">
+								{{ trans_choice('{0} Aucune page|{1} Une seule page|[2,*] :count pages', $site->pages_count, ['count' => $site->pages_count]) }}
+							</a>
+						</p>
+					</td>
 
-				<p><a href="{{ route('site.pages', ['site' => $site]) }}">Voir les pages</a></p>
+					<td>
+						<form method="POST" action="{{ route('club.sites.remove', ['club' => $club, 'site' => $site]) }}">
+							@csrf
+							@method('DELETE')
 
-				<form method="POST" action="{{ route('club.sites.remove', ['club' => $club, 'site' => $site]) }}">
-					@csrf
-					@method('DELETE')
+							<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
 
-					<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
-
-					<p>Créé <time datetime="{{ $site->created_at->toIso8601String() }}" title="Le {{ $site->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $site->created_at->diffForHumans() }}</time>.</p>
-				</form>
-			</div>
-		</div>
-		@endforeach
+							<p>Créé <time datetime="{{ $site->created_at->toIso8601String() }}" title="Le {{ $site->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $site->created_at->diffForHumans() }}</time>.</p>
+						</form>
+					</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
 	</div>
 	<div class="column">
 		<form method="POST" action="{{ route('club.sites.add', ['club' => $club]) }}" class="card">
