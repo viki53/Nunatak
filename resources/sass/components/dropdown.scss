@@ -7,42 +7,75 @@
 	&-label {
 		position: relative;
 		display: block;
-
-		&:hover,
-		&:focus {
-			& ~ .dropdown-values {
-				display: block;
-			}
-		}
+		padding: 1.25em;
+		margin: 0;
 
 		&::after {
-			content: '';
+			content: '>';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 3em;
+			text-align: center;
+			line-height: 4em;
+			transform: rotate(90deg);
+			transition: transform linear 150ms;
 		}
 	}
 
 	&:hover,
 	&:focus-within {
+		& > .dropdown-label {
+			&::after {
+				transform: rotate(-90deg);
+			}
+		}
 		& > .dropdown-values {
-			display: block;
+			max-height: 21em;
+			opacity: 1;
+			overflow: auto;
 		}
 	}
 
 	&-values {
-		display: none;
+		display: block;
 		position: absolute;
-		top: 100%;
+		top: 0;
 		right: 0;
-		left: .5em;
-		padding: .25em 0;
+		left: 0;
+		padding: 0;
+		max-height: 0;
 		background-color: #fff;
+		opacity: 0;
+		overflow: hidden;
 		box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
+		transition: all linear 150ms;
 
 		.dropdown-item {
+			position: relative;
+			display: block;
+			padding: 1.25em;
+			margin: 0;
 			color: #202020;
 
 			&:hover,
 			&:focus {
 				color: #000;
+			}
+
+			&.selected {
+				&::after {
+					content: '✓';
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					width: 3em;
+					text-align: center;
+					line-height: 4em;
+					color: var(--color-navy);
+				}
 			}
 		}
 	}

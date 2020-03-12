@@ -14,15 +14,15 @@ elseif (!empty($params->site)) {
 $user_clubs = Auth::user()->clubs;
 @endphp
 
-<label id="sidebar-club-selector" class="dropdown">
-	<a href="#sidebar-club-selector-list" class="dropdown-label sidebar-item">@if(!empty($club)){{ $club->name }}@else{{ __('Choisir un club') }}@endif</a>
+<div id="sidebar-club-selector" class="dropdown">
+	<a href="#sidebar-club-selector-list" class="dropdown-label">@if(!empty($club)){{ $club->name }}@else{{ __('Choisir un club') }}@endif</a>
 
 	<div id="sidebar-club-selector-list" class="dropdown-values">
 		@foreach($user_clubs as $c)
-		<a href="{{ route('club.edit', ['club' => $c]) }}" class="dropdown-item sidebar-item @if(!-empty($club) && $club->id === $c->id) selected @endif" title="Vous êtes membre depuis le {{ $c->pivot->created_at->isoFormat('DD MMMM YYYY') }}">{{ $c->name }}</a>
+		<a href="{{ route('club.edit', ['club' => $c]) }}" class="dropdown-item @if(!-empty($club) && $club->id === $c->id) selected @endif" title="Vous êtes membre depuis le {{ $c->pivot->created_at->isoFormat('DD MMMM YYYY') }}">{{ $c->name }}</a>
 		@endforeach
 	</div>
-</label>
+</div>
 
 @if(!empty($club))
 <div class="sidebar-list">
