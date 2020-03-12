@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\Query\Builder;
 
 class CreatePageRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class CreatePageRequest extends FormRequest
 	{
 		return [
 			'title' => ['required', 'string', 'max:255'],
-			'path' => ['required', 'string', Rule::unique('pages')->where(function ($query) {
+			'path' => ['required', 'string', Rule::unique('pages')->where(function (Builder $query) {
 				return $query->where('site_id', $this->route()->parameter('site')->id);
 			})],
 		];
