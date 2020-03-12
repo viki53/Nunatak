@@ -44,7 +44,7 @@ $user_clubs = Auth::user()->clubs;
 
 		<div id="sidebar-club-selector-list" class="dropdown-values">
 			@foreach($paramClub->sites as $s)
-			<a href="{{ route('site.pages', ['site' => $s]) }}" class="dropdown-item @if(!empty($paramSite) && $paramSite->id === $c->id) selected @endif">{{ $s->title }}</a>
+			<a href="{{ route('site.pages', ['site' => $s]) }}" class="dropdown-item @if(!empty($paramSite) && $paramSite->id === $s->id) selected @endif">{{ $s->title }}</a>
 			@endforeach
 		</div>
 	</div>
