@@ -29,9 +29,13 @@
 					<td>
 						<p>
 							<strong>
+								@can('update', $page)
 								<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}">
 									{{ $page->last_revision->title }}
 								</a>
+								@else
+								{{ $page->last_revision->title }}
+								@endcan
 							</strong>
 						</p>
 
@@ -64,6 +68,7 @@
 		@endif
 	</div>
 
+	@can('create_page', $site)
 	<form method="POST" action="{{ route('site.pages.add', ['site' => $site]) }}" class="column">
 		@csrf
 
@@ -104,6 +109,7 @@
 			</button>
 		</div>
 	</form>
+	@endcan
 </div>
 
 @endsection

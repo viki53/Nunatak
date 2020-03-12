@@ -60,4 +60,16 @@ class Club extends Model
 			'is_owner',
 		]);
     }
+
+    /**
+     * The users managing the club.
+     */
+    public function owners()
+    {
+        return $this->belongsToMany('App\User')->using('App\ClubUser')->withPivot([
+			'created_at',
+			'updated_at',
+			'is_owner',
+		])->where('is_owner', true);
+    }
 }

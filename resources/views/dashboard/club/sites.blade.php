@@ -3,7 +3,7 @@
 @section('content')
 <header class="hero">
 	<h1 class="title">{{ $club->name }}</h1>
-	<p class="subtitle">L'association {{ trans_choice('{0} ne gère aucun site|{1} gère un seul site|[2,*] gère :count sites', count($club->sites), ['count' => count($club->sites)]) }}</p>
+	<p class="subtitle">{{ trans_choice('{0} L\'association ne gère aucun site|{1} L\'association gère un seul site|[2,*] L\'association gère :count sites', count($club->sites), ['count' => count($club->sites)]) }}</p>
 </header>
 
 <div class="columns-container">
@@ -53,6 +53,8 @@
 			</tbody>
 		</table>
 	</div>
+
+	@can('create_site', $club)
 	<div class="column">
 		<form method="POST" action="{{ route('club.sites.add', ['club' => $club]) }}" class="card">
 			@csrf
@@ -106,5 +108,6 @@
 			</div>
 		</form>
 	</div>
+	@endcan
 </div>
 @endsection

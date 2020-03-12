@@ -1262,6 +1262,7 @@ table.striped tbody > tr:nth-child(2n) td {
   z-index: 97;
   background-color: var(--color-sidebar-bg);
   color: var(--color-sidebar);
+  overflow-x: hidden;
   overflow-y: auto;
   box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
 }

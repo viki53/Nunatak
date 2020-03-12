@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Page;
 
@@ -31,7 +32,7 @@ class UpdatePageRequest extends FormRequest
 		return [
 			'title' => ['required', 'string', 'max:255'],
 			'subtitle' => ['required', 'string', 'max:255'],
-			'path' => ['required', 'string', Rule::unique('pages')->ignore($page->id)->where(function ($query) {
+			'path' => ['required', 'string', Rule::unique('pages')->ignore($page->id)->where(function (Builder $query) {
 				return $query->where('site_id', $this->route()->parameter('site')->id);
 			})],
 			'content' => ['required', 'string'],

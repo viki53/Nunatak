@@ -64,7 +64,6 @@
 	</div>
 
 	<div class="column">
-		@if(count($club->invitations) > 0)
 		<h2 id="invitations-list">{{ trans_choice('{0} Aucune invitation en attente|{1} Une invitation en attente|[2,*] :count invitations en attente', count($club->invitations), ['count' => count($club->invitations)]) }}</h2>
 		@foreach($club->invitations as $invitation)
 		<div class="card mb-3">
@@ -85,8 +84,8 @@
 			</div>
 		</div>
 		@endforeach
-		@endif
 
+		@can('invite_member', $club)
 		<form method="POST" action="{{ route('club.invitations.add', ['club' => $club]) }}" id="club-invite-form" class="card">
 			@csrf
 
@@ -128,6 +127,7 @@
 				</div>
 			</div>
 		</form>
+		@endcan
 	</div>
 </div>
 @endsection

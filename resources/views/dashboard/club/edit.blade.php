@@ -94,7 +94,7 @@
 		<section id="club-sports-list">
 			<header>
 				<h1>{{ __('Sports proposés') }}</h1>
-				<p class="lead">L'association {{ trans_choice('{0} ne propose aucun sport|{1} propose un seul sport|[2,*] propose :count sports', count($club->sports), ['count' => count($club->sports)]) }}</p>
+				<p class="lead">{{ trans_choice('{0} L\'association ne propose aucun sport|{1} L\'association propose un seul sport|[2,*] L\'association propose :count sports', count($club->sports), ['count' => count($club->sports)]) }}</p>
 			</header>
 			@foreach($club->sports as $sport)
 			<div class="card">
@@ -115,6 +115,7 @@
 			@endforeach
 		</section>
 
+		@can('add_sport', $club)
 		<section id="club-sports-add" class="card">
 			<h2 class="card-header">Ajouter un sport</h2>
 
@@ -144,6 +145,7 @@
 				</div>
 			</form>
 		</section>
+		@endcan
 	</div>
 </div>
 @endsection

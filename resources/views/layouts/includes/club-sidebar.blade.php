@@ -28,7 +28,9 @@ $user_clubs = Auth::user()->clubs;
 
 @if(!empty($paramClub))
 <div class="sidebar-list">
+	@can('update', $paramClub)
 	<a href="{{ route('club.edit', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.edit')) active @endif">{{ __('Modifier') }}</a>
+	@endcan
 	<a href="{{ route('club.sites', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.sites') || Str::startsWith($routeName, 'site.')) active @endif">{{ __('Sites gérés') }}</a>
 	<a href="{{ route('club.members', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.members')) active @endif">{{ __('Gestion des membres') }}</a>
 </div>
@@ -43,7 +45,7 @@ $user_clubs = Auth::user()->clubs;
 		<div id="sidebar-club-selector-list" class="dropdown-values">
 			@foreach($paramClub->sites as $s)
 			<a href="{{ route('site.pages', ['site' => $s]) }}" class="dropdown-item @if(!empty($paramSite) && $paramSite->id === $c->id) selected @endif">{{ $s->title }}</a>
-		@endforeach
+			@endforeach
 		</div>
 	</div>
 	@endif
@@ -55,8 +57,10 @@ $user_clubs = Auth::user()->clubs;
 	@endphp
 	<div class="sidebar-list">
 		<h1 class="sr-only">Choisir une page</h1>
-		@foreach($site->pages as $page)
-		<a href="{{ route('site.pages.edit', ['site' => $paramSite, 'page' => $page]) }}" class="sidebar-item @if(!empty($paramPage) && $paramPage->id === $page->id) active @endif">{{ $page->last_revision->title }}</a>
+		@foreach($site->pages as $p)
+		@can('update', $p)
+		<a href="{{ route('site.pages.edit', ['site' => $paramSite, 'page' => $p]) }}" class="sidebar-item @if(!empty($paramPage) && $paramPage->id === $p->id) active @endif">{{ $p->last_revision->title }}</a>
+		@endcan
 		@endforeach
 	</div>
 	@endif
