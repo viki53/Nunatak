@@ -9,7 +9,7 @@
 @section('content')
 <header class="hero">
 	<h1 class="title">{{ $club->name }}</h1>
-	<p class="subtitle">Existe depuis <time datetime="{{ $club->created_at->toIso8601String() }}" title="Depuis le {{ $club->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $club->created_at->longAbsoluteDiffForHumans() }}</time></p>
+	<p class="subtitle">{!! __('Existe depuis <time datetime=":date_iso" title="Depuis le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $club->created_at->toIso8601String(), 'date_formatted' => $club->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $club->created_at->longAbsoluteDiffForHumans()]) !!}</p>
 </header>
 
 <div class="columns-container">
@@ -96,21 +96,20 @@
 				<h1>{{ __('Sports proposés') }}</h1>
 				<p class="lead">{{ trans_choice('{0} L\'association ne propose aucun sport|{1} L\'association propose un seul sport|[2,*] L\'association propose :count sports', count($club->sports), ['count' => count($club->sports)]) }}</p>
 			</header>
+
 			@foreach($club->sports as $sport)
 			<div class="card">
 				<h2 class="card-header">{{ $sport->name }}</h2>
 
-				<div class="card-body">
-					<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}">
-						@csrf
-						@method('DELETE')
+				<p>{!! __('Ajouté <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $sport->pivot->created_at->toIso8601String(), 'date_formatted' => $sport->pivot->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $sport->pivot->created_at->diffForHumans()]) !!}</p>
 
-						<input type="hidden" name="sport_id" value="{{ $sport->id }}">
-						<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
+				<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}">
+					@csrf
+					@method('DELETE')
 
-						<p>Ajouté <time datetime="{{ $sport->pivot->created_at->toIso8601String() }}" title="Le {{ $sport->pivot->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $sport->pivot->created_at->diffForHumans() }}</time>.</p>
-					</form>
-				</div>
+					<input type="hidden" name="sport_id" value="{{ $sport->id }}">
+					<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
+				</form>
 			</div>
 			@endforeach
 		</section>

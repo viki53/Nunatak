@@ -1,74 +1,62 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<header>
-	<h1>{{ __('Bienvenue, :name', ['name' => $user->name]) }}</h1>
+<header class="hero">
+	<h1 class="title">Profil</h1>
+	<p class="subtitle">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</p>
 </header>
 
-<div class="container">
-	<div class="row">
-		@include('user.menu')
-		<div class="col-md-9">
-			<div class="card">
-				<h2 class="card-header">{{ __('Modifier mon compte') }}</h2>
+<form method="POST" action="{{ route('user.profile') }}">
+	@csrf
 
-				<div class="card-body">
-					<form method="POST" action="{{ route('user.profile') }}">
-						@csrf
+	<div class="columns-container">
+		<fieldset class="column col-sm">
+			<div class="form-group">
+				<label for="profile-name" class="label">{{ __('Nom complet') }}</label>
 
-						<div class="form-group row">
-							<label for="profile-name" class="col-md-4 col-form-label text-md-right">{{ __('Nom complet') }}</label>
+				<input id="profile-name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
 
-							<div class="col-md-6">
-								<input id="profile-name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
-
-								@error('name')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="profile-email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse email') }}</label>
-
-							<div class="col-md-6">
-								<input id="profile-email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
-
-								@error('email')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="profile-phone" class="col-md-4 col-form-label text-md-right">{{ __('Numéro de téléphone') }}</label>
-
-							<div class="col-md-6">
-								<input id="profile-phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel">
-
-								@error('phone')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-							</div>
-						</div>
-
-						<div class="form-group row mb-0">
-							<div class="col-md-6 offset-md-4">
-								<button type="submit" class="btn btn-primary">
-									{{ __('Enregistrer') }}
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
+				@error('name')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
-		</div>
+		</fieldset>
+
+		<fieldset class="column col-sm">
+			<div class="form-group">
+				<label for="profile-email" class="label">{{ __('Adresse email') }}</label>
+
+				<input id="profile-email" type="email" class="input @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
+
+				@error('email')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
+			</div>
+		</fieldset>
+
+		<fieldset class="column col-sm">
+			<div class="form-group">
+				<label for="profile-phone" class="label">{{ __('Numéro de téléphone') }}</label>
+
+				<input id="profile-phone" type="tel" class="input @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel">
+
+				@error('phone')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
+			</div>
+		</fieldset>
 	</div>
-</div>
+
+	<div class="form-group submit">
+		<button type="submit" class="btn btn-primary">
+			{{ __('Enregistrer') }}
+		</button>
+	</div>
+</form>
 @endsection

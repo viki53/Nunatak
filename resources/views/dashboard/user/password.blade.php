@@ -1,61 +1,62 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<header>
-	<h1>{{ __('Bienvenue, :name', ['name' => $user->name]) }}</h1>
+<header class="hero">
+	<h1 class="title">Mot de passe</h1>
+	<p class="subtitle">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</p>
 </header>
 
-<div class="container">
-	<div class="row">
-		@include('user.menu')
-		<div class="col-md-9">
-			<div class="card">
-				<h2 class="card-header">{{ __('Changer de mot de passe') }}</h2>
+<form method="POST" action="{{ route('user.password') }}">
+	@csrf
 
-				<div class="card-body">
-					<form method="POST" action="{{ route('user.password') }}">
-						@csrf
+	<div class="columns-container">
+		<fieldset class="column col-sm">
+			<div class="form-group">
+				<label for="old_password" class="label">{{ __('Ancien mot de passe') }}</label>
 
+				<input id="old_password" type="password" class="input @error('old_password') is-invalid @enderror" name="old_password" required autocomplete="password" autofocus>
 
-						<div class="form-group row">
-							<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>
-
-							<div class="col-md-6">
-								<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus>
-
-								@error('password')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmer le mot de passe') }}</label>
-
-							<div class="col-md-6">
-								<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-
-								@error('password_confirmation')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-							</div>
-						</div>
-
-						<div class="form-group row mb-0">
-							<div class="col-md-6 offset-md-4">
-								<button type="submit" class="btn btn-primary">
-									{{ __('Changer de mot de passe') }}
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
+				@error('password')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
-		</div>
+		</fieldset>
+
+		<fieldset class="column col-sm">
+			<div class="form-group">
+				<label for="password" class="label">{{ __('Nouveau mot de passe') }}</label>
+
+				<input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus>
+
+				@error('password')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
+			</div>
+		</fieldset>
+
+		<fieldset class="column col-sm">
+			<div class="form-group">
+				<label for="password-confirm" class="label">{{ __('Confirmer le mot de passe') }}</label>
+
+				<input id="password-confirm" type="password" class="input" name="password_confirmation" required autocomplete="new-password">
+
+				@error('password_confirmation')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
+			</div>
+		</fieldset>
 	</div>
-</div>
+
+	<div class="form-group submit">
+		<button type="submit" class="btn btn-primary">
+			{{ __('Changer de mot de passe') }}
+		</button>
+	</div>
+</form>
 @endsection

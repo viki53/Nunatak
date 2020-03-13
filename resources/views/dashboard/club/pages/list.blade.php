@@ -3,14 +3,14 @@
 @section('content')
 <header class="hero">
 	<h1 class="title">{{ $site->title }}</h1>
-	<p class="subtitle">Ce site {{ trans_choice('{0} ne comporte aucune page|{1} comporte une seule page|[2,*] comporte :count pages', count($site->pages), ['count' => count($site->pages)]) }}</p>
+	<p class="subtitle">{{ trans_choice('{0} Ce site ne comporte aucune page|{1} Ce site comporte une seule page|[2,*] Ce site comporte :count pages', count($site->pages), ['count' => count($site->pages)]) }}</p>
 </header>
 
 <div class="columns-container">
 	<div class="column">
 		@if(empty($site->home_page))
 		<p class="alert warning" role="alert">
-			{{ __('Votre site n\'a pas de page d\'accueil') }}
+			{{ __('Ce site n\'a pas de page d\'accueil') }}
 		</p>
 		@endif
 
@@ -18,8 +18,8 @@
 		<table class="simple striped">
 			<thead>
 				<tr>
-					<th>Page</th>
-					<th>Chemin</th>
+					<th>{{ __('Page') }}</th>
+					<th>{{ __('Chemin') }}</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -39,8 +39,7 @@
 							</strong>
 						</p>
 
-						<p>Créée <time datetime="{{ $page->created_at->toIso8601String() }}" title="Le {{ $page->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $page->created_at->diffForHumans() }}</time>.</p>
-						<p>Dernière modification <time datetime="{{ $page->created_at->toIso8601String() }}" title="Le {{ $page->last_revision->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $page->last_revision->created_at->diffForHumans() }}</time>.</p>
+						<p>{!! __('Dernière modification <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $page->last_revision->created_at->toIso8601String(), 'date_formatted' => $page->last_revision->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $page->last_revision->created_at->diffForHumans()]) !!}</p>
 					</td>
 
 					<td>
@@ -72,10 +71,10 @@
 	<form method="POST" action="{{ route('site.pages.add', ['site' => $site]) }}" class="column">
 		@csrf
 
-		<h2>Créer une nouvelle page</h2>
+		<h2>{{ __('Créer une nouvelle page') }}</h2>
 
 		<div class="form-group row">
-			<label for="new-page-title" class="col-md-4 col-form-label text-md-right">{{ __('Titre') }}</label>
+			<label for="new-page-title" class="label">{{ __('Titre') }}</label>
 
 			<input id="new-page-title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required>
 
@@ -87,7 +86,7 @@
 		</div>
 
 		<div class="form-group row">
-			<label for="new-page-path" class="col-md-4 col-form-label text-md-right">{{ __('Chemin') }}</label>
+			<label for="new-page-path" class="label">{{ __('Chemin') }}</label>
 
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">

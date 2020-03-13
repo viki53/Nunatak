@@ -11,8 +11,8 @@
 		<table class="simple striped">
 			<thead>
 				<tr>
-					<th>Site</th>
-					<th>Pages</th>
+					<th>{{ __('Site') }}</th>
+					<th>{{ __('Pages') }}</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -45,7 +45,7 @@
 
 							<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
 
-							<p>Créé <time datetime="{{ $site->created_at->toIso8601String() }}" title="Le {{ $site->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $site->created_at->diffForHumans() }}</time>.</p>
+							<p>{!! __('Créé <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $site->created_at->toIso8601String(), 'date_formatted' => $site->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $site->created_at->longAbsoluteDiffForHumans()]) !!}</p>
 						</form>
 					</td>
 				</tr>

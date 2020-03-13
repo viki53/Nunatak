@@ -31,8 +31,8 @@ $user_clubs = Auth::user()->clubs;
 	@can('update', $paramClub)
 	<a href="{{ route('club.edit', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.edit')) active @endif">{{ __('Modifier') }}</a>
 	@endcan
-	<a href="{{ route('club.sites', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.sites') || Str::startsWith($routeName, 'site.')) active @endif">{{ __('Sites gérés') }}</a>
 	<a href="{{ route('club.members', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.members')) active @endif">{{ __('Gestion des membres') }}</a>
+	<a href="{{ route('club.sites', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.sites') || Str::startsWith($routeName, 'site.')) active @endif">{{ __('Sites gérés') }}</a>
 </div>
 
 	@if(Str::startsWith($routeName, 'club.') || Str::startsWith($routeName, 'site.'))
@@ -64,6 +64,15 @@ $user_clubs = Auth::user()->clubs;
 		@endforeach
 	</div>
 	@endif
+@else
+
+<div class="sidebar-list">
+	<a href="{{ route('user.invitations') }}" class="sidebar-item @if($routeName === 'user.invitations') active @endif">{{ __('Invitations en attente') }}</a>
+</div>
+<div class="sidebar-list">
+	<a href="{{ route('user.profile') }}" class="sidebar-item @if($routeName === 'user.profile') active @endif }}">{{ __('Mon compte') }}</a>
+	<a href="{{ route('user.password') }}" class="sidebar-item @if($routeName === 'user.password') active @endif">{{ __('Changer de mot de passe') }}</a>
+</div>
 @endif
 
 @yield('sidebar')

@@ -1,49 +1,47 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<header>
-	<h1>{{ __('Bienvenue, :name', ['name' => $user->name]) }}</h1>
+<header class="hero">
+	<h1 class="title">{{ config('app.name') }}</h1>
+	<p class="subtitle">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</p>
 </header>
 
-<div class="container">
-	@if (session('status'))
-	<div class="alert alert-success" role="alert">
-		{{ session('status') }}
-	</div>
-	@endif
+@if (session('status'))
+<div class="alert success" role="alert">
+	{{ session('status') }}
+</div>
+@endif
 
-	<div class="row">
-		@include('user.menu', ['user' => $user])
-		<div class="col-md-9">
-			@if(count($user->invitations) === 0)
-			<p class="lead">
-				{{ trans_choice('{0} Aucune invitation en attente|{1} Une invitation en attente|[2,*] :count invitations en attente', count($user->invitations), ['count' => count($user->invitations)]) }}
-			</p>
-			@endif
-			@foreach($user->invitations as $invitation)
-			<div class="card mb-3">
-				<h2 class="card-header">{{ $invitation->club->name }}</h2>
+<div class="columns-container">
+	<div class="column">
+		@if(!count($user->invitations))
+		<p class="lead">
+			{{ trans_choice('{0} Vous n\'avez aucune invitation en attente|{1} Vous avez une invitation en attente|[2,*] Vous avez :count invitations en attente', count($user->invitations), ['count' => count($user->invitations)]) }}
+		</p>
+		@endif
+		@foreach($user->invitations as $invitation)
+		<div class="card mb-3">
+			<h2 class="card-header">{{ $invitation->club->name }}</h2>
 
-				<div class="card-body">
-					<form method="POST" action="{{ route('user.invitations.accept', ['invitation' => $invitation]) }}" class="float-right ml-2">
-						@csrf
-						@method('POST')
+			<div class="card-body">
+				<form method="POST" action="{{ route('user.invitations.accept', ['invitation' => $invitation]) }}" class="float-right ml-2">
+					@csrf
+					@method('POST')
 
-						<button type="submit" class="btn btn-outline-success">{{ __('Accepter') }}</button>
-					</form>
+					<button type="submit" class="btn btn-outline-success">{{ __('Accepter') }}</button>
+				</form>
 
-					<form method="POST" action="{{ route('user.invitations.reject', ['invitation' => $invitation]) }}" class="float-right ml-2">
-						@csrf
-						@method('DELETE')
+				<form method="POST" action="{{ route('user.invitations.reject', ['invitation' => $invitation]) }}" class="float-right ml-2">
+					@csrf
+					@method('DELETE')
 
-						<button type="submit" class="btn btn-outline-danger">{{ __('Refuser') }}</button>
-					</form>
+					<button type="submit" class="btn btn-outline-danger">{{ __('Refuser') }}</button>
+				</form>
 
-					<p>Depuis <time datetime="{{ $invitation->created_at->toIso8601String() }}" title="Le {{ $invitation->created_at->isoFormat('dddd DD MMMM YYYY [à] HH[h]mm') }}, pour être exact">{{ $invitation->created_at->longAbsoluteDiffForHumans() }}</time>.</p>
-				</div>
+				<p>{!! __('Depuis <time datetime=":date_iso" title="Depuis le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $invitation->created_at->toIso8601String(), 'date_formatted' => $invitation->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $invitation->created_at->diffForHumans()]) !!}</p>
 			</div>
-			@endforeach
 		</div>
+		@endforeach
 	</div>
 </div>
 @endsection
