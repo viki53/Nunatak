@@ -8,6 +8,12 @@ $line-height-base: 1.6;
 
 // Sizes
 $sizes: (
+	// Responsive 
+	"sm": 30rem,
+	"md": 50rem,
+	"lg": 70rem,
+	"xl": 90rem,
+	// UI sizes
 	"container": 80rem,
 	"navbar-height": 4rem,
 	"navbar-font": 1.25rem,
@@ -24,12 +30,13 @@ $sizes: (
 
 // Colors
 $colors: (
+	// Graphic chart
 	"navy": #326a8c,
 	"yellow": #f2a71b,
 	"orange": #f25749,
 	"red": #f25050,
 	"grey": #bfbfbf,
-
+	// UI colors
 	"body-bg": #f4f4f4,
 	"body-color": #202020,
 	"navbar-bg": #f2a71b,

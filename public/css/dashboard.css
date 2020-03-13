@@ -953,6 +953,10 @@
   --font-weight-base: 400;
   --font-weight-bold: 700;
   --line-height-base: 1.6;
+  --size-sm: 30rem;
+  --size-md: 50rem;
+  --size-lg: 70rem;
+  --size-xl: 90rem;
   --size-container: 80rem;
   --size-navbar-height: 4rem;
   --size-navbar-font: 1.25rem;
@@ -1262,14 +1266,14 @@ table.striped tbody > tr:nth-child(2n+1) td {
   position: fixed;
   top: var(--size-navbar-height);
   bottom: 0;
-  left: 0;
+  left: calc(-1 * var(--size-sidebar-width));
   width: var(--size-sidebar-width);
   z-index: 97;
   background-color: var(--color-sidebar-bg);
   color: var(--color-sidebar);
   overflow-x: hidden;
   overflow-y: auto;
-  box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
+  transition: box-shadow linear 150ms, left linear 150ms;
 }
 
 #sidebar a {
@@ -1286,7 +1290,18 @@ table.striped tbody > tr:nth-child(2n+1) td {
 }
 
 #sidebar ~ #main-content {
-  margin-left: var(--size-sidebar-width);
+  transition: margin-left linear 150ms;
+}
+
+@media all and (min-width: 50rem) {
+  #sidebar {
+    left: 0;
+    box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
+  }
+
+  #sidebar ~ #main-content {
+    margin-left: var(--size-sidebar-width);
+  }
 }
 
 .sidebar-list .sidebar-list-title {

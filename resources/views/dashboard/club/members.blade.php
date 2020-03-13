@@ -95,7 +95,7 @@
 				<div class="form-group">
 					<label for="new-member-name" class="label">{{ __('Nom') }}</label>
 
-					<input id="new-member-name" type="text" class="input @error('user_name') is-invalid @enderror" name="user_name" id="club-invite-form-name" value="{{ old('user_name') }}" required autocomplete="name">
+					<input id="new-member-name" type="text" class="input @error('user_name') is-invalid @enderror" name="user_name" id="club-invite-form-name" value="{{ old('user_name') }}" required autocomplete="name" placeholder="{{ __('Ex. : Hubert Bonisseur de la Bath') }}">
 
 					@error('user_name')
 						<span class="invalid-feedback" role="alert">
@@ -107,7 +107,7 @@
 				<div class="form-group">
 					<label for="new-member-email" class="label">{{ __('Adresse email') }}</label>
 
-					<input id="new-member-email" type="email" class="input @error('user_email') is-invalid @enderror" name="user_email" value="{{ old('user_email') }}" required autocomplete="email">
+					<input id="new-member-email" type="email" class="input @error('user_email') is-invalid @enderror" name="user_email" value="{{ old('user_email') }}" required autocomplete="email" placeholder="{{ __('Ex. : oss117@').config('nunatak.root_domain') }}">
 
 					@error('name')
 						<span class="invalid-feedback" role="alert">

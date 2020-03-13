@@ -5,6 +5,10 @@
   --font-weight-base: 400;
   --font-weight-bold: 700;
   --line-height-base: 1.6;
+  --size-sm: 30rem;
+  --size-md: 50rem;
+  --size-lg: 70rem;
+  --size-xl: 90rem;
   --size-container: 80rem;
   --size-navbar-height: 4rem;
   --size-navbar-font: 1.25rem;
