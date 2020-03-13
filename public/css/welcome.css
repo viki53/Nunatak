@@ -22,7 +22,7 @@
   --color-orange: #f25749;
   --color-red: #f25050;
   --color-grey: #bfbfbf;
-  --color-body-bg: #f8fafc;
+  --color-body-bg: #f4f4f4;
   --color-body-color: #202020;
   --color-navbar-bg: #f2a71b;
   --color-navbar-color: #fff;
@@ -115,6 +115,11 @@ table.striped thead > tr td,
 table.striped tbody > tr:nth-child(2n) th,
 table.striped tbody > tr:nth-child(2n) td {
   background-color: var(--color-table-stripe);
+}
+
+table.striped tbody > tr:nth-child(2n+1) th,
+table.striped tbody > tr:nth-child(2n+1) td {
+  background-color: var(--color-body-bg);
 }
 
 .container {
