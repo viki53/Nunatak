@@ -1047,6 +1047,48 @@ a:active {
   white-space: normal;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+p,
+.ql-editor p {
+  margin: 1em 0;
+}
+
+h1,
+.ql-editor h1,
+.h1 {
+  margin: 1em 0 0;
+  font-size: 2rem;
+}
+
+h2,
+.ql-editor h2,
+.h2 {
+  margin: 1em 0 0;
+  font-size: 1.5rem;
+}
+
+h3,
+.ql-editor h3,
+.h3 {
+  margin: 1em 0 0;
+  font-size: 1.25rem;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -1074,6 +1116,36 @@ table.striped tbody > tr:nth-child(2n) td {
 table.striped tbody > tr:nth-child(2n+1) th,
 table.striped tbody > tr:nth-child(2n+1) td {
   background-color: var(--color-body-bg);
+}
+
+.card {
+  border: 0;
+  border-radius: var(--size-radius);
+  box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
+}
+
+.card-header {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  font-weight: normal;
+  background-color: var(--color-navy);
+  color: #fff;
+  border-radius: var(--size-radius) var(--size-radius) 0 0;
+}
+
+.card-body {
+  margin: 0;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.card-footer {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  border-top: 1px solid var(--color-navy);
+  border-radius: 0 0 var(--size-radius) var(--size-radius);
 }
 
 .container {
@@ -1188,169 +1260,6 @@ table.striped tbody > tr:nth-child(2n+1) td {
   color: var(--color-navy);
 }
 
-.hero {
-  padding: 2rem;
-  margin-bottom: 1rem;
-  background-color: var(--color-orange);
-  color: #fff;
-}
-
-.hero .title {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.hero .subtitle {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-#quicklinks {
-  height: 0;
-}
-
-#quicklinks a:active,
-#quicklinks a:focus {
-  position: relative;
-  z-index: 100;
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 99;
-  height: var(--size-navbar-height);
-  background-color: var(--color-navbar-bg);
-  color: var(--color-navbar-color);
-  font-size: var(--size-navbar-font);
-  line-height: var(--size-navbar-font);
-  box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-}
-
-.navbar a {
-  text-decoration: none;
-}
-
-.navbar a:focus,
-.navbar a:hover,
-.navbar a:active {
-  color: #fff;
-}
-
-.navbar .navbar-item {
-  display: block;
-  float: left;
-  height: var(--size-navbar-height);
-  padding: calc((var(--size-navbar-height) - var(--size-navbar-font)) / 2) calc(var(--size-navbar-font) / 2);
-}
-
-.navbar .navbar-left {
-  display: block;
-  flex: 1;
-  align-self: flex-start;
-}
-
-.navbar .navbar-right {
-  display: block;
-  align-self: flex-end;
-}
-
-#sidebar {
-  position: fixed;
-  top: var(--size-navbar-height);
-  bottom: 0;
-  left: calc(-1 * var(--size-sidebar-width));
-  width: var(--size-sidebar-width);
-  z-index: 97;
-  background-color: var(--color-sidebar-bg);
-  color: var(--color-sidebar);
-  overflow-x: hidden;
-  overflow-y: auto;
-  transition: box-shadow linear 150ms, left linear 150ms;
-}
-
-#sidebar a {
-  text-decoration: none;
-}
-
-#sidebar .dropdown {
-  display: block;
-}
-
-#sidebar .dropdown-label {
-  background-color: var(--color-navy);
-  color: #fff;
-}
-
-#sidebar ~ #main-content {
-  transition: margin-left linear 150ms;
-}
-
-@media all and (min-width: 50rem) {
-  #sidebar {
-    left: 0;
-    box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
-  }
-
-  #sidebar ~ #main-content {
-    margin-left: var(--size-sidebar-width);
-  }
-}
-
-.sidebar-list .sidebar-list-title {
-  display: block;
-  padding: 1.25em;
-  margin: 2em 0 0;
-  color: var(--color-sidebar-disabled);
-  font-size: 1em;
-  font-weight: var(--font-weight-bold, bold);
-}
-
-.sidebar-item {
-  position: relative;
-  display: block;
-  padding: 1.25em;
-  margin: 0;
-}
-
-.sidebar-item.disabled {
-  color: var(--color-sidebar-disabled);
-}
-
-.sidebar-item:not(.disabled)::after {
-  content: ">";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 3em;
-  text-align: center;
-  line-height: 4em;
-  color: var(--color-grey);
-}
-
-.sidebar-item:not(.disabled):focus,
-.sidebar-item:not(.disabled):hover {
-  background-color: var(--color-sidebar-hover-bg);
-  color: var(--color-sidebar-hover);
-}
-
-.sidebar-item:not(.disabled):focus::after,
-.sidebar-item:not(.disabled):hover::after {
-  color: var(--color-navy);
-}
-
-.sidebar-item:not(.disabled).active::after {
-  color: var(--color-navy);
-}
-
 fieldset {
   border: none;
   margin: 0;
@@ -1419,6 +1328,7 @@ button,
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-base);
+  text-decoration: none;
   background-color: var(--color-navy);
   color: #fff;
   border: 0;
@@ -1432,6 +1342,169 @@ button:focus,
 .button:hover,
 .button:focus {
   box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+}
+
+.hero {
+  padding: 2rem;
+  margin: 0;
+  background-color: var(--color-orange);
+  color: #fff;
+}
+
+.hero .title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.hero .subtitle {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  height: var(--size-navbar-height);
+  background-color: var(--color-navbar-bg);
+  color: var(--color-navbar-color);
+  font-size: var(--size-navbar-font);
+  line-height: var(--size-navbar-font);
+  box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+.navbar a:focus,
+.navbar a:hover,
+.navbar a:active {
+  color: #fff;
+}
+
+.navbar .navbar-item {
+  display: block;
+  float: left;
+  height: var(--size-navbar-height);
+  padding: calc((var(--size-navbar-height) - var(--size-navbar-font)) / 2) calc(var(--size-navbar-font) / 2);
+}
+
+.navbar .navbar-left {
+  display: block;
+  flex: 1;
+  align-self: flex-start;
+}
+
+.navbar .navbar-right {
+  display: block;
+  align-self: flex-end;
+}
+
+#quicklinks {
+  height: 0;
+}
+
+#quicklinks a:active,
+#quicklinks a:focus {
+  position: relative;
+  z-index: 100;
+}
+
+#sidebar {
+  position: fixed;
+  top: var(--size-navbar-height);
+  bottom: 0;
+  left: calc(-1 * var(--size-sidebar-width));
+  width: var(--size-sidebar-width);
+  z-index: 97;
+  background-color: var(--color-sidebar-bg);
+  color: var(--color-sidebar);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: box-shadow linear 150ms, left linear 150ms;
+}
+
+#sidebar a {
+  text-decoration: none;
+}
+
+#sidebar .dropdown {
+  display: block;
+}
+
+#sidebar .dropdown-label {
+  background-color: var(--color-navy);
+  color: #fff;
+}
+
+#sidebar ~ #main-content {
+  transition: margin-left linear 150ms;
+}
+
+@media all and (min-width: 50rem) {
+  #sidebar {
+    left: 0;
+    box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
+  }
+
+  #sidebar ~ #main-content {
+    margin-left: var(--size-sidebar-width);
+  }
+}
+
+.sidebar-list .sidebar-list-title {
+  display: block;
+  padding: 1.25em;
+  margin: 2em 0 0;
+  color: var(--color-sidebar-disabled);
+  font-size: 1em;
+  font-weight: var(--font-weight-bold, bold);
+}
+
+.sidebar-item {
+  position: relative;
+  display: block;
+  padding: 1.25em;
+  margin: 0;
+}
+
+.sidebar-item.disabled {
+  color: var(--color-sidebar-disabled);
+}
+
+.sidebar-item:not(.disabled)::after {
+  content: ">";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 3em;
+  text-align: center;
+  line-height: 4em;
+  color: var(--color-grey);
+}
+
+.sidebar-item:not(.disabled):focus,
+.sidebar-item:not(.disabled):hover {
+  background-color: var(--color-sidebar-hover-bg);
+  color: var(--color-sidebar-hover);
+}
+
+.sidebar-item:not(.disabled):focus::after,
+.sidebar-item:not(.disabled):hover::after {
+  color: var(--color-navy);
+}
+
+.sidebar-item:not(.disabled).active::after {
+  color: var(--color-navy);
 }
 
 #page {

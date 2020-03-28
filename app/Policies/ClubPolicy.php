@@ -68,7 +68,7 @@ class ClubPolicy
 	 */
 	public function create_site(User $user, Club $club)
 	{
-		return $club->loadCount('sites')->sites_count < 1 && ClubUser::where('user_id', $user->id)->where('club_id', $club->id)->where('is_owner', true)->count();
+		return $club->loadCount('sites')->sites_count < 2 && ClubUser::where('user_id', $user->id)->where('club_id', $club->id)->where('is_owner', true)->count();
 	}
 
 	/**

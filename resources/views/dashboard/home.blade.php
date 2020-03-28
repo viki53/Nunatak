@@ -60,8 +60,8 @@
 			</div>
 			@if($club->pivot->is_owner)
 			<div class="card-footer text-center">
-				<a href="{{ @route('club.members', ['club' => $club]) }}" class="btn btn-outline-primary">{{ __('Liste des membres') }}</a>
-				<a href="{{ @route('club.edit', ['club' => $club]) }}" class="btn btn-outline-secondary">{{ __('Modifier les informations') }}</a>
+				<a href="{{ @route('club.members', ['club' => $club]) }}">{{ __('Liste des membres') }}</a>
+				<a href="{{ @route('club.edit', ['club' => $club]) }}">{{ __('Modifier les informations') }}</a>
 			</div>
 			@endif
 		</div>

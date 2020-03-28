@@ -4,14 +4,7 @@
 // Variables
 @import 'common/common';
 
-@import 'components/container';
-@import 'components/columns';
-@import 'components/dropdown';
-@import 'components/hero';
-@import 'components/quicklinks';
-@import 'components/navbar';
-@import 'components/sidebar';
-@import 'components/form';
+@import 'components/_all';
 
 #page {
 	width: 100vw;

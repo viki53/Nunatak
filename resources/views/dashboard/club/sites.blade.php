@@ -7,6 +7,7 @@
 </header>
 
 <div class="columns-container">
+	@if(count($club->sites) > 0)
 	<div class="column">
 		<table class="simple striped">
 			<thead>
@@ -18,8 +19,8 @@
 			</thead>
 			<tbody>
 				@foreach($club->sites as $site)
-				<tr class="card">
-					<td class="card-header">
+				<tr>
+					<td>
 						<p><strong>{{ $site->title }}</strong></p>
 
 						<p><em><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></em></p>
@@ -53,6 +54,7 @@
 			</tbody>
 		</table>
 	</div>
+	@endif
 
 	@can('create_site', $club)
 	<div class="column">

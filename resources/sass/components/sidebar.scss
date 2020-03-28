@@ -32,7 +32,7 @@
 @media all and (min-width: map-get($sizes, "md")) {
 	#sidebar {
 		left: 0;
-		box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow-dark);
+		box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
 
 		& ~ #main-content {
 			margin-left: var(--size-sidebar-width);

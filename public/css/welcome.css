@@ -97,6 +97,44 @@ a:active {
   white-space: normal;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+p {
+  margin: 1em 0;
+}
+
+h1,
+.h1 {
+  margin: 1em 0 0;
+  font-size: 2rem;
+}
+
+h2,
+.h2 {
+  margin: 1em 0 0;
+  font-size: 1.5rem;
+}
+
+h3,
+.h3 {
+  margin: 1em 0 0;
+  font-size: 1.25rem;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
