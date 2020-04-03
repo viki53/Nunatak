@@ -15,11 +15,9 @@ class WelcomeController extends Controller
 	 */
 	public function index()
 	{
-		$splashscreen = Splashscreen::all()->random(1)->first();
 		$sports = Sport::has('clubs')->get();
 
 		return view('welcome', [
-			'splashscreen' => $splashscreen,
 			'sports' => $sports
 		]);
 	}
