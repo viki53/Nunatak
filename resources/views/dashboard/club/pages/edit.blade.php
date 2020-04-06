@@ -61,9 +61,7 @@
 		</div>
 
 		<div class="form-group submit">
-			<button type="submit" class="button-primary">
-				{{ !empty($page) ? __('Enregistrer') : __('Créer') }}
-			</button>
+			<button type="submit" class="button">{{ !empty($page) ? __('Enregistrer') : __('Créer') }}</button>
 		</div>
 	</fieldset>
 </form>

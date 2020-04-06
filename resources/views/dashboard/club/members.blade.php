@@ -61,7 +61,6 @@
 				@endforeach
 			</tbody>
 		</table>
-		@endif
 	</div>
 	@endif
 
@@ -98,9 +97,7 @@
 				</div>
 
 				<div class="form-group submit">
-					<button type="submit" class="button-primary">
-						{{ __('Ajouter') }}
-					</button>
+					<button type="submit" class="button">{{ __('Ajouter') }}</button>
 				</div>
 			</div>
 		</form>

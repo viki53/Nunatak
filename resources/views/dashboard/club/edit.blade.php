@@ -14,80 +14,80 @@
 
 <div class="columns-container">
 	<section id="club-edit" class="column">
-		<h2 class="sr-only">{{ __('Modifier le club') }}</h2>
+		<div class="card">
+			<h2 class="card-header">{{ __('Modifier le club') }}</h2>
 
-		<form method="POST" action="{{ route('club.update', ['club' => $club]) }}">
-			@csrf
+			<form method="POST" action="{{ route('club.update', ['club' => $club]) }}" class="card-body">
+				@csrf
 
-			<div class="form-group">
-				<label for="club-name" class="label">{{ __('Nom') }}</label>
+				<div class="form-group">
+					<label for="club-name" class="label">{{ __('Nom') }}</label>
 
-				<input id="club-name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name', $club->name) }}" required autocomplete="organization">
+					<input id="club-name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name', $club->name) }}" required autocomplete="organization">
 
-				@error('name')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-				@enderror
-			</div>
-
-			<div class="form-group">
-				<label for="club-address" class="label">{{ __('Adresse') }}</label>
-
-				<textarea id="club-address" class="input @error('address') is-invalid @enderror" name="address" required autocomplete="street-address">{{ old('address', $club->address) }}</textarea>
-
-				@error('address')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-				@enderror
-			</div>
-
-			<div class="form-group">
-				<label for="club-city" class="label">{{ __('Ville') }}</label>
-
-				<input id="club-city" type="text" class="input @error('city') is-invalid @enderror" name="city" value="{{ old('city', $club->city) }}" required autocomplete="city">
-
-				@error('city')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-				@enderror
-			</div>
-
-			<div class="form-group">
-				<label for="club-country" class="label">{{ __('Pays') }}</label>
-
-				<select id="club-country" class="custom-select @error('country') is-invalid @enderror" name="country" required autocomplete="country">
-					<option value="">—</option>
-					<option value="FR" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>France</option>
-				</select>
-
-				@error('country')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-				@enderror
-			</div>
-
-			<div class="form-group">
-				<label for="club-registration_number" class="label">{{ __('SIREN ou SIRET') }}</label>
-
-				<input id="club-registration_number" type="text" class="input @error('registration_number') is-invalid @enderror" name="registration_number" value="{{ old('registration_number', $club->registration_number) }}" required autocomplete="on">
-
-				@error('registration_number')
+					@error('name')
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
 					</span>
-				@enderror
-			</div>
+					@enderror
+				</div>
 
-			<div class="form-group submit">
-				<button type="submit" class="button-primary">
-					{{ __('Enregistrer') }}
-				</button>
-			</div>
-		</form>
+				<div class="form-group">
+					<label for="club-address" class="label">{{ __('Adresse') }}</label>
+
+					<textarea id="club-address" class="input @error('address') is-invalid @enderror" name="address" required autocomplete="street-address">{{ old('address', $club->address) }}</textarea>
+
+					@error('address')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+					@enderror
+				</div>
+
+				<div class="form-group">
+					<label for="club-city" class="label">{{ __('Ville') }}</label>
+
+					<input id="club-city" type="text" class="input @error('city') is-invalid @enderror" name="city" value="{{ old('city', $club->city) }}" required autocomplete="city">
+
+					@error('city')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+					@enderror
+				</div>
+
+				<div class="form-group">
+					<label for="club-country" class="label">{{ __('Pays') }}</label>
+
+					<select id="club-country" class="custom-select @error('country') is-invalid @enderror" name="country" required autocomplete="country">
+						<option value="">—</option>
+						<option value="FR" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>France</option>
+					</select>
+
+					@error('country')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+					@enderror
+				</div>
+
+				<div class="form-group">
+					<label for="club-registration_number" class="label">{{ __('SIREN ou SIRET') }}</label>
+
+					<input id="club-registration_number" type="text" class="input @error('registration_number') is-invalid @enderror" name="registration_number" value="{{ old('registration_number', $club->registration_number) }}" required autocomplete="on">
+
+					@error('registration_number')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+
+				<div class="form-group submit">
+					<button type="submit" class="button">{{ __('Enregistrer') }}</button>
+				</div>
+			</form>
+		</div>
 	</section>
 
 	<div class="column">
@@ -115,9 +115,7 @@
 				</div>
 
 				<div class="form-group submit">
-					<button type="submit" class="button-primary">
-						{{ __('Enregistrer') }}
-					</button>
+					<button type="submit" class="button">{{ __('Enregistrer') }}</button>
 				</div>
 			</div>
 		</form>

@@ -10,7 +10,7 @@
 	@csrf
 
 	<div class="columns-container">
-		<fieldset class="column col-sm">
+		<div class="column col-sm">
 			<div class="form-group">
 				<label for="old_password" class="label">{{ __('Ancien mot de passe') }}</label>
 
@@ -22,9 +22,9 @@
 					</span>
 				@enderror
 			</div>
-		</fieldset>
+		</div>
 
-		<fieldset class="column col-sm">
+		<div class="column col-sm">
 			<div class="form-group">
 				<label for="password" class="label">{{ __('Nouveau mot de passe') }}</label>
 
@@ -36,9 +36,9 @@
 					</span>
 				@enderror
 			</div>
-		</fieldset>
+		</div>
 
-		<fieldset class="column col-sm">
+		<div class="column col-sm">
 			<div class="form-group">
 				<label for="password-confirm" class="label">{{ __('Confirmer le mot de passe') }}</label>
 
@@ -50,13 +50,15 @@
 					</span>
 				@enderror
 			</div>
-		</fieldset>
+		</div>
 	</div>
 
-	<div class="form-group submit">
-		<button type="submit" class="btn btn-primary">
-			{{ __('Changer de mot de passe') }}
-		</button>
+	<div class="columns-container">
+		<div class="column">
+			<div class="form-group submit">
+				<button type="submit" class="button">{{ __('Changer de mot de passe') }}</button>
+			</div>
+		</div>
 	</div>
 </form>
 @endsection

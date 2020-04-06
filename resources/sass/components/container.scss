@@ -3,4 +3,8 @@
 	margin-right: auto;
 	max-width: var(--size-container);
 	overflow: visible;
+
+	&.small {
+		max-width: calc(var(--size-container) / 4);
+	}
 }

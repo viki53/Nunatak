@@ -8,7 +8,7 @@
 
 <div class="columns-container">
 	@if(count($club->sites) > 0)
-	<div class="column">
+	<div class="column col-lg">
 		<table class="simple striped">
 			<thead>
 				<tr>
@@ -44,9 +44,9 @@
 							@csrf
 							@method('DELETE')
 
-							<button type="submit" class="btn btn-outline-danger float-right">{{ __('Supprimer') }}</button>
+							<button type="submit" class="button">{{ __('Supprimer') }}</button>
 
-							<p>{!! __('Créé <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $site->created_at->toIso8601String(), 'date_formatted' => $site->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $site->created_at->longAbsoluteDiffForHumans()]) !!}</p>
+							<p>{!! __('Créé <time datetime=":date_iso" title="Le :date_formatted, pour être exact">il y a :date_absolute</time>', ['date_iso' => $site->created_at->toIso8601String(), 'date_formatted' => $site->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $site->created_at->longAbsoluteDiffForHumans()]) !!}</p>
 						</form>
 					</td>
 				</tr>
@@ -57,55 +57,47 @@
 	@endif
 
 	@can('create_site', $club)
-	<div class="column">
+	<div class="column col-sm">
 		<form method="POST" action="{{ route('club.sites.add', ['club' => $club]) }}" class="card">
 			@csrf
 
 			<h2 class="card-header">Créer un nouveau site</h2>
 
 			<div class="card-body">
-				<div class="form-group row">
+				<div class="form-group">
 					<label for="new-site-title" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
 
-					<div class="col-md-6">
-						<input id="new-site-title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $club->name) }}" required autocomplete="off">
+					<input id="new-site-title" type="text" class="input @error('title') is-invalid @enderror" name="title" value="{{ old('title', $club->name) }}" required autocomplete="off">
 
-						@error('title')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-						@enderror
-					</div>
+					@error('title')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+					@enderror
 				</div>
 
-				<div class="form-group row">
+				<div class="form-group">
 					<label for="new-site-domain" class="col-md-4 col-form-label text-md-right">{{ __('Nom de domaine') }}</label>
 
-					<div class="col-md-6">
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text">https://</span>
-							</div>
-							<input id="new-site-domain" type="text" class="form-control @error('domain') is-invalid @enderror" name="domain" value="{{ old('domain', Str::slug($club->name)) }}" required autocomplete="off">
-							<div class="input-group-append">
-								<span class="input-group-text">{{ config('nunatak.domain_suffix') }}</span>
-							</div>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">https://</span>
 						</div>
-
-						@error('domain')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-						@enderror
+						<input id="new-site-domain" type="text" class="input @error('domain') is-invalid @enderror" name="domain" value="{{ old('domain', Str::slug($club->name)) }}" required autocomplete="off">
+						<div class="input-group-append">
+							<span class="input-group-text">{{ config('nunatak.domain_suffix') }}</span>
+						</div>
 					</div>
+
+					@error('domain')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+					@enderror
 				</div>
 
-				<div class="form-group row mb-0">
-					<div class="col-md-6 offset-md-4">
-						<button type="submit" class="btn btn-primary">
-							{{ __('Créer') }}
-						</button>
-					</div>
+				<div class="form-group submit">
+					<button type="submit" class="button">{{ __('Créer') }}</button>
 				</div>
 			</div>
 		</form>

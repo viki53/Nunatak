@@ -1,5 +1,5 @@
 .form {
-
+	display: block;
 }
 
 fieldset {
@@ -19,16 +19,14 @@ fieldset {
 	}
 }
 
-.label {
+.label,
+.checkbox-container {
 	display: block;
 	padding: .625em 0;
 }
 
-input,
 .input,
-select,
 .select,
-textarea,
 .textarea {
 	display: block;
 	width: 100%;
@@ -38,38 +36,62 @@ textarea,
 	font-weight: var(--font-weight-base);
 	background-color: #fff;
 	border: 0;
-	border-bottom: 1px solid #bfbfbf;
+	border-bottom: 1px solid var(--color-input-border);
 	border-radius: var(--size-radius) var(--size-radius) 0 0;
 	transition: border linear 150ms;
 
 	&:hover,
 	&:focus {
-		border-bottom: 1px solid #9b9b9b;
+		border-bottom-color: var(--color-input-focus-border);
 	}
 }
 
-textarea,
 .textarea {
 	min-height: 5rem;
 	resize: vertical;
 }
 
-button,
 .button {
 	padding: .625em;
 	font-family: var(--font-family-main);
 	font-size: var(--font-size-base);
 	font-weight: var(--font-weight-base);
-	text-decoration: none;
-	background-color: var(--color-navy);
-	color: #fff;
 	border: 0;
-	box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
-	transition: all linear 150ms;
-	border-radius: var(--size-radius);
 
-	&:hover,
-	&:focus {
-		box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+	&:not(.is-link) {
+		text-decoration: none;
+		background-color: var(--color-navy);
+		color: #fff;
+		box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
+		transition: all linear 150ms;
+		border-radius: var(--size-radius);
+
+		&:hover,
+		&:focus {
+			box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+		}
+	}
+}
+
+.input-group {
+	display: flex;
+
+	&-prepend,
+	&-append {
+		flex: 0 1 auto;
+		padding: .625em;
+		font-family: var(--font-family-main);
+		font-size: var(--font-size-base);
+		font-weight: var(--font-weight-base);
+		background-color: #fff;
+		border: 0;
+		border-bottom: 1px solid var(--color-input-border);
+		border-radius: var(--size-radius) var(--size-radius) 0 0;
+		transition: border linear 150ms;
+	}
+
+	.input {
+		flex: 1 0 auto;
+		width: auto;
 	}
 }

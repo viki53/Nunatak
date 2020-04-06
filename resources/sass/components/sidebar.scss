@@ -41,6 +41,8 @@
 }
 
 .sidebar-list {
+	margin-bottom: 1rem;
+
 	.sidebar-list-title {
 		display: block;
 		padding: 1.25em;
@@ -54,14 +56,22 @@
 .sidebar-item {
 	position: relative;
 	display: block;
+	width: 100%;
 	padding: 1.25em;
 	margin: 0;
+	border: 0;
+	font-size: inherit;
+	text-align: left;
+	background-color: transparent;
+	appearance: none;
 
 	&.disabled {
 		color: var(--color-sidebar-disabled);
 	}
 
 	&:not(.disabled) {
+		cursor: pointer;
+
 		&::after {
 			content: '>';
 			position: absolute;

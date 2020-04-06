@@ -36,7 +36,7 @@
 						@if(!empty($page))
 						@auth
 						<li class="nav-item">
-							<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}" class="btn btn-primary">Modifier</a>
+							<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}" class="button">Modifier</a>
 						</li>
 						@endauth
 						@endif
@@ -51,7 +51,7 @@
 						</li>
 						@if (Route::has('register'))
 						<li class="nav-item ml-1">
-							<a class="btn btn-primary" href="{{ route('register') }}">{{ __('Inscription') }}</a>
+							<a class="button" href="{{ route('register') }}">{{ __('Inscription') }}</a>
 						</li>
 						@endif
 						@else

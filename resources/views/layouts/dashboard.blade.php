@@ -28,7 +28,7 @@
 
 		<div id="page">
 			<nav id="sidebar">
-				@include('layouts.includes.club-sidebar')
+				@include('layouts.includes.dashboard-sidebar')
 				@yield('sidebar')
 			</nav>
 			<main id="main-content">

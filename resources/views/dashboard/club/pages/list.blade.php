@@ -7,10 +7,16 @@
 </header>
 
 <div class="columns-container">
-	<div class="column">
+	<div class="column col-lg">
 		@if(empty($site->home_page))
 		<p class="alert warning" role="alert">
 			{{ __('Ce site n\'a pas de page d\'accueil') }}
+		</p>
+		@endif
+
+		@if(!empty($site->error404_page))
+		<p class="alert info" role="alert">
+			{!! __('Vous pouvez créer une page d\'erreur 404 personnalisée en indiquant le chemin <strong>/404</strong>.') !!}
 		</p>
 		@endif
 
@@ -56,7 +62,7 @@
 							@csrf
 							@method('DELETE')
 
-							<button type="submit" class="btn btn-outline-danger">{{ __('Supprimer') }}</button>
+							<button type="submit" class="button">{{ __('Supprimer') }}</button>
 						</form>
 						@endif
 					</td>
@@ -68,46 +74,48 @@
 	</div>
 
 	@can('create_page', $site)
-	<form method="POST" action="{{ route('site.pages.add', ['site' => $site]) }}" class="column">
-		@csrf
+	<div class="column col-sm">
+		<form method="POST" action="{{ route('site.pages.add', ['site' => $site]) }}" class="card">
+			@csrf
 
-		<h2>{{ __('Créer une nouvelle page') }}</h2>
+			<h2 class="card-header">{{ __('Créer une nouvelle page') }}</h2>
 
-		<div class="form-group row">
-			<label for="new-page-title" class="label">{{ __('Titre') }}</label>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="new-page-title" class="label">{{ __('Titre') }}</label>
 
-			<input id="new-page-title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required>
+					<input id="new-page-title" type="text" class="input @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required>
 
-			@error('title')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-			@enderror
-		</div>
-
-		<div class="form-group row">
-			<label for="new-page-path" class="label">{{ __('Chemin') }}</label>
-
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">{{ $site->domain}}</span>
+					@error('title')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+					@enderror
 				</div>
-				<input id="new-page-path" type="text" class="form-control @error('path') is-invalid @enderror" name="path" value="{{ old('path', '/') }}" required>
+
+				<div class="form-group">
+					<label for="new-page-path" class="label">{{ __('Chemin') }}</label>
+
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">{{ $site->domain}}</span>
+						</div>
+						<input id="new-page-path" type="text" class="input @error('path') is-invalid @enderror" name="path" value="{{ old('path', '/') }}" required>
+					</div>
+
+					@error('path')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+					@enderror
+				</div>
+
+				<div class="form-group submit">
+					<button type="submit" class="button">{{ __('Créer') }}</button>
+				</div>
 			</div>
-
-			@error('path')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-			@enderror
-		</div>
-
-		<div class="form-group submit">
-			<button type="submit" class="button-primary">
-				{{ __('Créer') }}
-			</button>
-		</div>
-	</form>
+		</form>
+	</div>
 	@endcan
 </div>
 

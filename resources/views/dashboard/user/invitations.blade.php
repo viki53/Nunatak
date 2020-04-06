@@ -20,7 +20,7 @@
 		</p>
 		@endif
 		@foreach($user->invitations as $invitation)
-		<div class="card mb-3">
+		<div class="card">
 			<h2 class="card-header">{{ $invitation->club->name }}</h2>
 
 			<div class="card-body">

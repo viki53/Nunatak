@@ -49,5 +49,13 @@ class Site extends Model
     public function home_page()
     {
         return $this->hasOne('App\Page')->where('path', '/')->latest();
+	}
+
+    /**
+     * The site's 404 error page.
+     */
+    public function error404_page()
+    {
+        return $this->hasOne('App\Page')->where('path', '/404')->latest();
     }
 }
