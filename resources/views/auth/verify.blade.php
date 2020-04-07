@@ -7,9 +7,7 @@
 
 		<div class="card-body">
 			@if (session('resent'))
-			<div class="alert is-success" role="alert">
-				{{ __('Un nouveau lien de vérification a été envoyé à votre adresse email') }}
-			</div>
+			<p class="alert is-success" role="alert">{{ __('Un nouveau lien de vérification a été envoyé à votre adresse email') }}</p>
 			@endif
 
 			<p>{{ __('Avant de continuer, veuillez vérifier que l\'email n\'est pas arrivé dans vos spams.') }}</p>

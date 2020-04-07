@@ -9,9 +9,7 @@
 			@csrf
 
 			@if (session('status'))
-			<div class="alert is-success" role="alert">
-				{{ session('status') }}
-			</div>
+			<p class="alert is-success" role="alert">{{ session('status') }}</p>
 			@endif
 
 			<div class="form-group">

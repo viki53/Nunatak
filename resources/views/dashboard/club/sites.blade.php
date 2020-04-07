@@ -63,11 +63,11 @@
 		<form method="POST" action="{{ route('club.sites.add', ['club' => $club]) }}" class="card">
 			@csrf
 
-			<h2 class="card-header">Créer un nouveau site</h2>
+			<h2 class="card-header">{{ __('Créer un nouveau site') }}</h2>
 
 			<div class="card-body">
 				<div class="form-group">
-					<label for="new-site-title" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
+					<label for="new-site-title" class="label">{{ __('Nom') }}</label>
 
 					<input id="new-site-title" type="text" class="input @error('title') is-invalid @enderror" name="title" value="{{ old('title', $club->name) }}" required autocomplete="off">
 
@@ -77,7 +77,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="new-site-domain" class="col-md-4 col-form-label text-md-right">{{ __('Nom de domaine') }}</label>
+					<label for="new-site-domain" class="label">{{ __('Nom de domaine') }}</label>
 
 					<div class="input-group">
 						<div class="input-group-prepend">

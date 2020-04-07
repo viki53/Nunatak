@@ -55,7 +55,7 @@
 
 					<select id="club-country" class="select @error('country') is-invalid @enderror" name="country" required autocomplete="country">
 						<option value="">—</option>
-						<option value="FR" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>France</option>
+						<option value="FR" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>{{ __('France') }}</option>
 					</select>
 
 					@error('country')
@@ -83,7 +83,7 @@
 	<div class="column">
 		@can('add_sport', $club)
 		<form method="POST" action="{{ route('club.sports.add', ['club' => $club]) }}" id="club-sports-add" class="card">
-			<h2 class="card-header">Ajouter un sport</h2>
+			<h2 class="card-header">{{ __('Ajouter un sport') }}</h2>
 
 			<div class="card-body">
 				@csrf

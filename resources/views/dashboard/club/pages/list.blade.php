@@ -13,15 +13,11 @@
 
 			<div class="card-body">
 				@if(empty($site->home_page))
-				<p class="alert is-warning" role="alert">
-					{{ __('Ce site n\'a pas de page d\'accueil') }}
-				</p>
+				<p class="alert is-warning" role="alert">{{ __('Ce site n\'a pas de page d\'accueil') }}</p>
 				@endif
 
 				@if(empty($site->error404_page))
-				<p class="alert is-info" role="alert">
-					{!! __('Vous pouvez créer une page d\'erreur 404 personnalisée en indiquant le chemin <strong>/404</strong>.') !!}
-				</p>
+				<p class="alert is-info" role="alert">{!! __('Vous pouvez créer une page d\'erreur 404 personnalisée en indiquant le chemin <strong>/404</strong>.') !!}</p>
 				@endif
 
 				@if(!empty($site->pages))
@@ -46,9 +42,9 @@
 									</strong>
 
 									@if($page->isHomePage)
-									<span class="tag is-info">Accueil</span>
+									<span class="tag is-info">{{ __('Accueil') }}</span>
 									@elseif($page->isError404Page)
-									<span class="tag is-info">Erreur 404</span>
+									<span class="tag is-info">{{ __('Erreur 404') }}</span>
 									@endif
 								</p>
 
@@ -57,7 +53,7 @@
 
 							<td class="text-center">
 								@if(!$page->isHomePage)
-								<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}" class="float-right mx-1">
+								<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}">
 									@csrf
 									@method('DELETE')
 
