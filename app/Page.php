@@ -65,5 +65,15 @@ class Page extends Model
     public function last_revision()
     {
         return $this->hasOne('App\PageRevision')->latest();
-    }
+	}
+
+	public function getIsHomePageAttribute()
+	{
+		return $this->attributes['path'] === '/';
+	}
+
+	public function getIsError404PageAttribute()
+	{
+		return $this->attributes['path'] === '/404';
+	}
 }

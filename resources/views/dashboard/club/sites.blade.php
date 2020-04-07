@@ -9,50 +9,52 @@
 <div class="columns-container">
 	@if(count($club->sites) > 0)
 	<div class="column col-lg">
-		<table class="simple striped">
-			<thead>
-				<tr>
-					<th>{{ __('Site') }}</th>
-					<th>{{ __('Pages') }}</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($club->sites as $site)
-				<tr>
-					<td>
-						<p><strong>{{ $site->title }}</strong></p>
+		<div class="card">
+			<h2 class="card-header">{{ __('Liste des sites') }}</h2>
 
-						<p><em><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></em></p>
-						@if(empty($site->home_page))
-						<p class="alert warning" role="alert">
-							{{ __('Ce site n\'a pas de page d\'accueil') }}
-						</p>
-						@endif
-					</td>
+			<div class="card-body">
+				<table class="simple striped">
+					<thead>
+						<tr>
+							<th>{{ __('Site') }}</th>
+							<th class="text-center" style="width: 12rem">{{ __('Pages') }}</th>
+							<th class="text-center" style="width: 9rem"></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($club->sites as $site)
+						<tr>
+							<td>
+								<p><strong>{{ $site->title }}</strong></p>
 
-					<td>
-						<p>
-							<a href="{{ route('site.pages', ['site' => $site]) }}">
-								{{ trans_choice('{0} Aucune page|{1} Une seule page|[2,*] :count pages', $site->pages_count, ['count' => $site->pages_count]) }}
-							</a>
-						</p>
-					</td>
+								<p><em><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->domain }}</a></em></p>
+								@if(empty($site->home_page))
+								<p class="alert is-warning" role="alert">{{ __('Ce site n\'a pas de page d\'accueil') }}</p>
+								@endif
+							</td>
 
-					<td>
-						<form method="POST" action="{{ route('club.sites.remove', ['club' => $club, 'site' => $site]) }}">
-							@csrf
-							@method('DELETE')
+							<td class="text-center">
+								<p>
+									<a href="{{ route('site.pages', ['site' => $site]) }}">{{ trans_choice('{0} Aucune page|{1} Une seule page|[2,*] :count pages', $site->pages_count, ['count' => $site->pages_count]) }}</a>
+								</p>
+							</td>
 
-							<button type="submit" class="button">{{ __('Supprimer') }}</button>
+							<td class="text-center">
+								<form method="POST" action="{{ route('club.sites.remove', ['club' => $club, 'site' => $site]) }}">
+									@csrf
+									@method('DELETE')
 
-							<p>{!! __('Créé <time datetime=":date_iso" title="Le :date_formatted, pour être exact">il y a :date_absolute</time>', ['date_iso' => $site->created_at->toIso8601String(), 'date_formatted' => $site->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $site->created_at->longAbsoluteDiffForHumans()]) !!}</p>
-						</form>
-					</td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
+									<button type="submit" class="button is-danger">{{ __('Supprimer') }}</button>
+
+									<p>{!! __('Créé <time datetime=":date_iso" title="Le :date_formatted, pour être exact">il y a :date_absolute</time>', ['date_iso' => $site->created_at->toIso8601String(), 'date_formatted' => $site->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $site->created_at->longAbsoluteDiffForHumans()]) !!}</p>
+								</form>
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 	@endif
 
@@ -70,9 +72,7 @@
 					<input id="new-site-title" type="text" class="input @error('title') is-invalid @enderror" name="title" value="{{ old('title', $club->name) }}" required autocomplete="off">
 
 					@error('title')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 					@enderror
 				</div>
 
@@ -90,9 +90,7 @@
 					</div>
 
 					@error('domain')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 					@enderror
 				</div>
 

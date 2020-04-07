@@ -5,6 +5,7 @@
 @import '~quill/dist/quill.snow.css';
 
 .ql-snow {
+	.ql-tooltip,
 	.ql-picker-options {
 		background-color: var(--color-body-bg);
 		color: var(--color-body-color);
@@ -52,6 +53,7 @@
 }
 
 .ql-toolbar {
+	background-color: var(--color-body-bg);
 	border-top-left-radius: var(--size-radius);
 	border-top-right-radius: var(--size-radius);
 

@@ -36,6 +36,11 @@ $colors: (
 	"orange": #f25749,
 	"red": #f25050,
 	"grey": #bfbfbf,
+	// Alert/Generic colors
+	"info": #2d7cad,
+	"success": #78b01e,
+	"warning": #e3731f,
+	"danger": #e34041,
 	// UI colors
 	"body-bg": #f4f4f4,
 	"body-color": #202020,
@@ -52,6 +57,7 @@ $colors: (
 	"sidebar-disabled": #404040,
 	"sidebar-hover-bg": #fafafa,
 	"sidebar-hover": #323232,
+	"tag": #404040,
 	"table-border": #bfbfbf,
 	"table-stripe": #ffffff,
 );

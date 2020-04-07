@@ -11,44 +11,53 @@
 
 	<div class="columns-container">
 		<div class="column col-sm">
-			<div class="form-group">
-				<label for="old_password" class="label">{{ __('Ancien mot de passe') }}</label>
+			<div class="card">
+				<label for="old_password" class="card-header">{{ __('Ancien mot de passe') }}</label>
 
-				<input id="old_password" type="password" class="input @error('old_password') is-invalid @enderror" name="old_password" required autocomplete="password" autofocus>
+				<div class="card-body">
+					<div class="form-group">
 
-				@error('password')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
-				@enderror
+						<input id="old_password" type="password" class="input @error('old_password') is-invalid @enderror" name="old_password" required autocomplete="password" autofocus>
+
+						@error('password')
+						<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
+						@enderror
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div class="column col-sm">
-			<div class="form-group">
-				<label for="password" class="label">{{ __('Nouveau mot de passe') }}</label>
+			<div class="card">
+				<label for="password" class="card-header">{{ __('Nouveau mot de passe') }}</label>
 
-				<input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus>
+				<div class="card-body">
+					<div class="form-group">
 
-				@error('password')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
-				@enderror
+						<input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus>
+
+						@error('password')
+						<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
+						@enderror
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div class="column col-sm">
-			<div class="form-group">
-				<label for="password-confirm" class="label">{{ __('Confirmer le mot de passe') }}</label>
+			<div class="card">
+				<label for="password-confirm" class="card-header">{{ __('Confirmer le mot de passe') }}</label>
 
-				<input id="password-confirm" type="password" class="input" name="password_confirmation" required autocomplete="new-password">
+				<div class="card-body">
+					<div class="form-group">
 
-				@error('password_confirmation')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
-				@enderror
+						<input id="password-confirm" type="password" class="input" name="password_confirmation" required autocomplete="new-password">
+
+						@error('password_confirmation')
+						<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
+						@enderror
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

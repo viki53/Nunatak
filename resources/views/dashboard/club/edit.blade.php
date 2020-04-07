@@ -26,21 +26,17 @@
 					<input id="club-name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name', $club->name) }}" required autocomplete="organization">
 
 					@error('name')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</span>
 					@enderror
 				</div>
 
 				<div class="form-group">
 					<label for="club-address" class="label">{{ __('Adresse') }}</label>
 
-					<textarea id="club-address" class="input @error('address') is-invalid @enderror" name="address" required autocomplete="street-address">{{ old('address', $club->address) }}</textarea>
+					<textarea id="club-address" class="textarea @error('address') is-invalid @enderror" name="address" required autocomplete="street-address">{{ old('address', $club->address) }}</textarea>
 
 					@error('address')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</span>
 					@enderror
 				</div>
 
@@ -50,24 +46,20 @@
 					<input id="club-city" type="text" class="input @error('city') is-invalid @enderror" name="city" value="{{ old('city', $club->city) }}" required autocomplete="city">
 
 					@error('city')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</span>
 					@enderror
 				</div>
 
 				<div class="form-group">
 					<label for="club-country" class="label">{{ __('Pays') }}</label>
 
-					<select id="club-country" class="custom-select @error('country') is-invalid @enderror" name="country" required autocomplete="country">
+					<select id="club-country" class="select @error('country') is-invalid @enderror" name="country" required autocomplete="country">
 						<option value="">—</option>
 						<option value="FR" @if (old('country', $club->country) == 'FR') {{ 'selected' }} @endif>France</option>
 					</select>
 
 					@error('country')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</span>
 					@enderror
 				</div>
 
@@ -77,9 +69,7 @@
 					<input id="club-registration_number" type="text" class="input @error('registration_number') is-invalid @enderror" name="registration_number" value="{{ old('registration_number', $club->registration_number) }}" required autocomplete="on">
 
 					@error('registration_number')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 					@enderror
 				</div>
 
@@ -108,9 +98,7 @@
 					</select>
 
 					@error('sport_id')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 					@enderror
 				</div>
 
@@ -128,14 +116,16 @@
 			</header>
 
 			@foreach($club->sports as $sport)
-			<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}" class="tag has-action-right">
+			<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}" class="tag has-action">
 				@csrf
 				@method('DELETE')
 
 				<span class="tag-content">{{ $sport->name }}</span>
 
 				<input type="hidden" name="sport_id" value="{{ $sport->id }}">
-				<button type="submit" class="tag-action">{{ __('Supprimer') }}</button>
+				@can('remove_sport', $club)
+				<button type="submit" class="tag-action is-danger">{{ __('Supprimer') }}</button>
+				@endcan
 			</form>
 			@endforeach
 		</section>

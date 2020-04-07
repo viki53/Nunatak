@@ -9,15 +9,15 @@
 <div class="columns-container">
 	<div class="column">
 		@if (session('status'))
-		<div class="alert alert-success" role="alert">
+		<p class="alert is-success" role="alert">
 			{{ session('status') }}
-		</div>
+		</p>
 		@endif
 
 		@empty($user->clubs)
-		<div class="alert alert-warning" role="alert">
+		<p class="alert is-warning" role="alert">
 			{{ __('Vous ne faites partie d\'aucune association') }}
-		</div>
+		</p>
 		@endempty
 
 		@foreach($user->clubs as $club)
@@ -26,23 +26,23 @@
 
 			<div class="card-body">
 				@if(!count($club->sports))
-				<p class="alert warning" role="alert">{{ __('Ne propose aucun sport') }}</p>
+				<p class="alert is-warning" role="alert">{{ __('Ne propose aucun sport') }}</p>
 				@else
 				<p>
 					{{ __('Propose :') }}
 					@foreach($club->sports as $sport)
-					<strong><a href="{{ route('clubs').'/'.$sport->slug }}">{{ $sport->name }}</a></strong>@if (!$loop->last),@endif
+					<a href="{{ route('clubs').'/'.$sport->slug }}" class="tag">{{ $sport->name }}</a>@if (!$loop->last)<span class="sr-only">,</span>@endif
 					@endforeach
 				</p>
 				@endif
 
 				@if(!count($club->sites))
-				<p class="alert warning" role="alert">{{ __('Aucun site') }}</p>
+				<p class="alert is-warning" role="alert">{{ __('Aucun site') }}</p>
 				@else
 				<p>{{ trans_choice('{1} Un site public|[2,*] :count sites publics', count($club->sites), ['count' => count($club->sites)]) }} :</p>
 				<ul>
 					@foreach($club->sites as $site)
-					<li><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->title }}</a> <a href="{{ route('site.pages', ['site' => $site]) }}" class="btn btn-outline-primary btn-sm">{{ __('Gérer') }}</a></li>
+					<li><a href="{{ $protocol }}://{{ $site->domain }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}">{{ $site->title }}</a> <a href="{{ route('site.pages', ['site' => $site]) }}" class="tag is-info">{{ __('Gérer') }}</a></li>
 					@endforeach
 				</ul>
 				@endif
@@ -50,7 +50,7 @@
 				<p>{!! __('Vous êtes membre depuis <time datetime=":date_iso" title="Depuis le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $club->pivot->created_at->toIso8601String(), 'date_formatted' => $club->pivot->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $club->pivot->created_at->longAbsoluteDiffForHumans()]) !!}</p>
 
 				@if($club->pivot->is_owner)
-				<p class="alert success" role="alert">{{ __('Vous êtes gérant de cette association') }}</p>
+				<p class="alert is-success" role="alert">{{ __('Vous êtes gérant de cette association') }}</p>
 
 				<p>{{ trans_choice('{1} Vous êtes le seul membre|[2,*] :count membres dans l\'association', $club->members_count, ['count' => $club->members_count]) }}</p>
 				@if(!empty($club->invitations_count))

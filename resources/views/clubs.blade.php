@@ -8,13 +8,13 @@
 
 <div class="container">
 	@if (session('status'))
-	<div class="alert alert-success" role="alert">
+	<div class="alert is-success" role="alert">
 		{{ session('status') }}
 	</div>
 	@endif
 
 	@empty($clubs)
-	<div class="alert alert-warning" role="alert">
+	<div class="alert is-warning" role="alert">
 		Aucune association ne semble correspondre à votre recherche
 	</div>
 	@endempty

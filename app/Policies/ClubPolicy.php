@@ -60,6 +60,18 @@ class ClubPolicy
 	}
 
 	/**
+	 * Determine whether the user can remove a member from the club.
+	 *
+	 * @param  \App\User  $user
+	 * @param  \App\Club  $club
+	 * @return mixed
+	 */
+	public function remove_member(User $user, Club $club)
+	{
+		return ClubUser::where('user_id', $user->id)->where('club_id', $club->id)->where('is_owner', true)->count();
+	}
+
+	/**
 	 * Determine whether the user can create a new site for the club.
 	 *
 	 * @param  \App\User  $user
@@ -81,6 +93,18 @@ class ClubPolicy
 	public function add_sport(User $user, Club $club)
 	{
 		return $club->loadCount('sports')->sports_count < 5 && ClubUser::where('user_id', $user->id)->where('club_id', $club->id)->where('is_owner', true)->count();
+	}
+
+	/**
+	 * Determine whether the user can remove a sport from the club.
+	 *
+	 * @param  \App\User  $user
+	 * @param  \App\Club  $club
+	 * @return mixed
+	 */
+	public function remove_sport(User $user, Club $club)
+	{
+		return ClubUser::where('user_id', $user->id)->where('club_id', $club->id)->where('is_owner', true)->count();
 	}
 
 	/**

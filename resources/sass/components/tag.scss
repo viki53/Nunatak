@@ -1,0 +1,68 @@
+.tag {
+	display: inline-block;
+	border: 1px solid currentColor;
+	color: var(--color-tag);
+	border-color: var(--color-tag);
+	border-radius: var(--size-radius);
+
+	.tag-content,
+	.tag-action {
+		display: inline-block;
+	}
+
+	&:not(.has-action),
+	.tag-content,
+	.tag-action {
+		padding: 0 .25em;
+	}
+
+	&.is-info,
+	&.is-info .tag-action {
+		color: var(--color-info);
+		border-color: var(--color-info);
+	}
+	&.is-success,
+	&.is-success .tag-action {
+		color: var(--color-success);
+		border-color: var(--color-success);
+	}
+	&.is-warning,
+	&.is-warning .tag-action {
+		color: var(--color-warning);
+		border-color: var(--color-warning);
+	}
+	&.is-danger,
+	&.is-danger .tag-action {
+		color: var(--color-danger);
+		border-color: var(--color-danger);
+	}
+
+	.tag-action {
+		appearance: none;
+		font-size: inherit;
+		font-style: inherit;
+		font-family: inherit;
+		line-height: inherit;
+		white-space: nowrap;
+		border: 0;
+		border-left: 1px solid;
+		border-color: inherit;
+
+		&.is-info {
+			color: var(--color-navy);
+		}
+		&.is-success {
+			color: var(--color-green);
+		}
+		&.is-warning {
+			color: var(--color-yellow);
+		}
+		&.is-danger {
+			color: var(--color-red);
+		}
+	}
+}
+
+a.tag {
+	text-decoration: none;
+}

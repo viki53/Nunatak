@@ -8,69 +8,70 @@
 
 <div class="columns-container">
 	<div class="column col-lg">
-		@if(empty($site->home_page))
-		<p class="alert warning" role="alert">
-			{{ __('Ce site n\'a pas de page d\'accueil') }}
-		</p>
-		@endif
+		<div class="card">
+			<h2 class="card-header">{{ __('Liste des pages') }}</h2>
 
-		@if(!empty($site->error404_page))
-		<p class="alert info" role="alert">
-			{!! __('Vous pouvez créer une page d\'erreur 404 personnalisée en indiquant le chemin <strong>/404</strong>.') !!}
-		</p>
-		@endif
+			<div class="card-body">
+				@if(empty($site->home_page))
+				<p class="alert is-warning" role="alert">
+					{{ __('Ce site n\'a pas de page d\'accueil') }}
+				</p>
+				@endif
 
-		@if(!empty($site->pages))
-		<table class="simple striped">
-			<thead>
-				<tr>
-					<th>{{ __('Page') }}</th>
-					<th>{{ __('Chemin') }}</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($site->pages as $page)
-				<tr>
-					<td>
-						<p>
-							<strong>
-								@can('update', $page)
-								<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}">
-									{{ $page->last_revision->title }}
-								</a>
-								@else
-								{{ $page->last_revision->title }}
-								@endcan
-							</strong>
-						</p>
+				@if(empty($site->error404_page))
+				<p class="alert is-info" role="alert">
+					{!! __('Vous pouvez créer une page d\'erreur 404 personnalisée en indiquant le chemin <strong>/404</strong>.') !!}
+				</p>
+				@endif
 
-						<p>{!! __('Dernière modification <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $page->last_revision->created_at->toIso8601String(), 'date_formatted' => $page->last_revision->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $page->last_revision->created_at->diffForHumans()]) !!}</p>
-					</td>
+				@if(!empty($site->pages))
+				<table class="simple striped">
+					<thead>
+						<tr>
+							<th>{{ __('Page') }}</th>
+							<th class="text-center" style="width: 7rem"></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($site->pages as $page)
+						<tr>
+							<td>
+								<p>
+									<strong>
+										@can('update', $page)
+										<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}">{{ $page->last_revision->title }}</a>
+										@else
+										{{ $page->last_revision->title }}
+										@endcan
+									</strong>
 
-					<td>
-						<p>
-							<a href="{{ $protocol }}://{{ $site->domain }}{{ $page->path }}" target="_blank" title="{{ __('Ouvrir la page dans un nouvel onglet') }}">
-								{{ $page->path }}
-							</a>
-						</p>
-					</td>
+									@if($page->isHomePage)
+									<span class="tag is-info">Accueil</span>
+									@elseif($page->isError404Page)
+									<span class="tag is-info">Erreur 404</span>
+									@endif
+								</p>
 
-					<td>
-						@if(!empty($site->home_page) && $page->id !== $site->home_page->id)
-						<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}" class="float-right mx-1">
-							@csrf
-							@method('DELETE')
+								<p>{!! __('Dernière modification <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $page->last_revision->created_at->toIso8601String(), 'date_formatted' => $page->last_revision->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $page->last_revision->created_at->diffForHumans()]) !!}</p>
+							</td>
 
-							<button type="submit" class="button">{{ __('Supprimer') }}</button>
-						</form>
-						@endif
-					</td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
-		@endif
+							<td class="text-center">
+								@if(!$page->isHomePage)
+								<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}" class="float-right mx-1">
+									@csrf
+									@method('DELETE')
+
+									<button type="submit" class="button is-danger">{{ __('Supprimer') }}</button>
+								</form>
+								@endif
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+				@endif
+			</div>
+		</div>
 	</div>
 
 	@can('create_page', $site)
@@ -104,9 +105,7 @@
 					</div>
 
 					@error('path')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 					@enderror
 				</div>
 

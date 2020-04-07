@@ -11,44 +11,50 @@
 
 	<div class="columns-container">
 		<div class="column col-sm">
-			<div class="form-group">
-				<label for="profile-name" class="label">{{ __('Nom complet') }}</label>
+			<div class="card">
+				<label for="profile-name" class="card-header">{{ __('Nom complet') }}</label>
 
-				<input id="profile-name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+				<div class="card-body">
+					<div class="form-group">
+						<input id="profile-name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
 
-				@error('name')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-				@enderror
+						@error('name')
+						<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
+						@enderror
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div class="column col-sm">
-			<div class="form-group">
-				<label for="profile-email" class="label">{{ __('Adresse email') }}</label>
+			<div class="card">
+				<label for="profile-email" class="card-header">{{ __('Adresse email') }}</label>
 
-				<input id="profile-email" type="email" class="input @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
+				<div class="card-body">
+					<div class="form-group">
+						<input id="profile-email" type="email" class="input @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
 
-				@error('email')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-				@enderror
+						@error('email')
+						<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
+						@enderror
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div class="column col-sm">
-			<div class="form-group">
-				<label for="profile-phone" class="label">{{ __('Numéro de téléphone') }}</label>
+			<div class="card">
+				<label for="profile-phone" class="card-header">{{ __('Numéro de téléphone') }}</label>
 
-				<input id="profile-phone" type="tel" class="input @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel">
+				<div class="card-body">
+					<div class="form-group">
+						<input id="profile-phone" type="tel" class="input @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel">
 
-				@error('phone')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-				@enderror
+						@error('phone')
+						<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
+						@enderror
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

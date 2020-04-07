@@ -9,7 +9,7 @@
 			@csrf
 
 			@if (session('status'))
-			<div class="alert alert-success" role="alert">
+			<div class="alert is-success" role="alert">
 				{{ session('status') }}
 			</div>
 			@endif
@@ -20,9 +20,7 @@
 				<input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
 				@error('email')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
+				<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 				@enderror
 			</div>
 

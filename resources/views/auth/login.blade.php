@@ -15,9 +15,7 @@
 					<input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
 					@error('email')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 					@enderror
 				</div>
 
@@ -27,9 +25,7 @@
 					<input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
 					@error('password')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
+					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>
 					@enderror
 				</div>
 
