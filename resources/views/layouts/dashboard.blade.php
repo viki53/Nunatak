@@ -27,10 +27,8 @@
 		@include('layouts.includes.navbar')
 
 		<div id="page">
-			<nav id="sidebar">
-				@include('layouts.includes.dashboard-sidebar')
-				@yield('sidebar')
-			</nav>
+			@include('layouts.includes.dashboard-sidebar')
+
 			<main id="main-content">
 				@yield('content')
 			</main>

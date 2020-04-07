@@ -15,7 +15,8 @@
 	align-content: center;
 	justify-content: center;
 
-	a {
+	a,
+	button {
 		text-decoration: none;
 
 		&:focus,
@@ -27,7 +28,14 @@
 
 	.navbar-item {
 		display: block;
+		appearance: none;
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		background-color: inherit;
+		border: none;
 		float: left;
+		min-width: var(--size-navbar-height);
 		height: var(--size-navbar-height);
 		padding: calc((var(--size-navbar-height) - var(--size-navbar-font)) / 2) calc(var(--size-navbar-font) / 2);
 	}

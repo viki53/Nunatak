@@ -4,20 +4,24 @@
 	flex-wrap: wrap;
 
 	& > .column {
-		flex: 1 0 var(--size-column-min-width);
+		@media all and (min-width: #{map-get($sizes, "sm")}) {
+			flex: 1 1 0;
+		}
 		padding: 0 1rem;
 		margin: 1rem 0;
 
-		&.col-sm {
-			flex-basis: calc(var(--size-column-min-width) * 0.6);
-		}
+		@media all and (min-width: #{map-get($sizes, "sm")}) {
+			&.col-sm {
+				flex-basis: calc(var(--size-column-min-width) * 0.6);
+			}
 
-		&.col-md {
-			flex-basis: calc(var(--size-column-min-width) * 1.5);
-		}
+			&.col-md {
+				flex-basis: calc(var(--size-column-min-width) * 1.5);
+			}
 
-		&.col-lg {
-			flex-basis: calc(var(--size-column-min-width) * 3);
+			&.col-lg {
+				flex-basis: calc(var(--size-column-min-width) * 3);
+			}
 		}
 	}
 }
