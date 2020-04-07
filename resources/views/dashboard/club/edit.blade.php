@@ -109,25 +109,26 @@
 		</form>
 		@endcan
 
-		<section id="club-sports-list">
-			<header>
-				<h1>{{ __('Sports proposés') }}</h1>
-				<p class="lead">{{ trans_choice('{0} L\'association ne propose aucun sport|{1} L\'association propose un seul sport|[2,*] L\'association propose :count sports', count($club->sports), ['count' => count($club->sports)]) }}</p>
-			</header>
+		<section id="club-sports-list" class="card">
+			<h2 class="card-header">{{ __('Sports proposés') }}</h2>
 
-			@foreach($club->sports as $sport)
-			<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}" class="tag has-action">
-				@csrf
-				@method('DELETE')
+			<div class="card-body">
+				<p>{{ trans_choice('{0} L\'association ne propose aucun sport|{1} L\'association propose un seul sport|[2,*] L\'association propose :count sports', count($club->sports), ['count' => count($club->sports)]) }}</p>
 
-				<span class="tag-content">{{ $sport->name }}</span>
+				@foreach($club->sports as $sport)
+				<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}" class="tag has-action">
+					@csrf
+					@method('DELETE')
 
-				<input type="hidden" name="sport_id" value="{{ $sport->id }}">
-				@can('remove_sport', $club)
-				<button type="submit" class="tag-action is-danger">{{ __('Supprimer') }}</button>
-				@endcan
-			</form>
-			@endforeach
+					<span class="tag-content">{{ $sport->name }}</span>
+
+					<input type="hidden" name="sport_id" value="{{ $sport->id }}">
+					@can('remove_sport', $club)
+					<button type="submit" class="tag-action is-danger">{{ __('Supprimer') }}</button>
+					@endcan
+				</form>
+				@endforeach
+			</div>
 		</section>
 	</div>
 </div>
