@@ -30,9 +30,7 @@ if (sidebar) {
 
 	checkSidebarSpace();
 
-	window.addEventListener('resize', (evt) => {
-		checkSidebarSpace();
-	}, { passive: true });
+	window.addEventListener('resize', checkSidebarSpace, { passive: true });
 }
 else {
 	sidebarControllers.forEach((controller) => {
