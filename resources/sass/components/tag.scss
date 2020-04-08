@@ -1,14 +1,21 @@
 .tag {
-	display: inline-block;
+	display: inline-flex;
 	border: 1px solid currentColor;
 	color: var(--color-tag);
 	background: #fff;
 	border-color: var(--color-tag);
 	border-radius: var(--size-radius);
+	box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
+
+	&:hover,
+	&:focus,
+	&:focus-within {
+		box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+	}
 
 	.tag-content,
 	.tag-action {
-		display: inline-block;
+		display: inline-flex;
 	}
 
 	&:not(.has-action),
@@ -61,6 +68,11 @@
 		}
 		&.is-danger {
 			color: var(--color-red);
+		}
+
+		&:hover,
+		&:focus {
+			background: var(--color-body-bg);
 		}
 	}
 }
