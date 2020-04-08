@@ -83,6 +83,12 @@
 	}
 }
 
-a.tag {
+a.tag,
+button.tag {
 	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+	}
 }
