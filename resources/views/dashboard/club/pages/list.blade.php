@@ -1,11 +1,13 @@
 @extends('layouts.dashboard')
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">{{ $site->title }}</h1>
 	<p class="subtitle">{{ trans_choice('{0} Ce site ne comporte aucune page|{1} Ce site comporte une seule page|[2,*] Ce site comporte :count pages', count($site->pages), ['count' => count($site->pages)]) }}</p>
 </header>
+@endsection
 
+@section('content')
 <div class="columns-container">
 	<div class="column col-lg">
 		<div class="card">

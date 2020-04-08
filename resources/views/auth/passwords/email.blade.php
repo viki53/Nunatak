@@ -8,10 +8,6 @@
 		<form method="POST" action="{{ route('password.email') }}" class="card-body">
 			@csrf
 
-			@if (session('status'))
-			<p class="alert is-success" role="alert">{{ session('status') }}</p>
-			@endif
-
 			<div class="form-group">
 				<label for="email" class="label">{{ __('Adresse email') }}</label>
 

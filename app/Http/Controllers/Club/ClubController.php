@@ -47,6 +47,7 @@ class ClubController extends Controller
 		$club->save();
 
 		$request->session()->flash('status', __('Association mise à jour'));
+		$request->session()->flash('status-type', 'info');
 		return redirect()->route('dashboard');
 	}
 }

@@ -39,6 +39,7 @@ class ProfileController extends Controller
 		$user->save();
 
 		$request->session()->flash('status', __('Profil mis à jour'));
+		$request->session()->flash('status-type', 'info');
 		return redirect()->route('dashboard');
 	}
 }

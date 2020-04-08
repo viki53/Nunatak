@@ -1,11 +1,13 @@
 @extends('layouts.dashboard')
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">{{ $club->name }}</h1>
 	<p class="subtitle">{{ trans_choice('{0} L\'association ne gère aucun site|{1} L\'association gère un seul site|[2,*] L\'association gère :count sites', count($club->sites), ['count' => count($club->sites)]) }}</p>
 </header>
+@endsection
 
+@section('content')
 <div class="columns-container">
 	@if(count($club->sites) > 0)
 	<div class="column col-lg">

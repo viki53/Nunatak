@@ -49,6 +49,7 @@ class MembersController extends Controller
 		}
 
 		$request->session()->flash('status', __('Membre ajouté'));
+		$request->session()->flash('status-type', 'success');
 		return redirect()->route('club.members', ['club' => $club]);
 	}
 
@@ -62,6 +63,7 @@ class MembersController extends Controller
 		$invitation->delete();
 
 		$request->session()->flash('status', __('Invitation supprimée'));
+		$request->session()->flash('status-type', 'info');
 		return redirect()->route('club.members', ['club' => $club]);
 	}
 }

@@ -1,17 +1,13 @@
 @extends('layouts.dashboard')
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">{{ config('app.name') }}</h1>
 	<p class="subtitle">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</p>
 </header>
+@endsection
 
-@if (session('status'))
-<div class="alert is-success" role="alert">
-	{{ session('status') }}
-</div>
-@endif
-
+@section('content')
 <div class="columns-container">
 	<div class="column">
 		@if(!count($user->invitations))

@@ -1,11 +1,13 @@
 @extends('layouts.dashboard')
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">Mot de passe</h1>
 	<p class="subtitle">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</p>
 </header>
+@endsection
 
+@section('content')
 <form method="POST" action="{{ route('user.password') }}">
 	@csrf
 

@@ -1,18 +1,14 @@
 @extends('layouts.public')
 
-@section('content')
+@section('hero')
 <header class="container">
 	<h1>{{ !empty($sport) ? $sport->name :__('Les associations') }}</h1>
 	<p class="lead">{{ trans_choice('{0}Aucune association|{1}Une seule association|[2,*] :count associations', count($clubs), ['count' => count($clubs)]) }}</p>
 </header>
+@endsection
 
+@section('content')
 <div class="container">
-	@if (session('status'))
-	<div class="alert is-success" role="alert">
-		{{ session('status') }}
-	</div>
-	@endif
-
 	@empty($clubs)
 	<div class="alert is-warning" role="alert">
 		Aucune association ne semble correspondre à votre recherche

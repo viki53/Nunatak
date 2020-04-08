@@ -37,6 +37,7 @@ class PasswordController extends Controller
 		$user->save();
 
 		$request->session()->flash('status', __('Mot de passe mis à jour'));
+		$request->session()->flash('status-type', 'info');
 		return redirect()->route('dashboard');
 	}
 }

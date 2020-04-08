@@ -6,12 +6,14 @@
 <a href="#club-sports-add">{{ __('Ajouter un sport proposé') }}</a>
 @endsection
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">{{ $club->name }}</h1>
 	<p class="subtitle">{!! __('Existe depuis <time datetime=":date_iso" title="Depuis le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $club->created_at->toIso8601String(), 'date_formatted' => $club->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $club->created_at->longAbsoluteDiffForHumans()]) !!}</p>
 </header>
+@endsection
 
+@section('content')
 <div class="columns-container">
 	<section id="club-edit" class="column">
 		<div class="card">

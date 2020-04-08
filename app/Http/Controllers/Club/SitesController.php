@@ -53,6 +53,7 @@ class SitesController extends Controller
 		]);
 
 		$request->session()->flash('status', __('Site créé'));
+		$request->session()->flash('status-type', 'success');
 		return redirect()->route('site.pages', ['site' => $site]);
 	}
 
@@ -67,7 +68,8 @@ class SitesController extends Controller
 		$site->save();
 		$site->delete();
 
-		$request->session()->flash('status', __('Site retiré'));
+		$request->session()->flash('status', __('Site supprimé'));
+		$request->session()->flash('status-type', 'warning');
 		return redirect()->route('club.sites', ['club' => $club]);
 	}
 }

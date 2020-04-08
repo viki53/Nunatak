@@ -48,6 +48,7 @@ class PagesController extends Controller
 		]);
 
 		$request->session()->flash('status', __('Page créée'));
+		$request->session()->flash('status-type', 'success');
 		return redirect()->route('site.pages.edit', ['site' => $site, 'page' => $page]);
 	}
 
@@ -88,6 +89,7 @@ class PagesController extends Controller
 		$page->save();
 
 		$request->session()->flash('status', __('Page mise à jour'));
+		$request->session()->flash('status-type', 'info');
 		return redirect()->route('site.pages', ['site' => $site]);
 	}
 
@@ -100,11 +102,13 @@ class PagesController extends Controller
 	{
 		if($page->path === '/') {
 			$request->session()->flash('status', __('Page protégée, vous ne pouvez pas la supprimer'));
+		$request->session()->flash('status-type', 'danger');
 			return redirect()->route('site.pages', ['site' => $site]);
 		}
 		$page->delete();
 
 		$request->session()->flash('status', __('Page supprimée'));
+		$request->session()->flash('status-type', 'warning');
 		return redirect()->route('site.pages', ['site' => $site]);
 	}
 }

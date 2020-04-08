@@ -21,6 +21,7 @@ class SportsController extends Controller
 		$club->save();
 
 		$request->session()->flash('status', __('Sport ajouté'));
+		$request->session()->flash('status-type', 'success');
 		return redirect(route('club.edit', ['club' => $club]).'#club-sports-add');
 	}
 
@@ -36,6 +37,7 @@ class SportsController extends Controller
 		$club->save();
 
 		$request->session()->flash('status', __('Sport retiré'));
+		$request->session()->flash('status-type', 'warning');
 		return redirect(route('club.edit', ['club' => $club]).'#club-sports-list');
 	}
 }

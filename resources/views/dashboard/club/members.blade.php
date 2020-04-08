@@ -10,12 +10,14 @@
 @endif
 @endsection
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">{{ $club->name }}</h1>
 	<p class="subtitle">{!! __('Gestion des <a href=":href_list">membres</a> et <a href=":href_invitations">invitations</a>.', ['href_list' => '#members-list', 'href_invitations' => '#invitations-list']) !!} <a href="#club-invite-form">{{ __('Inviter un sportif') }}</a></p>
 </header>
+@endsection
 
+@section('content')
 <div class="columns-container">
 	@if(count($club->members) > 0)
 	<div class="column">

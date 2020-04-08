@@ -1,19 +1,15 @@
 @extends('layouts.dashboard')
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">{{ __('Bienvenue, :name', ['name' => $user->name]) }}</h1>
 	<p class="subtitle">{{ trans_choice('{0}Vous êtes membre d\'aucune association|{1}Vous êtes membre d\'une seule association|[2,*]Vous êtes membre de :count associations', count($user->clubs), ['count' => count($user->clubs)]) }}</p>
 </header>
+@endsection
 
+@section('content')
 <div class="columns-container">
 	<div class="column">
-		@if (session('status'))
-		<p class="alert is-success" role="alert">
-			{{ session('status') }}
-		</p>
-		@endif
-
 		@empty($user->clubs)
 		<p class="alert is-warning" role="alert">
 			{{ __('Vous ne faites partie d\'aucune association') }}

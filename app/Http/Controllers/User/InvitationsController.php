@@ -35,6 +35,7 @@ class InvitationsController extends Controller
 		$invitation->delete();
 
 		$request->session()->flash('status', __('Invitation acceptée'));
+		$request->session()->flash('status-type', 'success');
 		return redirect()->route('dashboard');
 	}
 
@@ -48,6 +49,7 @@ class InvitationsController extends Controller
 		$invitation->delete();
 
 		$request->session()->flash('status', __('Invitation supprimée'));
+		$request->session()->flash('status-type', 'warning');
 		return redirect()->route('user.invitations');
 	}
 }

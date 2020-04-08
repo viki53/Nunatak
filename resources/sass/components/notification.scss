@@ -1,0 +1,31 @@
+#notifications-zone {
+	overflow: hidden;
+}
+
+.notification {
+	display: block;
+	padding: 2rem;
+	margin: 0;
+	font-size: 1.5rem;
+
+	& + & {
+		margin-top: 2rem;
+	}
+
+	&.is-info {
+		background-color: var(--color-info);
+		color: #fff;
+	}
+	&.is-success {
+		background-color: var(--color-success);
+		color: #fff;
+	}
+	&.is-warning {
+		background-color: var(--color-warning);
+		color: #fff;
+	}
+	&.is-danger {
+		background-color: var(--color-danger);
+		color: #fff;
+	}
+}

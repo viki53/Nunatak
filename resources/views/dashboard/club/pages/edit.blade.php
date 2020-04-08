@@ -1,11 +1,13 @@
 @extends('layouts.dashboard')
 
-@section('content')
+@section('hero')
 <header class="hero">
 	<h1 class="title">{{ $site->title }}</h1>
 	<p class="subtitle">{!! __('Modifier la page <q>:page_title</q>', ['page_title' => e($page->last_revision->title)]) !!}</p>
 </header>
+@endsection
 
+@section('content')
 <form method="POST" action="{{ route('site.pages.update', ['site' => $site, 'page' => $page]) }}" class="columns-container">
 	@csrf
 

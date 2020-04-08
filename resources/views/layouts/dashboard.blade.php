@@ -30,6 +30,14 @@
 			@include('layouts.includes.dashboard-sidebar')
 
 			<main id="main-content">
+				@yield('hero')
+
+				@if (session('status'))
+				<div id="notifications-zone">
+					<p class="notification is-success" role="alert">{{ session('status') }}</p>
+				</div>
+				@endif
+
 				@yield('content')
 			</main>
 		</div>

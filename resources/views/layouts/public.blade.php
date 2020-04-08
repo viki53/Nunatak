@@ -26,6 +26,14 @@
 
 		<div id="page">
 			<main id="main-content">
+				@yield('hero')
+
+				@if(session('status'))
+				<div id="notifications-zone">
+					<p class="notification @if(session('status-type')) is-{{ session('status-type') }} @else is-info @endif" role="alert">{{ session('status') }}</p>
+				</div>
+				@endif
+
 				@yield('content')
 			</main>
 		</div>
