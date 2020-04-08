@@ -90,7 +90,7 @@
 			<div class="card-body">
 				@csrf
 				<div class="form-group">
-					<label for="new-sport" class="label">{{ __('Nom') }}</label>
+					<label for="new-sport" class="label">{{ __('Nom du sport') }}</label>
 
 					<select id="new-sport" class="select @error('sport_id') is-invalid @enderror" name="sport_id" value="{{ old('sport_id') }}" required autocomplete="off">
 						<option value=""></option>
