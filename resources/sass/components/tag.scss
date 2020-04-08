@@ -1,16 +1,22 @@
 .tag {
 	display: inline-flex;
-	border: 1px solid currentColor;
+	border: none;
 	color: var(--color-tag);
-	background: #fff;
-	border-color: var(--color-tag);
+	background-color: var(--color-body-bg);
 	border-radius: var(--size-radius);
 	box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
+	transition: box-shadow linear 150ms, color linear 150ms;
 
-	&:hover,
-	&:focus,
-	&:focus-within {
-		box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+	&.has-action {
+		&:hover,
+		&:focus,
+		&:focus-within {
+			box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+		}
+	}
+
+	& + & {
+		margin-left: .5rem;
 	}
 
 	.tag-content,
@@ -55,7 +61,7 @@
 		background: inherit;
 		border: 0;
 		border-left: 1px solid;
-		border-color: inherit;
+		border-color: var(--color-shadow);
 
 		&.is-info {
 			color: var(--color-navy);
@@ -72,7 +78,7 @@
 
 		&:hover,
 		&:focus {
-			background: var(--color-body-bg);
+			background-color: #fff;
 		}
 	}
 }
