@@ -27,7 +27,7 @@
 				<p>
 					{{ __('Propose :') }}
 					@foreach($club->sports as $sport)
-					<a href="{{ route('clubs').'/'.$sport->slug }}" class="tag">{{ $sport->name }}</a>@if (!$loop->last)<span class="sr-only">,</span>@endif
+					<a href="{{ route('clubs').'/'.$sport->slug }}" class="tag is-secondary">{{ $sport->name }}</a>@if (!$loop->last)<span class="sr-only">,</span>@endif
 					@endforeach
 				</p>
 				@endif

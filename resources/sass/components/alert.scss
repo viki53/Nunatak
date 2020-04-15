@@ -4,17 +4,10 @@
 	border: 1px solid currentColor;
 	border-radius: var(--size-radius);
 
-	&.is-info {
-		color: var(--color-info);
-	}
-	&.is-success {
-		color: var(--color-success);
-	}
-	&.is-warning {
-		color: var(--color-warning);
-	}
-	&.is-danger {
-		color: var(--color-danger);
+	@each $accent in $accents {
+		&.is-#{$accent} {
+			color: var(--color-#{$accent});
+		}
 	}
 }
 

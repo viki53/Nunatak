@@ -2,7 +2,7 @@
 	display: inline-flex;
 	border: none;
 	color: var(--color-tag);
-	background-color: var(--color-body-bg);
+	background-color: var(--color-tag-bg, var(--color-body-bg));
 	border-radius: var(--size-radius);
 	box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
 	transition: box-shadow linear 150ms, color linear 150ms;
@@ -19,66 +19,68 @@
 		margin-left: .5rem;
 	}
 
-	.tag-content,
-	.tag-action {
-		display: inline-flex;
-	}
-
 	&:not(.has-action),
 	.tag-content,
 	.tag-action {
 		padding: 0 .25em;
+
+		@each $accent in $accents {
+			&.is-#{$accent} {
+				--color-tag-bg: var(--color-#{$accent});
+				--color-tag: #fff;
+			}
+		}
 	}
 
-	&.is-info,
-	&.is-info .tag-action {
-		color: var(--color-info);
-		border-color: var(--color-info);
-	}
-	&.is-success,
-	&.is-success .tag-action {
-		color: var(--color-success);
-		border-color: var(--color-success);
-	}
-	&.is-warning,
-	&.is-warning .tag-action {
-		color: var(--color-warning);
-		border-color: var(--color-warning);
-	}
-	&.is-danger,
-	&.is-danger .tag-action {
-		color: var(--color-danger);
-		border-color: var(--color-danger);
+
+	.tag-content {
+		--color-tag-bg: #fff;
+
+		&:not(:last-child) {
+			border-radius: var(--size-radius) 0 0 var(--size-radius);
+		}
 	}
 
+	.tag-content,
 	.tag-action {
+		--color-tag-bg: #fff;
 		appearance: none;
+		display: inline-flex;
 		font-size: inherit;
 		font-style: inherit;
 		font-family: inherit;
 		line-height: inherit;
 		white-space: nowrap;
-		background: inherit;
+		background-color: var(--color-tag-bg, var(--color-body-bg));
+		color: var(--color-tag, inherit);
 		border: 0;
-		border-left: 1px solid;
-		border-color: var(--color-shadow);
 
-		&.is-info {
-			color: var(--color-navy);
+		&:first-child {
+			border-top-left-radius: var(--size-radius);
+			border-bottom-left-radius: var(--size-radius);
 		}
-		&.is-success {
-			color: var(--color-green);
+		&:last-child {
+			border-top-right-radius: var(--size-radius);
+			border-bottom-right-radius: var(--size-radius);
 		}
-		&.is-warning {
-			color: var(--color-yellow);
-		}
-		&.is-danger {
-			color: var(--color-red);
+		&:not(:first-child) {
+			border-left: 1px solid;
+			border-color: var(--color-shadow);
 		}
 
 		&:hover,
 		&:focus {
-			background-color: #fff;
+			--color-tag-bg: #fff;
+			--color-tag: var(--color-text);
+		}
+
+		@each $accent in $accents {
+			&.is-#{$accent} {
+				&:hover,
+				&:focus {
+					--color-tag: var(--color-#{$accent});
+				}
+			}
 		}
 	}
 }

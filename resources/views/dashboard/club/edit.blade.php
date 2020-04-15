@@ -119,14 +119,17 @@
 
 				@foreach($club->sports as $sport)
 				<form method="POST" action="{{ route('club.sports.remove', ['club' => $club, 'sport' => $sport]) }}" class="tag has-action">
-					@csrf
-					@method('DELETE')
+					<span class="tag-content is-secondary">
+						{{ $sport->name }}
 
-					<span class="tag-content">{{ $sport->name }}</span>
+						@csrf
+						@method('DELETE')
 
-					<input type="hidden" name="sport_id" value="{{ $sport->id }}">
+						<input type="hidden" name="sport_id" value="{{ $sport->id }}">
+					</span>
+
 					@can('remove_sport', $club)
-					<button type="submit" class="tag-action is-danger">{{ __('Supprimer') }}</button>
+					<button type="submit" class="tag-action is-warning">{{ __('Supprimer') }}</button>
 					@endcan
 				</form>
 				@endforeach

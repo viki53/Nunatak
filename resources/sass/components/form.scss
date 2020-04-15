@@ -75,17 +75,10 @@ fieldset {
 			box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
 		}
 
-		&.is-info {
-			background-color: var(--color-info);
-		}
-		&.is-success {
-			background-color: var(--color-success);
-		}
-		&.is-warning {
-			background-color: var(--color-warning);
-		}
-		&.is-danger {
-			background-color: var(--color-danger);
+		@each $accent in $accents {
+			&.is-#{$accent} {
+				background-color: var(--color-#{$accent});
+			}
 		}
 	}
 }

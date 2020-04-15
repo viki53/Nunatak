@@ -12,20 +12,10 @@
 		margin-top: 2rem;
 	}
 
-	&.is-info {
-		background-color: var(--color-info);
-		color: #fff;
-	}
-	&.is-success {
-		background-color: var(--color-success);
-		color: #fff;
-	}
-	&.is-warning {
-		background-color: var(--color-warning);
-		color: #fff;
-	}
-	&.is-danger {
-		background-color: var(--color-danger);
-		color: #fff;
+	@each $accent in $accents {
+		&.is-#{$accent} {
+			background-color: var(--color-#{$accent});
+			color: #fff;
+		}
 	}
 }
