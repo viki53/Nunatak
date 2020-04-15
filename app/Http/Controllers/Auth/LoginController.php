@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -26,6 +27,20 @@ class LoginController extends Controller
 	 * @var string
 	 */
 	protected $redirectTo = 'dashboard';
+
+	protected function authenticated(Request $request, $user)
+	{
+		$user->load(['clubs']);
+
+		if (count($user->clubs) === 1) {
+			return redirect()->route('club.edit', ['club' => $user->clubs->first()]);
+		}
+		elseif (count($user->clubs) > 1) {
+			return redirect()->route('dashboard');
+		}
+
+		return redirect()->route('dashboard'); // TODO: redirect to club create form
+	}
 
 	/**
 	 * Create a new controller instance.
