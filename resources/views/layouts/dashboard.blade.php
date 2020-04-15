@@ -18,13 +18,14 @@
 </head>
 <body>
 	<nav id="quicklinks">
-		<a href="#main-menu">{{ __('Aller au menu') }}</a>
-		<a href="#main-content">{{ __('Aller au contenu principal') }}</a>
+		<a href="#main-menu">{{ __('Aller au menu principal') }}</a>
+		<a href="#sidebar">{{ __('Aller au menu secondaire') }}</a>
+		<a href="#main-content">{{ __('Aller au contenu de la page') }}</a>
 		@yield('quicklinks')
 	</nav>
 
 	<div id="app">
-		@include('layouts.includes.navbar')
+		@include('layouts.includes.navbar', ['has_sidebar' => true])
 
 		<div id="page">
 			@include('layouts.includes.dashboard-sidebar')

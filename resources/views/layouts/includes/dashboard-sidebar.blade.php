@@ -71,7 +71,7 @@ $user_clubs = Auth::user()->clubs;
 		<a href="{{ route('user.invitations') }}" class="sidebar-item @if($routeName === 'user.invitations') active @endif">{{ __('Invitations en attente') }}</a>
 	</div>
 	<div class="sidebar-list">
-		<a href="{{ route('user.profile') }}" class="sidebar-item @if($routeName === 'user.profile') active @endif }}">{{ __('Mon compte') }}</a>
+		<a href="{{ route('user.profile') }}" class="sidebar-item @if($routeName === 'user.profile') active @endif">{{ __('Mon compte') }}</a>
 		<a href="{{ route('user.password') }}" class="sidebar-item @if($routeName === 'user.password') active @endif">{{ __('Changer de mot de passe') }}</a>
 	</div>
 	<div>

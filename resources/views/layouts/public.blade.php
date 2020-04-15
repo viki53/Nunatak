@@ -22,7 +22,7 @@
 	@yield('quicklinks')
 
 	<div id="app">
-		@include('layouts.includes.navbar')
+		@include('layouts.includes.navbar', ['has_sidebar' => false])
 
 		<div id="page">
 			<main id="main-content">

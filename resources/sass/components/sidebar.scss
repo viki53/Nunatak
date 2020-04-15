@@ -32,14 +32,8 @@
 			box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
 		}
 	}
-}
 
-@media all and (min-width: map-get($sizes, "md")) {
-	.sidebar-toggler {
-		display: none !important;
-	}
-
-	#sidebar {
+	@media all and (min-width: map-get($sizes, "md")) {
 		transform: translateX(0);
 		box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
 
@@ -47,6 +41,14 @@
 			transition: margin-left ease-in-out 150ms;
 			margin-left: var(--size-sidebar-width);
 		}
+	}
+}
+
+.sidebar-toggler {
+	touch-action: manipulation;
+
+	@media all and (min-width: map-get($sizes, "md")) {
+		display: none !important;
 	}
 }
 
