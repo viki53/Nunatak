@@ -83,11 +83,11 @@
 
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">https://</span>
+							<label for="new-site-domain" class="input-group-text">https://</label>
 						</div>
 						<input id="new-site-domain" type="text" class="input @error('domain') is-invalid @enderror" name="domain" value="{{ old('domain', Str::slug($club->name)) }}" required autocomplete="off">
 						<div class="input-group-append">
-							<span class="input-group-text">{{ config('nunatak.domain_suffix') }}</span>
+							<label for="new-site-domain" class="input-group-text">{{ config('nunatak.domain_suffix') }}</label>
 						</div>
 					</div>
 

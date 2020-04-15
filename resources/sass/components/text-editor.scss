@@ -1,5 +1,11 @@
 .text-editor {
 	min-height: 15em;
+	height: 50vh;
+
+	&:hover,
+	&:focus {
+		border-bottom-color: var(--color-input-border);
+	}
 }
 
 @import '~quill/dist/quill.snow.css';
@@ -9,27 +15,14 @@
 	.ql-picker-options {
 		background-color: var(--color-body-bg);
 		color: var(--color-body-color);
-
-		// @media (prefers-color-scheme: dark) {
-		// 	background-color: var(--color-body-color);
-		// 	color: var(--color-body-bg);
-		// }
 	}
 	&.ql-toolbar button,
 	.ql-toolbar button,
 	.ql-picker-label {
 		color: var(--color-body-color);
-
-		// @media (prefers-color-scheme: dark) {
-		// 	color: var(--color-body-bg);
-		// }
 	}
 	.ql-stroke {
 		stroke: var(--color-body-color);
-
-		// @media (prefers-color-scheme: dark) {
-		// 	stroke: var(--color-body-bg);
-		// }
 	}
 }
 .ql-container {

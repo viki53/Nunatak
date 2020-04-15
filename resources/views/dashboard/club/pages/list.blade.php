@@ -43,6 +43,8 @@
 										@endcan
 									</strong>
 
+									<a href="{{ $protocol }}://{{ $site->domain }}{{ $page->path }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}" class="tag is-primary">{{ __('Voir') }}</a>
+
 									@if($page->isHomePage)
 									<span class="tag is-info">{{ __('Accueil') }}</span>
 									@elseif($page->isError404Page)
@@ -97,7 +99,7 @@
 
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">{{ $site->domain}}</span>
+							<label for="new-page-path" class="input-group-text">{{ $site->domain}}</label>
 						</div>
 						<input id="new-page-path" type="text" class="input @error('path') is-invalid @enderror" name="path" value="{{ old('path', '/') }}" required>
 					</div>
