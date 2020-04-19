@@ -2,6 +2,7 @@
 	height: 0;
 
 	a {
+		@extend .sr-only;
 		@extend .sr-only-focusable;
 
 		&:active,
