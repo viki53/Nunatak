@@ -16,70 +16,70 @@ $user_clubs = Auth::user()->clubs;
 @endphp
 
 <nav id="sidebar">
-	<h1 class="sr-only">Menu principal</h1>
-	<div id="sidebar-club-selector" class="dropdown">
-		<h1 class="dropdown-label">@if(!empty($paramClub)){{ $paramClub->name }}@else{{ __('Choisir un club') }}@endif</h1>
-
-		<div id="sidebar-club-selector-list" class="dropdown-values">
-			@foreach($user_clubs as $c)
-			<a href="{{ route('club.edit', ['club' => $c]) }}" class="dropdown-item @if(!empty($paramClub) && $paramClub->id === $c->id) selected @endif" title="Vous êtes membre depuis le {{ $c->pivot->created_at->isoFormat('DD MMMM YYYY') }}">{{ $c->name }}</a>
-			@endforeach
-		</div>
-	</div>
-
-	@if(!empty($paramClub))
-	<div class="sidebar-list">
-		@can('update', $paramClub)
-		<a href="{{ route('club.edit', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.edit')) active @endif">{{ __('Modifier') }}</a>
-		@endcan
-		<a href="{{ route('club.members', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.members')) active @endif">{{ __('Gestion des membres') }}</a>
-		<a href="{{ route('club.sites', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.sites') || Str::startsWith($routeName, 'site.')) active @endif">{{ __('Sites gérés') }}</a>
-	</div>
-
-		@if(Str::startsWith($routeName, 'club.') || Str::startsWith($routeName, 'site.'))
-		@php
-		$paramClub->load(['sites']);
-		@endphp
+	<div id="sidebar-content">
+		<h1 class="sr-only">Menu principal</h1>
 		<div id="sidebar-club-selector" class="dropdown">
-			<h1 class="dropdown-label">@if(!empty($paramSite)){{ $paramSite->title }}@else{{ __('Choisir un site') }}@endif</h1>
+			<h1 class="dropdown-label">@if(!empty($paramClub)){{ $paramClub->name }}@else{{ __('Choisir un club') }}@endif</h1>
 
 			<div id="sidebar-club-selector-list" class="dropdown-values">
-				@foreach($paramClub->sites as $s)
-				<a href="{{ route('site.pages', ['site' => $s]) }}" class="dropdown-item @if(!empty($paramSite) && $paramSite->id === $s->id) selected @endif">{{ $s->title }}</a>
+				@foreach($user_clubs as $c)
+				<a href="{{ route('club.edit', ['club' => $c]) }}" class="dropdown-item @if(!empty($paramClub) && $paramClub->id === $c->id) selected @endif" title="Vous êtes membre depuis le {{ $c->pivot->created_at->isoFormat('DD MMMM YYYY') }}">{{ $c->name }}</a>
 				@endforeach
 			</div>
 		</div>
-		@endif
 
-		@if(!empty($paramSite) && (Str::startsWith($routeName, 'site.') || Str::startsWith($routeName, 'club.sites')))
-		@php
-		$paramSite->load(['pages']);
-		$paramPage = $route->parameter('page');
-		@endphp
+		@if(!empty($paramClub))
 		<div class="sidebar-list">
-			<h1 class="sr-only">Choisir une page</h1>
-			@foreach($site->pages as $p)
-			@can('update', $p)
-			<a href="{{ route('site.pages.edit', ['site' => $paramSite, 'page' => $p]) }}" class="sidebar-item @if(!empty($paramPage) && $paramPage->id === $p->id) active @endif">{{ $p->last_revision->title }}</a>
+			@can('update', $paramClub)
+			<a href="{{ route('club.edit', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.edit')) active @endif">{{ __('Modifier') }}</a>
 			@endcan
-			@endforeach
+			<a href="{{ route('club.members', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.members')) active @endif">{{ __('Gestion des membres') }}</a>
+			<a href="{{ route('club.sites', ['club' => $paramClub]) }}" class="sidebar-item @if(Str::startsWith($routeName, 'club.sites') || Str::startsWith($routeName, 'site.')) active @endif">{{ __('Sites gérés') }}</a>
 		</div>
-		@endif
-	@else
 
-	<div class="sidebar-list">
-		<a href="{{ route('user.invitations') }}" class="sidebar-item @if($routeName === 'user.invitations') active @endif">{{ __('Invitations en attente') }}</a>
+			@if(Str::startsWith($routeName, 'club.') || Str::startsWith($routeName, 'site.'))
+			@php
+			$paramClub->load(['sites']);
+			@endphp
+			<div id="sidebar-club-selector" class="dropdown">
+				<h1 class="dropdown-label">@if(!empty($paramSite)){{ $paramSite->title }}@else{{ __('Choisir un site') }}@endif</h1>
+
+				<div id="sidebar-club-selector-list" class="dropdown-values">
+					@foreach($paramClub->sites as $s)
+					<a href="{{ route('site.pages', ['site' => $s]) }}" class="dropdown-item @if(!empty($paramSite) && $paramSite->id === $s->id) selected @endif">{{ $s->title }}</a>
+					@endforeach
+				</div>
+			</div>
+			@endif
+
+			@if(!empty($paramSite) && (Str::startsWith($routeName, 'site.') || Str::startsWith($routeName, 'club.sites')))
+			@php
+			$paramSite->load(['pages']);
+			$paramPage = $route->parameter('page');
+			@endphp
+			<div class="sidebar-list">
+				<h1 class="sr-only">Choisir une page</h1>
+				@foreach($site->pages as $p)
+				@can('update', $p)
+				<a href="{{ route('site.pages.edit', ['site' => $paramSite, 'page' => $p]) }}" class="sidebar-item @if(!empty($paramPage) && $paramPage->id === $p->id) active @endif">{{ $p->last_revision->title }}</a>
+				@endcan
+				@endforeach
+			</div>
+			@endif
+		@endif
+
+		@yield('sidebar')
 	</div>
-	<div class="sidebar-list">
+
+	<div id="sidebar-footer">
+		@if(count(Auth::user()->invitations))
+		<a href="{{ route('user.invitations') }}" class="sidebar-item @if($routeName === 'user.invitations') active @endif">{{ __('Invitations en attente') }}</a>
+		@endif
 		<a href="{{ route('user.profile') }}" class="sidebar-item @if($routeName === 'user.profile') active @endif">{{ __('Mon compte') }}</a>
 		<a href="{{ route('user.password') }}" class="sidebar-item @if($routeName === 'user.password') active @endif">{{ __('Changer de mot de passe') }}</a>
+		<form method="POST" action="{{ route('logout') }}">
+			@csrf
+			<button type="submit" class="sidebar-item">{{ __('Déconnexion') }}</button>
+		</form>
 	</div>
-	<div>
-	<form method="POST" action="{{ route('logout') }}" class="sidebar-list">
-		@csrf
-		<button type="submit" class="sidebar-item">{{ __('Déconnexion') }}</button>
-	</form>
-	@endif
-
-	@yield('sidebar')
 </nav>

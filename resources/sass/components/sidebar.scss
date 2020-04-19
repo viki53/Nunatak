@@ -1,5 +1,7 @@
 #sidebar {
 	position: fixed;
+	display: flex;
+	flex-direction: column;
 	top: var(--size-navbar-height);
 	bottom: 0;
 	width: var(--size-sidebar-width);
@@ -42,6 +44,16 @@
 			margin-left: var(--size-sidebar-width);
 		}
 	}
+}
+
+#sidebar-content {
+	justify-self: start;
+	flex: 1 0 auto;
+}
+
+#sidebar-footer {
+	justify-self: end;
+	flex: 0 0 auto;
 }
 
 .sidebar-toggler {
