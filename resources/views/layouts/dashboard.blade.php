@@ -25,8 +25,6 @@
 	</nav>
 
 	<div id="app">
-		@include('layouts.includes.navbar', ['has_sidebar' => true])
-
 		<div id="page">
 			@include('layouts.includes.dashboard-sidebar')
 

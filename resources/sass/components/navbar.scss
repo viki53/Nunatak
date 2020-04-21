@@ -49,4 +49,12 @@
 		display: block;
 		align-self: flex-end;
 	}
+
+	& ~ #page {
+		margin-top: var(--size-navbar-height);
+
+		#sidebar {
+			top: var(--size-navbar-height);
+		}
+	}
 }

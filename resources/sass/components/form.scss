@@ -3,6 +3,7 @@
 }
 
 fieldset {
+	display: block;
 	border: none;
 	margin: 0;
 	padding: 0;
@@ -19,7 +20,7 @@ fieldset {
 	}
 
 	&.submit {
-		text-align: right;
+		@extend .text-right;
 	}
 }
 
@@ -85,10 +86,13 @@ fieldset {
 
 .input-group {
 	display: flex;
+	width: 100%;
 
 	&-prepend,
 	&-append {
 		flex: 0 1 auto;
+		min-width: 3rem;
+		width: auto;
 		padding: .625em;
 		font-family: var(--font-family-main);
 		font-size: var(--font-size-base);
@@ -99,10 +103,27 @@ fieldset {
 		border-bottom: 1px solid var(--color-input-border);
 		border-radius: var(--size-radius) var(--size-radius) 0 0;
 		transition: border linear 150ms;
+		@extend .ellipsis;
+
+		@media all and (max-width: map-get($sizes, "md")) {
+			max-width: 30%;
+			flex: 0 1 auto;
+		}
 	}
 
-	.input {
+	&-prepend {
+		text-align: right;
+	}
+
+	.input,
+	.select,
+	.textarea {
 		flex: 1 0 auto;
 		width: auto;
+		min-width: 8rem;
+
+		@media all and (max-width: map-get($sizes, "md")) {
+			flex: 0 0 auto;
+		}
 	}
 }

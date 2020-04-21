@@ -17,11 +17,12 @@ $user_clubs = Auth::user()->clubs;
 
 <nav id="sidebar">
 	<div id="sidebar-content">
-		<h1 class="sr-only">Menu principal</h1>
+		<h1 class="sr-only">{{ __('Menu principal') }}</h1>
 		<div id="sidebar-club-selector" class="dropdown">
 			<h1 class="dropdown-label">@if(!empty($paramClub)){{ $paramClub->name }}@else{{ __('Choisir un club') }}@endif</h1>
 
 			<div id="sidebar-club-selector-list" class="dropdown-values">
+				<a href="{{ route('dashboard') }}" class="dropdown-item @if($routeName === 'dashboard') selected @endif" title="{{ __('Voir votre page principale') }}">{{ __('Tableau de bord') }}</a>
 				@foreach($user_clubs as $c)
 				<a href="{{ route('club.edit', ['club' => $c]) }}" class="dropdown-item @if(!empty($paramClub) && $paramClub->id === $c->id) selected @endif" title="Vous êtes membre depuis le {{ $c->pivot->created_at->isoFormat('DD MMMM YYYY') }}">{{ $c->name }}</a>
 				@endforeach
@@ -58,7 +59,7 @@ $user_clubs = Auth::user()->clubs;
 			$paramPage = $route->parameter('page');
 			@endphp
 			<div class="sidebar-list">
-				<h1 class="sr-only">Choisir une page</h1>
+				<h1 class="sr-only">{{ __('Choisir une page') }}</h1>
 				@foreach($site->pages as $p)
 				@can('update', $p)
 				<a href="{{ route('site.pages.edit', ['site' => $paramSite, 'page' => $p]) }}" class="sidebar-item @if(!empty($paramPage) && $paramPage->id === $p->id) active @endif">{{ $p->last_revision->title }}</a>

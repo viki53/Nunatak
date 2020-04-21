@@ -67,6 +67,8 @@
 			}
 
 			&.selected {
+				background-color: var(--color-sidebar-hover-bg);
+
 				&::after {
 					content: '✓';
 					position: absolute;
