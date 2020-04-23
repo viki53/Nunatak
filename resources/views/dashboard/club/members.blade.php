@@ -20,67 +20,69 @@
 @section('content')
 <div class="columns-container">
 	@if(count($club->members) > 0)
-	<div class="column">
+	<div class="column col-md-8">
 		<div class="card" id="members-list">
 			<h2 class="card-header">{{ trans_choice('{0} Aucun membre inscrit|{1} Un membre inscrit|[2,*] :count membres inscrits', count($club->members), ['count' => count($club->members)]) }}</h2>
 
 			<div class="card-body">
-				<table class="simple striped">
-					<thead>
-						<tr>
-							<th>{{ __('Identité') }}</th>
-							<th class="text-center" style="width: 9rem">{{ __('Ancienneté') }}</th>
-							@can('remove_member', $club)
-							<th class="text-center" style="width: 7rem"></th>
-							@endcan
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($club->members as $member)
-						<tr>
-							<td>
-								<p>
-									<strong>{{ $member->name }}</strong>
-								</p>
+				<div class="table-container">
+					<table class="simple striped">
+						<thead>
+							<tr>
+								<th>{{ __('Identité') }}</th>
+								<th class="text-center" style="max-width: 9rem">{{ __('Ancienneté') }}</th>
+								@can('remove_member', $club)
+								<th class="text-center" style="max-width: 7rem"></th>
+								@endcan
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($club->members as $member)
+							<tr>
+								<td>
+									<p>
+										<strong>{{ $member->name }}</strong>
+									</p>
 
-								<p>
-									@if($member->id == $user->id)
-									<span class="tag is-info" role="alert">{{ __('C\'est vous !') }}</span>
+									<p>
+										@if($member->id == $user->id)
+										<span class="tag is-info" role="alert">{{ __('C\'est vous !') }}</span>
+										@endif
+
+										@if($member->pivot->is_owner)
+										<span class="tag is-success" role="alert">{{ __('Gérant de l\'association') }}</span>
+										@endif
+									</p>
+								</td>
+
+								<td class="text-center">
+									<p>{!! __('Membre depuis <time datetime=":date_iso" title="Depuis le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $member->pivot->created_at->toIso8601String(), 'date_formatted' => $member->pivot->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $member->pivot->created_at->longAbsoluteDiffForHumans()]) !!}</p>
+								</td>
+
+								@can('remove_member', $club)
+								<td class="text-center">
+									@if(!$member->pivot->is_owner && $member->id !== $user->id)
+									<form method="POST" action="{{ route('club.members.remove', ['club' => $club, 'member' => $member->pivot->id]) }}">
+										@csrf
+										@method('DELETE')
+
+										<input type="hidden" name="member_id" value="{{ $member->id }}">
+										<button type="submit" class="button is-danger">{{ __('Supprimer') }}</button>
+									</form>
 									@endif
-
-									@if($member->pivot->is_owner)
-									<span class="tag is-success" role="alert">{{ __('Gérant de l\'association') }}</span>
-									@endif
-								</p>
-							</td>
-
-							<td class="text-center">
-								<p>{!! __('Membre depuis <time datetime=":date_iso" title="Depuis le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $member->pivot->created_at->toIso8601String(), 'date_formatted' => $member->pivot->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $member->pivot->created_at->longAbsoluteDiffForHumans()]) !!}</p>
-							</td>
-
-							@can('remove_member', $club)
-							<td class="text-center">
-								@if(!$member->pivot->is_owner && $member->id !== $user->id)
-								<form method="POST" action="{{ route('club.members.remove', ['club' => $club, 'member' => $member->pivot->id]) }}">
-									@csrf
-									@method('DELETE')
-
-									<input type="hidden" name="member_id" value="{{ $member->id }}">
-									<button type="submit" class="button is-danger">{{ __('Supprimer') }}</button>
-								</form>
-								@endif
-							</td>
-							@endcan
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
+								</td>
+								@endcan
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
 	@endif
 
-	<div class="column">
+	<div class="column col-md-4">
 		@can('invite_member', $club)
 		<form method="POST" action="{{ route('club.invitations.add', ['club' => $club]) }}" id="club-invite-form" class="card">
 			@csrf

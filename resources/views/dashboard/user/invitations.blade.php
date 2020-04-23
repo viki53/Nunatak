@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="columns-container">
-	<div class="column">
+	<div class="column col-12">
 		@if(!count($user->invitations))
 		<p class="alert is-success">{{ __('Vous n\'avez aucune invitation en attente') }}</p>
 		@else

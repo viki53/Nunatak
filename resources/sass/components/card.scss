@@ -2,6 +2,7 @@
 	border: 0;
 	border-radius: var(--size-radius);
 	box-shadow: var(--size-shadow-x) var(--size-shadow-y) var(--size-shadow-spread) var(--color-shadow);
+	max-width: 100vw;
 
 	&-header {
 		display: block;
@@ -15,10 +16,11 @@
 
 	&-body {
 		display: block;
+		width: 100%;
 		margin: 0;
 		padding: 1rem;
 		background-color: #fff;
-		overflow: auto;
+		overflow: hidden;
 	}
 
 	&-footer {

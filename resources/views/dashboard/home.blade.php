@@ -8,15 +8,15 @@
 @endsection
 
 @section('content')
-<div class="columns-container">
-	<div class="column">
-		@empty($user->clubs)
-		<p class="alert is-warning" role="alert">
-			{{ __('Vous ne faites partie d\'aucune association') }}
-		</p>
-		@endempty
+@empty($user->clubs)
+<p class="alert is-warning" role="alert">
+	{{ __('Vous ne faites partie d\'aucune association') }}
+</p>
+@endempty
 
-		@foreach($user->clubs as $club)
+<div class="columns-container">
+	@foreach($user->clubs as $club)
+	<div class="column col-md-6">
 		<div class="card">
 			<h2 class="card-header">{{ $club->name }}</h2>
 
@@ -61,7 +61,7 @@
 			</div>
 			@endif
 		</div>
-		@endforeach
 	</div>
+	@endforeach
 </div>
 @endsection

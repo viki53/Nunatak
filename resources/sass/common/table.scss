@@ -33,3 +33,14 @@ table {
 		}
 	}
 }
+
+.table-container {
+	display: block;
+	width: 100%;
+	overflow: auto;
+
+	table {
+		min-width: 100%;
+		width: auto;
+	}
+}

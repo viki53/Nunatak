@@ -11,7 +11,7 @@
 <form method="POST" action="{{ route('site.pages.update', ['site' => $site, 'page' => $page]) }}" class="columns-container">
 	@csrf
 
-	<fieldset class="column col-lg">
+	<fieldset class="column col-md-8">
 		<div class="card">
 			<label for="edit-page-content" class="card-header">{{ __('Contenu') }}</label>
 
@@ -27,7 +27,7 @@
 		</div>
 	</fieldset>
 
-	<fieldset class="column col-sm">
+	<fieldset class="column col-md-4">
 		<div class="card">
 			<label for="edit-page-title" class="card-header">{{ __('Titre') }}</label>
 
@@ -61,12 +61,7 @@
 
 			<div class="card-body">
 				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<label for="edit-page-path" class="input-group-text">{{ $site->domain}}</label>
-						</div>
-						<input id="edit-page-path" type="text" class="input @error('path') is-invalid @enderror" name="path" value="{{ old('path', $page->path) }}" required>
-					</div>
+					<input id="edit-page-path" type="text" class="input @error('path') is-invalid @enderror" name="path" value="{{ old('path', $page->path) }}" placeholder="{{ $site->domain}}" required>
 
 					@error('path')
 					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>

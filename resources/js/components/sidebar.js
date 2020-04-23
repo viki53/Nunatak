@@ -1,14 +1,14 @@
 const sidebar = document.querySelector('#sidebar');
-const sidebarControllers = Array.from(document.querySelectorAll('[aria-controls="sidebar"]'));
-const sidebarMediaQuery = window.matchMedia('(min-width: 50rem)');
+const sidebarController = document.querySelector('#sidebar-toggle-input');
+const sidebarControllerLabel = document.querySelector('#sidebar-toggle');
+const sidebarMediaQuery = window.matchMedia('(min-width: 60rem)');
 
-let sidebarOpen = false;
+let sidebarOpen = true;
 
 function updateSidebar() {
-	sidebar.classList.toggle('open', !!sidebarOpen);
-	sidebarControllers.forEach((ctrl) => {
-		ctrl.setAttribute('aria-expanded', !!sidebarOpen);
-	})
+	sidebar.setAttribute('aria-hidden', !sidebarOpen);
+	sidebarController.checked = sidebarOpen;
+	sidebarControllerLabel.setAttribute('aria-expanded', sidebarOpen);
 }
 function checkSidebarSpace() {
 	const shouldBeOpen = sidebarMediaQuery.matches;
@@ -20,20 +20,16 @@ function checkSidebarSpace() {
 }
 
 if (sidebar) {
-	sidebarControllers.forEach((controller) => {
-		controller.addEventListener('click', (evt) => {
-			evt.preventDefault();
-			sidebarOpen = !sidebarOpen;
-			updateSidebar();
-		})
-	});
+	// sidebarController.checked.addEventListener('click', (evt) => {
+	// 	evt.preventDefault();
+	// 	sidebarOpen = !sidebarOpen;
+	// 	updateSidebar();
+	// })
 
 	checkSidebarSpace();
 
 	window.addEventListener('resize', checkSidebarSpace, { passive: true });
 }
-else {
-	sidebarControllers.forEach((controller) => {
-		controller.parentNode.removeChild(controller);
-	})
+else if (sidebarController) {
+	sidebarController.parentNode.removeChild(controller);
 }

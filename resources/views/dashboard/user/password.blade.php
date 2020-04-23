@@ -12,7 +12,7 @@
 	@csrf
 
 	<div class="columns-container">
-		<div class="column col-sm">
+		<div class="column col-md-4">
 			<div class="card">
 				<label for="old_password" class="card-header">{{ __('Ancien mot de passe') }}</label>
 
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 
-		<div class="column col-sm">
+		<div class="column col-md-4">
 			<div class="card">
 				<label for="password" class="card-header">{{ __('Nouveau mot de passe') }}</label>
 
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 
-		<div class="column col-sm">
+		<div class="column col-md-4">
 			<div class="card">
 				<label for="password-confirm" class="card-header">{{ __('Confirmer le mot de passe') }}</label>
 

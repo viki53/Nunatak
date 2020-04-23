@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="columns-container">
-	<div class="column col-lg">
+	<div class="column col-md-8">
 		<div class="card">
 			<h2 class="card-header">{{ __('Liste des pages') }}</h2>
 
@@ -23,59 +23,61 @@
 				@endif
 
 				@if(!empty($site->pages))
-				<table class="simple striped">
-					<thead>
-						<tr>
-							<th>{{ __('Page') }}</th>
-							<th class="text-center" style="width: 7rem"></th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($site->pages as $page)
-						<tr>
-							<td>
-								<p>
-									<strong>
-										@can('update', $page)
-										<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}">{{ $page->last_revision->title }}</a>
-										@else
-										{{ $page->last_revision->title }}
-										@endcan
-									</strong>
+				<div class="table-container">
+					<table class="simple striped">
+						<thead>
+							<tr>
+								<th>{{ __('Page') }}</th>
+								<th class="text-center" style="width: 7rem"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($site->pages as $page)
+							<tr>
+								<td>
+									<p>
+										<strong>
+											@can('update', $page)
+											<a href="{{ route('site.pages.edit', ['site' => $site, 'page' => $page]) }}">{{ $page->last_revision->title }}</a>
+											@else
+											{{ $page->last_revision->title }}
+											@endcan
+										</strong>
 
-									<a href="{{ $protocol }}://{{ $site->domain }}{{ $page->path }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}" class="tag is-primary">{{ __('Voir') }}</a>
+										<a href="{{ $protocol }}://{{ $site->domain }}{{ $page->path }}" target="_blank" title="{{ __('Ouvrir le site dans un nouvel onglet') }}" class="tag is-primary">{{ __('Voir') }}</a>
 
-									@if($page->isHomePage)
-									<span class="tag is-info">{{ __('Accueil') }}</span>
-									@elseif($page->isError404Page)
-									<span class="tag is-info">{{ __('Erreur 404') }}</span>
+										@if($page->isHomePage)
+										<span class="tag is-info">{{ __('Accueil') }}</span>
+										@elseif($page->isError404Page)
+										<span class="tag is-info">{{ __('Erreur 404') }}</span>
+										@endif
+									</p>
+
+									<p>{!! __('Dernière modification <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $page->last_revision->created_at->toIso8601String(), 'date_formatted' => $page->last_revision->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $page->last_revision->created_at->diffForHumans()]) !!}</p>
+								</td>
+
+								<td class="text-center">
+									@if(!$page->isHomePage)
+									<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}">
+										@csrf
+										@method('DELETE')
+
+										<button type="submit" class="button is-danger">{{ __('Supprimer') }}</button>
+									</form>
 									@endif
-								</p>
-
-								<p>{!! __('Dernière modification <time datetime=":date_iso" title="Le :date_formatted, pour être exact">:date_absolute</time>', ['date_iso' => $page->last_revision->created_at->toIso8601String(), 'date_formatted' => $page->last_revision->created_at->isoFormat('dddd D MMMM YYYY [à] HH[h]mm'), 'date_absolute' => $page->last_revision->created_at->diffForHumans()]) !!}</p>
-							</td>
-
-							<td class="text-center">
-								@if(!$page->isHomePage)
-								<form method="POST" action="{{ route('site.pages.remove', ['site' => $site, 'page' => $page]) }}">
-									@csrf
-									@method('DELETE')
-
-									<button type="submit" class="button is-danger">{{ __('Supprimer') }}</button>
-								</form>
-								@endif
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
 				@endif
 			</div>
 		</div>
 	</div>
 
 	@can('create_page', $site)
-	<div class="column col-sm">
+	<div class="column col-md-4">
 		<form method="POST" action="{{ route('site.pages.add', ['site' => $site]) }}" class="card">
 			@csrf
 
@@ -97,12 +99,7 @@
 				<div class="form-group">
 					<label for="new-page-path" class="label">{{ __('Chemin') }}</label>
 
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<label for="new-page-path" class="input-group-text">{{ $site->domain}}</label>
-						</div>
-						<input id="new-page-path" type="text" class="input @error('path') is-invalid @enderror" name="path" value="{{ old('path', '/') }}" required>
-					</div>
+					<input id="new-page-path" type="text" class="input @error('path') is-invalid @enderror" name="path" value="{{ old('path', '/') }}" placeholder="{{ $site->domain}}" required>
 
 					@error('path')
 					<strong class="invalid-feedback" role="alert">{{ $message }}</strong>

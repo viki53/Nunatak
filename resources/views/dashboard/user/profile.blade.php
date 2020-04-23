@@ -12,7 +12,7 @@
 	@csrf
 
 	<div class="columns-container">
-		<div class="column col-sm">
+		<div class="column col-md-4">
 			<div class="card">
 				<label for="profile-name" class="card-header">{{ __('Nom complet') }}</label>
 
@@ -28,7 +28,7 @@
 			</div>
 		</div>
 
-		<div class="column col-sm">
+		<div class="column col-md-4">
 			<div class="card">
 				<label for="profile-email" class="card-header">{{ __('Adresse email') }}</label>
 
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 
-		<div class="column col-sm">
+		<div class="column col-md-4">
 			<div class="card">
 				<label for="profile-phone" class="card-header">{{ __('Numéro de téléphone') }}</label>
 
@@ -59,10 +59,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="columns-container">
-		<div class="column">
+		<div class="column col-12">
 			<div class="form-group submit">
 				<button type="submit" class="button">{{ __('Enregistrer') }}</button>
 			</div>

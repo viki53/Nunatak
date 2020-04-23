@@ -1,3 +1,40 @@
+#sidebar-toggle {
+	position: fixed;
+	top: 2.5rem;
+	left: 0;
+	padding: 1.25em .25rem;
+	width: 1.75rem;
+	text-align: center;
+	background-color: var(--color-yellow);
+	color: #fff;
+	border-radius: 0 var(--size-radius) var(--size-radius) 0;
+	box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
+	transition: box-shadow ease-in-out 150ms, transform ease-in-out 150ms;
+
+	&::before {
+		content: '»';
+	}
+
+	@media all and (min-width: map-get($sizes, "md")) {
+		display: none;
+	}
+
+	&:hover,
+	&:focus {
+		display: block !important;
+	}
+
+	& > span {
+		@extend .sr-only;
+	}
+}
+
+@media all and (max-width: map-get($sizes, "sm")) {
+	:root {
+		--size-sidebar-width: calc(100vw - var(--size-navbar-height));
+	}
+}
+
 #sidebar {
 	position: fixed;
 	display: flex;
@@ -10,8 +47,6 @@
 	color: var(--color-sidebar);
 	overflow-x: hidden;
 	overflow-y: auto;
-	transition: box-shadow ease-in-out 150ms, transform ease-in-out 150ms;
-	transform: translateX(-100%);
 
 	a {
 		text-decoration: none;
@@ -27,12 +62,8 @@
 	}
 
 	@media all and (max-width: map-get($sizes, "md")) {
-		width: calc(100vw -var(--size-navbar-height));
-
-		&.open {
-			transform: translateX(0);
-			box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
-		}
+		transition: box-shadow ease-in-out 150ms, transform ease-in-out 150ms;
+		transform: translateX(-100%);
 	}
 
 	@media all and (min-width: map-get($sizes, "md")) {
@@ -40,8 +71,43 @@
 		box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
 
 		& ~ #main-content {
-			transition: margin-left ease-in-out 150ms;
+			// transition: margin-left ease-in-out 150ms;
 			margin-left: var(--size-sidebar-width);
+		}
+	}
+}
+
+#sidebar-toggle-input {
+	@extend [hidden];
+
+	&:hover,
+	&:focus {
+		& ~ #sidebar-toggle {
+			display: block;
+			box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
+		}
+	}
+
+	&:checked {
+		& ~ #sidebar-toggle {
+			transform: translateX(var(--size-sidebar-width));
+
+			&::before {
+				content: '«';
+			}
+		}
+
+		& ~ #sidebar {
+			@media all and (max-width: map-get($sizes, "md")) {
+				transform: translateX(0);
+				box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
+			}
+		}
+
+		& ~ #main-content {
+			@media all and (max-width: map-get($sizes, "md")) {
+				overflow: hidden;
+			}
 		}
 	}
 }

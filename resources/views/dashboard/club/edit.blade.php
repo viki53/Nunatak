@@ -15,7 +15,7 @@
 
 @section('content')
 <div class="columns-container">
-	<section id="club-edit" class="column">
+	<section id="club-edit" class="column col-md-8">
 		<div class="card">
 			<h2 class="card-header">{{ __('Modifier le club') }}</h2>
 
@@ -82,7 +82,7 @@
 		</div>
 	</section>
 
-	<div class="column">
+	<div class="column col-md-4">
 		@can('add_sport', $club)
 		<form method="POST" action="{{ route('club.sports.add', ['club' => $club]) }}" id="club-sports-add" class="card">
 			<h2 class="card-header">{{ __('Ajouter un sport') }}</h2>

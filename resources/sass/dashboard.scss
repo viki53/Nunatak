@@ -14,4 +14,7 @@
 #main-content {
 	margin: 0;
 	padding: 0;
+	overflow: auto;
+	overflow-x: hidden;
+	max-height: 100vh;
 }
