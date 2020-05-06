@@ -1,27 +1,31 @@
 #sidebar-toggle {
-	position: fixed;
-	top: 2.5rem;
-	left: 0;
-	padding: 1.25em .25rem;
-	width: 1.75rem;
-	text-align: center;
-	background-color: var(--color-yellow);
-	color: #fff;
-	border-radius: 0 var(--size-radius) var(--size-radius) 0;
-	box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
-	transition: box-shadow ease-in-out 150ms, transform ease-in-out 150ms;
+	@extend .sr-only;
+
+	@media all and (max-width: map-get($sizes, "md")) {
+		position: fixed;
+		z-index: 98;
+		top: 2.5rem;
+		left: 0;
+		padding: 1.25em .25rem;
+		width: 1.75rem;
+		text-align: center;
+		background-color: var(--color-yellow);
+		color: #fff;
+		border-radius: 0 var(--size-radius) var(--size-radius) 0;
+		box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
+		transition: box-shadow ease-in-out var(--time-sidebar-animation), transform ease-in-out var(--time-sidebar-animation);
+		transform: translate3d(calc(var(--size-sidebar-width) * var(--delta-sidebar-slide, 0)), 0, 0);
+	}
 
 	&::before {
 		content: '»';
 	}
 
-	@media all and (min-width: map-get($sizes, "md")) {
-		display: none;
-	}
-
 	&:hover,
 	&:focus {
-		display: block !important;
+		@extend .sr-only-focusable-displayed;
+		position: fixed;
+		width: 1.75rem;
 	}
 
 	& > span {
@@ -30,8 +34,16 @@
 }
 
 @media all and (max-width: map-get($sizes, "sm")) {
-	:root {
+	#page {
 		--size-sidebar-width: calc(100vw - var(--size-navbar-height));
+		--delta-sidebar-slide: 0;
+		--time-sidebar-animation: 150ms;
+	}
+}
+
+html.has-sidebar {
+	&, & > body {
+		overflow: hidden;
 	}
 }
 
@@ -42,7 +54,7 @@
 	top: 0;
 	bottom: 0;
 	width: var(--size-sidebar-width);
-	z-index: 97;
+	z-index: 0;
 	background-color: var(--color-sidebar-bg);
 	color: var(--color-sidebar);
 	overflow-x: hidden;
@@ -61,17 +73,27 @@
 		}
 	}
 
+	& ~ #main-content {
+		position: relative;
+		z-index: 1;
+	}
+
 	@media all and (max-width: map-get($sizes, "md")) {
-		transition: box-shadow ease-in-out 150ms, transform ease-in-out 150ms;
-		transform: translateX(-100%);
+		transition: transform ease-in-out var(--time-sidebar-animation);
+		margin-left: calc(-1 * var(--size-sidebar-width));
+		transform: translate3d(calc(var(--size-sidebar-width) * var(--delta-sidebar-slide, 0)), 0, 0);
+
+		& ~ #main-content {
+			transition: box-shadow linear var(--time-sidebar-animation), transform ease-in-out var(--time-sidebar-animation);
+			transform: translate3d(calc(var(--size-sidebar-width) * var(--delta-sidebar-slide, 0)), 0, 0);
+		}
 	}
 
 	@media all and (min-width: map-get($sizes, "md")) {
-		transform: translateX(0);
-		box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
+		transform: translate3d(0, 0, 0);
 
 		& ~ #main-content {
-			// transition: margin-left ease-in-out 150ms;
+			box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
 			margin-left: var(--size-sidebar-width);
 		}
 	}
@@ -83,30 +105,21 @@
 	&:hover,
 	&:focus {
 		& ~ #sidebar-toggle {
-			display: block;
 			box-shadow: var(--size-shadow-x-hover) var(--size-shadow-y-hover) var(--size-shadow-spread-hover) var(--color-shadow-hover);
 		}
 	}
 
 	&:checked {
 		& ~ #sidebar-toggle {
-			transform: translateX(var(--size-sidebar-width));
-
 			&::before {
 				content: '«';
-			}
-		}
-
-		& ~ #sidebar {
-			@media all and (max-width: map-get($sizes, "md")) {
-				transform: translateX(0);
-				box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
 			}
 		}
 
 		& ~ #main-content {
 			@media all and (max-width: map-get($sizes, "md")) {
 				overflow: hidden;
+				box-shadow: 0 0 var(--size-shadow-spread) var(--color-shadow);
 			}
 		}
 	}

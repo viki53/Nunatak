@@ -50,13 +50,17 @@ $sportlink-color: #292929;
 	}
 
 	.brand {
-		font-size: 6.25rem;
+		font-size: 4.25rem;
 		font-family: var(--font-family-title);
 		padding: calc(var(--size-lane-height) / 2) 0;
+
+		@media all and (min-width: map-get($sizes, "md")) {
+			font-size: 6.25rem;
+		}
 	}
 
 	.slogan {
-		font-size: 2rem;
+		font-size: 1.75rem;
 		padding: calc(var(--size-lane-height) / 4) 0;
 
 		span {

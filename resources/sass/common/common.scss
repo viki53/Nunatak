@@ -40,6 +40,14 @@ a {
 	}
 }
 
+.sr-only-focusable-displayed {
+	position: static;
+	width: auto;
+	height: auto;
+	overflow: visible;
+	clip: auto;
+	white-space: normal;
+}
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -53,12 +61,7 @@ a {
 	&-focusable {
 		&:active,
 		&:focus {
-			position: static;
-			width: auto;
-			height: auto;
-			overflow: visible;
-			clip: auto;
-			white-space: normal;
+			@extend .sr-only-focusable-displayed;
 		}
 	}
 }

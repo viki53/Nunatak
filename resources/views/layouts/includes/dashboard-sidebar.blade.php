@@ -16,7 +16,7 @@ $user_clubs = Auth::user()->clubs;
 @endphp
 
 <input type="checkbox" hidden id="sidebar-toggle-input" checked>
-<label for="sidebar-toggle-input" aria-controls="sidebar" aria-expanded="true" id="sidebar-toggle"><span>Menu</span></label>
+<label for="sidebar-toggle-input" aria-controls="sidebar" tabindex="0" aria-expanded="true" id="sidebar-toggle"><span>Menu</span></label>
 <nav id="sidebar" role="navigation">
 	<div id="sidebar-content">
 		<h1 class="sr-only">{{ __('Menu principal') }}</h1>

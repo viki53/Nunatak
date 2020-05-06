@@ -13,8 +13,9 @@
 
 #main-content {
 	margin: 0;
-	padding: 0;
+	padding: 0 0 1rem 0;
 	overflow: auto;
 	overflow-x: hidden;
+	min-height: 100vh;
 	max-height: 100vh;
 }
