@@ -3,7 +3,7 @@ version: '3.3'
 services:
   db:
     image: mysql:8.0
-    container_name: nunatak_db
+    container_name: nunatak-db
     command: '--default-authentication-plugin=mysql_native_password'
     ports:
       - "3308:3306"
