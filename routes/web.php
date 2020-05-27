@@ -11,10 +11,9 @@
 |
 */
 
-// ===== Clus's site routing =====
+// ===== Club's site routing =====
 
 Route::domain('{domain}'.config('nunatak.domain_suffix'))->middleware('loadsite')->name('site.')->group(function () {
-	// Route::get('/', 'Site\WelcomeController@index');
 	Route::fallback('Site\PageController@index');
 });
 
